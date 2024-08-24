@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import portfolio.composeapp.generated.resources.Res
@@ -35,7 +36,14 @@ fun App() {
 
             Spacer(modifier = Modifier.height(height = 18.dp))
 
-            Text(text = "Hi, my name is Long Nguyen. I am a Software Engineer.")
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Hi, my name is Long Nguyen. I am a Software Engineer.",
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(height = 200.dp))
         }
+
     }
 }
