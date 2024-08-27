@@ -1,4 +1,4 @@
-package org.kingfu.portfolio.theme
+package org.kingfu.portfolio.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -6,7 +6,6 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.kingfu.imaginate.ui.theme.ThemeType
 import com.kingfu.imaginate.ui.theme.darkBackground
 import com.kingfu.imaginate.ui.theme.darkError
 import com.kingfu.imaginate.ui.theme.darkErrorContainer
@@ -168,7 +167,6 @@ fun PortfolioTheme(
     val colorScheme = when (theme) {
         ThemeType.DARK -> darkColorScheme
         ThemeType.LIGHT -> lightColorScheme
-        ThemeType.SYSTEM -> if (isSystemInDarkTheme()) darkColorScheme else lightColorScheme
     }
 
     MaterialTheme(

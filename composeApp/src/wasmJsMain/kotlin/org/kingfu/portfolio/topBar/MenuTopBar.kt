@@ -32,7 +32,8 @@ fun MenuTopBar(
         scrollBehavior = scrollBehavior,
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = containerColor
+            containerColor = containerColor,
+            scrolledContainerColor = Transparent
         ),
         title = { if (title != null) TextBodyLarge(text = title) },
         navigationIcon = {

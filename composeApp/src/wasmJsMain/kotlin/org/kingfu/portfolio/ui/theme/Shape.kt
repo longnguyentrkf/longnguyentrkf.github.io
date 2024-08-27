@@ -1,4 +1,4 @@
-package com.kingfu.imaginate.ui.theme
+package org.kingfu.portfolio.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

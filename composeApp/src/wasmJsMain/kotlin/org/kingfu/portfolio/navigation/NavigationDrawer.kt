@@ -28,10 +28,11 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import org.kingfu.portfolio.settings.viewModel.SettingsViewModel
 
 
 @Composable
-fun NavigationDrawer() {
+fun NavigationDrawer(settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
     val route = navController.currentBackStackEntryAsState().value?.destination?.route
     var drawerState by rememberSaveable { mutableStateOf(value = DrawerValue.Closed) }
@@ -45,6 +46,7 @@ fun NavigationDrawer() {
     })
     val screens = listOf(Screen.Home, Screen.Settings)
     val isDrawerOpen = drawerState == DrawerValue.Open
+    val isEnabled = route == Screen.Home.route
 
     fun toggleDrawer() {
         scope.launch {
@@ -52,8 +54,6 @@ fun NavigationDrawer() {
             drawerState = if (isDrawerOpen) DrawerValue.Closed else DrawerValue.Open
         }
     }
-
-
 
     fun onDragStopped(velocity: Float) {
         val decayX = decay.calculateTargetValue(
@@ -77,8 +77,6 @@ fun NavigationDrawer() {
         }
     }
 
-
-
     DrawerContent(
         navController = navController,
         toggleDrawer = ::toggleDrawer,
@@ -87,6 +85,7 @@ fun NavigationDrawer() {
             .width(width = drawerWidth.dp)
             .graphicsLayer { this.translationX = -drawerWidth + translationX.value }
             .draggable(
+                enabled = isEnabled,
                 state = draggableState,
                 orientation = Orientation.Horizontal,
                 onDragStopped = { onDragStopped(velocity = it) }
@@ -123,11 +122,13 @@ fun NavigationDrawer() {
             modifier = Modifier
                 .graphicsLayer { this.translationX = translationX.value }
                 .draggable(
+                    enabled = isEnabled,
                     state = draggableState,
                     orientation = Orientation.Horizontal,
                     onDragStopped = { onDragStopped(velocity = it) }),
             toggleDrawer = { toggleDrawer() },
-            navController = navController
+            navController = navController,
+            settingsViewModel = settingsViewModel
         )
     }
 

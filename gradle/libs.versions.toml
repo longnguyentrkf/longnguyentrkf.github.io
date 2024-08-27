@@ -7,6 +7,7 @@ navigation = "2.7.0-alpha07"
 material3 = "1.6.11"
 
 
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }

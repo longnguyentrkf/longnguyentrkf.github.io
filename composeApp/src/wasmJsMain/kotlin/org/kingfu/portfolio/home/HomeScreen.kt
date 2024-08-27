@@ -15,14 +15,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.kingfu.portfolio.ui.theme.Shape
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
 import org.kingfu.portfolio.navigation.Screen
@@ -37,12 +42,16 @@ fun HomeScreen(
     toggleDrawer: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
 
     Scaffold(
+        modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
             MenuTopBar(
                 title = Screen.Home.name,
-                toggleDrawer = toggleDrawer
+                toggleDrawer = toggleDrawer,
+                scrollBehavior = scrollBehavior
             )
         }
     ) {
@@ -52,6 +61,7 @@ fun HomeScreen(
                 .verticalScroll(state = scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxSize()
@@ -60,8 +70,12 @@ fun HomeScreen(
             ) {
                 val maxWidth = this.maxWidth
                 val text = "Hi, my name is Long Nguyen. I am a Software Engineer based in Anaheim, California"
+                val fontSize = 36.sp
+                val lineHeight = 48.sp
+                val shape = Shape.medium
+                val scale = 0.7f
 
-                if (maxWidth <= 600.dp) {
+                if (maxWidth <= 700.dp) {
                     Column(
                         modifier = Modifier
                             .height(intrinsicSize = IntrinsicSize.Max)
@@ -69,7 +83,9 @@ fun HomeScreen(
                     ) {
                         Image(
                             modifier = Modifier
-                                .height(height = 400.dp),
+                                .scale(scale  = scale)
+                                .clip(shape = shape)
+                            ,
                             painter = painterResource(Res.drawable.longnguyen),
                             contentDescription = null
                         )
@@ -79,8 +95,8 @@ fun HomeScreen(
                                 .fillMaxWidth(),
                             text = text,
                             textAlign = TextAlign.Center,
-                            fontSize = 36.sp,
-                            lineHeight = 48.sp
+                            fontSize = fontSize,
+                            lineHeight = lineHeight
                         )
                     }
                 } else {
@@ -92,8 +108,10 @@ fun HomeScreen(
                     ) {
                         Image(
                             modifier = Modifier
-                                .height(height = 500.dp)
-                                .weight(weight = 0.5f),
+                                .scale(scale  = scale)
+                                .weight(weight = 0.5f)
+                                .clip(shape = shape)
+                            ,
                             painter = painterResource(Res.drawable.longnguyen),
                             contentDescription = null
                         )
@@ -106,15 +124,15 @@ fun HomeScreen(
                                 .weight(weight = 0.5f),
                             text = text,
                             textAlign = TextAlign.Center,
-                            fontSize = 36.sp,
-                            lineHeight = 48.sp
+                            fontSize = fontSize,
+                            lineHeight = lineHeight
                         )
                     }
                 }
             }
 
 
-            Spacer(modifier = Modifier.height(height = 500.dp))
+            Spacer(modifier = Modifier.height(height = 1500.dp))
         }
 
 

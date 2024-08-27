@@ -44,6 +44,10 @@ kotlin {
             // Material Design 3
             implementation(libs.material3)
 
+            // Icons
+//            implementation(libs.androidx.material.icons.extended)
+            implementation(compose.materialIconsExtended)
+
 
         }
     }
