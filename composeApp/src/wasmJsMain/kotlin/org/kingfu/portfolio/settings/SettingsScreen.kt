@@ -9,21 +9,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.kingfu.portfolio.navigation.Screen
-import org.kingfu.portfolio.topBar.MenuTopBar
+import org.kingfu.portfolio.topBar.BackTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    toggleDrawer: () -> Unit
+    goBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            MenuTopBar(
+            BackTopBar(
                 title = Screen.Settings.name,
-                toggleDrawer = toggleDrawer
+                goBack = goBack
             )
         }
     ) {
@@ -32,7 +32,7 @@ fun SettingsScreen(
             horizontalAlignment = CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ){
-            Text(text = "Settings")
+            TextBodyLarge(text = "Settings")
         }
     }
 }

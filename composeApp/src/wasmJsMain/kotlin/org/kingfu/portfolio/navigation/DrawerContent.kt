@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
+import com.kingfu.imaginate.ui.theme.TextBodyLarge
 
 @Composable
 fun DrawerContent(
@@ -39,7 +40,7 @@ fun DrawerContent(
         screens.forEach { screen ->
             val selected = route == screen.route
             val color by animateColorAsState(
-                targetValue = if (selected) colorScheme.primary else colorScheme.outline,
+                targetValue = if (selected) colorScheme.primary else colorScheme.outline.copy(alpha = 0.5f),
                 label = ""
             )
             NavigationDrawerItem(
@@ -56,7 +57,7 @@ fun DrawerContent(
                     }
                 },
                 label = {
-                    Text(
+                    TextBodyLarge(
                         text = screen.name,
                         overflow = TextOverflow.Ellipsis,
                         color = color

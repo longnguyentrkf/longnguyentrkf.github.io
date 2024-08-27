@@ -7,11 +7,11 @@ import org.kingfu.portfolio.settings.SettingsScreen
 
 
 fun NavGraphBuilder.settingsGraph(
-    toggleDrawer: () -> Unit
+    goBack: () -> Unit
 ) {
     composable(route = Screen.Settings.route) {
         SettingsScreen(
-            toggleDrawer = toggleDrawer
+            goBack = goBack
         )
     }
 }

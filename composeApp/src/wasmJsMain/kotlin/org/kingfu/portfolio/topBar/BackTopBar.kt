@@ -2,12 +2,10 @@ package org.kingfu.portfolio.topBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -20,10 +18,10 @@ import com.kingfu.imaginate.ui.theme.TextBodyLarge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuTopBar(
+fun BackTopBar(
     modifier: Modifier = Modifier,
     title: String? = null,
-    toggleDrawer: () -> Unit,
+    goBack: () -> Unit,
     containerColor: Color = Transparent,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     iconContainerColor: Color = Transparent
@@ -40,10 +38,10 @@ fun MenuTopBar(
                 colors = IconButtonDefaults.iconButtonColors(
                     containerColor = iconContainerColor
                 ),
-                onClick = toggleDrawer
+                onClick = goBack
             ) {
                 Icon(
-                    imageVector = Icons.Default.Menu,
+                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                     contentDescription = null
                 )
             }
@@ -51,6 +49,4 @@ fun MenuTopBar(
         }
     )
 }
-
-
 
