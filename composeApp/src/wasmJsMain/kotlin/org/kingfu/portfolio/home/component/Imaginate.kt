@@ -32,22 +32,7 @@ import kotlin.math.log10
 @Composable
 fun Imaginate(modifier: Modifier = Modifier) {
 
-    Column(
-        modifier = modifier.fillMaxWidth()
-    ) {
-//        val fontSize = 42.sp
-//        val lineHeight = 52.sp
-//
-//        TextBodyLarge(
-//            modifier = Modifier.fillMaxWidth(),
-//            text = "Latest Work",
-//            fontSize = fontSize,
-//            lineHeight = lineHeight,
-//            textAlign = TextAlign.Center
-//        )
-//
-//        Spacer(modifier = Modifier.height(height = 32.dp))
-
+    Column(modifier = modifier.fillMaxWidth()) {
         BoxWithConstraints(
             modifier = modifier
                 .fillMaxSize()
@@ -203,7 +188,5 @@ fun Imaginate(modifier: Modifier = Modifier) {
                 }
             }
         }
-
     }
-
 }

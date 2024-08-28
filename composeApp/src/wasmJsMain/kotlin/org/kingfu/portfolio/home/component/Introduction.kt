@@ -16,16 +16,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
-import org.kingfu.portfolio.ui.theme.Shape
 import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.longnguyen3
+import portfolio.composeapp.generated.resources.longnguyen
 import kotlin.math.log10
 
 @Composable
@@ -46,7 +44,7 @@ fun Introduction(modifier: Modifier = Modifier) {
         val whatIDoLineHeight = 72.sp * scaleMultiplier
         val scale = 1f
         val aspectRatio = 1f
-        val resource = Res.drawable.longnguyen3
+        val resource = Res.drawable.longnguyen
 
 
 
