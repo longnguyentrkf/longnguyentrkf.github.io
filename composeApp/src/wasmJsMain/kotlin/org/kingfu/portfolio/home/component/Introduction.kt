@@ -1,7 +1,10 @@
 package org.kingfu.portfolio.home.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -12,16 +15,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
+import org.kingfu.portfolio.ui.theme.Shape
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.longnguyen
 import kotlin.math.log10
@@ -36,7 +47,8 @@ fun Introduction(modifier: Modifier = Modifier) {
     ) {
         val maxWidth = this.maxWidth
         val introduction = "Hello, I am Long Nguyen"
-        val scaleMultiplier = log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
+        val scaleMultiplier =
+            log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
         val introductionFontSize = 42.sp * scaleMultiplier
         val introductionLineHeight = 52.sp * scaleMultiplier
         val whatIDo = "A software engineer and graphic designer based in California"
@@ -45,6 +57,9 @@ fun Introduction(modifier: Modifier = Modifier) {
         val scale = 1f
         val aspectRatio = 1f
         val resource = Res.drawable.longnguyen
+        val uriHandler = LocalUriHandler.current
+        val linkedInUrl = "https://www.linkedin.com/in/longnguyentrkf/"
+        val linkedIn = "LinkedIn"
 
 
 
@@ -78,6 +93,17 @@ fun Introduction(modifier: Modifier = Modifier) {
                         lineHeight = whatIDoLineHeight,
                         fontWeight = FontWeight.Bold
                     )
+
+                    Spacer(modifier = Modifier.height(height = 16.dp))
+
+                    OutlinedButton(
+                        onClick = { uriHandler.openUri(uri = linkedInUrl) }
+                    ) {
+                        TextBodyLarge(
+                            text = linkedIn,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                 }
             }
         } else {
@@ -118,6 +144,17 @@ fun Introduction(modifier: Modifier = Modifier) {
                         lineHeight = whatIDoLineHeight,
                         fontWeight = FontWeight.Bold,
                     )
+
+                    Spacer(modifier = Modifier.height(height = 16.dp))
+
+                    OutlinedButton(
+                        onClick = { uriHandler.openUri(uri = linkedInUrl) }
+                    ) {
+                        TextBodyLarge(
+                            text = linkedIn,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                 }
             }
         }

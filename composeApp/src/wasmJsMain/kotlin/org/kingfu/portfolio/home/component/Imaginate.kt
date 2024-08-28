@@ -105,7 +105,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                             fontWeight = fontWeight
                         )
 
-                        Spacer(modifier = Modifier.height(height = 42.dp))
+                        Spacer(modifier = Modifier.height(height = 32.dp))
 
                         OutlinedButton(
                             onClick = { uriHandler.openUri(uri = imaginateUrl) }
@@ -172,7 +172,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                             fontWeight = fontWeight
                         )
 
-                        Spacer(modifier = Modifier.height(height = 42.dp))
+                        Spacer(modifier = Modifier.height(height = 32.dp))
 
                         OutlinedButton(
                             onClick = { uriHandler.openUri(uri = imaginateUrl) }
