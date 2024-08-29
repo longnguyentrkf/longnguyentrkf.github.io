@@ -24,18 +24,18 @@ import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
 import org.kingfu.portfolio.ui.theme.Shape
 import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.imaginate
+import portfolio.composeapp.generated.resources.weatherai
 import kotlin.math.log10
 
 @Composable
-fun Imaginate(modifier: Modifier = Modifier) {
+fun WeatherAI(modifier: Modifier = Modifier) {
 
     BoxWithConstraints(
         modifier = modifier.padding(horizontal = 16.dp),
         propagateMinConstraints = true
     ) {
         val maxWidth = this.maxWidth
-        val title = "Imaginate"
+        val title = "WeatherAI"
         val scaleMultiplier =
             log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
         val titleFontSize = 42.sp * scaleMultiplier
@@ -44,17 +44,17 @@ fun Imaginate(modifier: Modifier = Modifier) {
         val subTitleFontSize = 24.sp * scaleMultiplier
         val subTitleLineHeight = 34.sp * scaleMultiplier
         val body =
-            "Imaginate brings creative innovation to life with AI-generated masterpieces that " +
-                    "you can download or set as wallpapers. Enjoy intuitive search, and customize your experience with themes."
+            "WeatherAI is a sleek weather app offering accurate 7-day forecasts and hourly updates. " +
+                    "AI-powered weather answers from ChatGPT, and unique wallpapers created by AI."
         val bodyFontSize = 24.sp * scaleMultiplier
         val bodyLineHeight = 34.sp * scaleMultiplier
         val shape = Shape.medium
-        val resource = Res.drawable.imaginate
+        val resource = Res.drawable.weatherai
         val download = "Download"
         val downloadFontSize = 16.sp
         val downloadLineHeight = 26.sp
         val uriHandler = LocalUriHandler.current
-        val url = "https://play.google.com/store/apps/details?id=com.kingfu.aigallery&hl=en_US"
+        val url = "https://play.google.com/store/apps/details?id=com.kingfu.weatherai&hl=en_US"
 
 
         if (maxWidth <= 700.dp) {
@@ -84,7 +84,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                     TextBodyLarge(
                         text = subTitle,
                         fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+                        lineHeight = subTitleLineHeight,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
@@ -92,7 +92,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                     TextBodyLarge(
                         text = body,
                         fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        lineHeight = bodyLineHeight,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
@@ -103,9 +103,10 @@ fun Imaginate(modifier: Modifier = Modifier) {
                         TextBodyLarge(
                             text = download,
                             fontSize = downloadFontSize,
-                            lineHeight = downloadLineHeight
+                            lineHeight = downloadLineHeight,
                         )
                     }
+
                 }
             }
         } else {
@@ -114,18 +115,6 @@ fun Imaginate(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .clip(shape = shape)
-                        .aspectRatio(ratio = 256f / 125f)
-                        .size(width = 1024.dp, height = 500.dp),
-                    painter = painterResource(resource = resource),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-
-                Spacer(modifier = Modifier.width(width = 32.dp))
 
                 Column(modifier = Modifier.weight(weight = 0.5f)) {
                     TextBodyLarge(
@@ -139,7 +128,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                     TextBodyLarge(
                         text = subTitle,
                         fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+                        lineHeight = subTitleLineHeight,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
@@ -147,7 +136,7 @@ fun Imaginate(modifier: Modifier = Modifier) {
                     TextBodyLarge(
                         text = body,
                         fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        lineHeight = bodyLineHeight,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
@@ -162,6 +151,19 @@ fun Imaginate(modifier: Modifier = Modifier) {
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.width(width = 32.dp))
+
+                Image(
+                    modifier = Modifier
+                        .weight(weight = 0.5f)
+                        .clip(shape = shape)
+                        .aspectRatio(ratio = 256f / 125f)
+                        .size(width = 1024.dp, height = 500.dp),
+                    painter = painterResource(resource = resource),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
             }
         }
     }

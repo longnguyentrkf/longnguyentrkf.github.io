@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,37 +25,35 @@ import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
 import org.kingfu.portfolio.ui.theme.Shape
 import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.imaginate
+import portfolio.composeapp.generated.resources.kingfu
 import kotlin.math.log10
 
 @Composable
-fun Imaginate(modifier: Modifier = Modifier) {
+fun WhatIDo(modifier: Modifier = Modifier) {
 
     BoxWithConstraints(
         modifier = modifier.padding(horizontal = 16.dp),
         propagateMinConstraints = true
     ) {
         val maxWidth = this.maxWidth
-        val title = "Imaginate"
+        val title = "KingFu"
         val scaleMultiplier =
             log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
         val titleFontSize = 42.sp * scaleMultiplier
         val titleLineHeight = 52.sp * scaleMultiplier
-        val subTitle = "Android Application"
+        val subTitle = "• Web Developer\n• Brand Design\n• Logo Design\n• Native Android Engineer\n• Mentor"
         val subTitleFontSize = 24.sp * scaleMultiplier
         val subTitleLineHeight = 34.sp * scaleMultiplier
-        val body =
-            "Imaginate brings creative innovation to life with AI-generated masterpieces that " +
-                    "you can download or set as wallpapers. Enjoy intuitive search, and customize your experience with themes."
+        val body = "Simple, elegant, productivity"
         val bodyFontSize = 24.sp * scaleMultiplier
         val bodyLineHeight = 34.sp * scaleMultiplier
         val shape = Shape.medium
-        val resource = Res.drawable.imaginate
-        val download = "Download"
+        val resource = Res.drawable.kingfu
+        val download = "View"
         val downloadFontSize = 16.sp
         val downloadLineHeight = 26.sp
         val uriHandler = LocalUriHandler.current
-        val url = "https://play.google.com/store/apps/details?id=com.kingfu.aigallery&hl=en_US"
+        val url = "https://play.google.com/store/apps/dev?id=6685291617439812065&hl=en_US"
 
 
         if (maxWidth <= 700.dp) {
@@ -72,14 +71,15 @@ fun Imaginate(modifier: Modifier = Modifier) {
                     contentScale = ContentScale.Crop
                 )
 
-                Column {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(space = 8.dp)
+                ) {
                     TextBodyLarge(
                         text = title,
                         fontSize = titleFontSize,
                         lineHeight = titleLineHeight,
                     )
-
-                    Spacer(modifier = Modifier.height(height = 8.dp))
 
                     TextBodyLarge(
                         text = subTitle,
@@ -87,7 +87,6 @@ fun Imaginate(modifier: Modifier = Modifier) {
                         lineHeight = subTitleLineHeight
                     )
 
-                    Spacer(modifier = Modifier.height(height = 32.dp))
 
                     TextBodyLarge(
                         text = body,
@@ -95,7 +94,6 @@ fun Imaginate(modifier: Modifier = Modifier) {
                         lineHeight = bodyLineHeight
                     )
 
-                    Spacer(modifier = Modifier.height(height = 32.dp))
 
                     OutlinedButton(
                         onClick = { uriHandler.openUri(uri = url) }

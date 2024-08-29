@@ -24,18 +24,18 @@ import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
 import org.kingfu.portfolio.ui.theme.Shape
 import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.imaginate
+import portfolio.composeapp.generated.resources.clok
 import kotlin.math.log10
 
 @Composable
-fun Imaginate(modifier: Modifier = Modifier) {
+fun Clok(modifier: Modifier = Modifier) {
 
     BoxWithConstraints(
         modifier = modifier.padding(horizontal = 16.dp),
         propagateMinConstraints = true
     ) {
         val maxWidth = this.maxWidth
-        val title = "Imaginate"
+        val title = "Clok"
         val scaleMultiplier =
             log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
         val titleFontSize = 42.sp * scaleMultiplier
@@ -44,17 +44,19 @@ fun Imaginate(modifier: Modifier = Modifier) {
         val subTitleFontSize = 24.sp * scaleMultiplier
         val subTitleLineHeight = 34.sp * scaleMultiplier
         val body =
-            "Imaginate brings creative innovation to life with AI-generated masterpieces that " +
-                    "you can download or set as wallpapers. Enjoy intuitive search, and customize your experience with themes."
+            "Clok is a versatile time management app that combines a Stopwatch and Timer with " +
+                    "automatic data saving. Its user-friendly " +
+                    "design adapts to your device’s theme, tracks laps, and enhances productivity with smooth performance."
+
         val bodyFontSize = 24.sp * scaleMultiplier
         val bodyLineHeight = 34.sp * scaleMultiplier
         val shape = Shape.medium
-        val resource = Res.drawable.imaginate
+        val resource = Res.drawable.clok
         val download = "Download"
         val downloadFontSize = 16.sp
         val downloadLineHeight = 26.sp
         val uriHandler = LocalUriHandler.current
-        val url = "https://play.google.com/store/apps/details?id=com.kingfu.aigallery&hl=en_US"
+        val url = "https://play.google.com/store/apps/details?id=com.kingfu.clok&hl=en_US"
 
 
         if (maxWidth <= 700.dp) {

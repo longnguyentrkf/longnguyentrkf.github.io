@@ -25,6 +25,7 @@ kotlin {
         }
         binaries.executable()
     }
+
     
     sourceSets {
         
@@ -49,8 +50,12 @@ kotlin {
             implementation(compose.materialIconsExtended)
 
 
+
+
         }
     }
 }
+
+
 
 
