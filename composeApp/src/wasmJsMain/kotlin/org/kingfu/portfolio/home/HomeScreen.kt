@@ -182,7 +182,7 @@ fun HomeScreen(
                     Experience(
                         title = "Northrop Grumman",
                         subTitle = "Software Engineer",
-                        body = "August - May 2021"
+                        body = "August 2020 - May 2021"
                     )
                 }
 

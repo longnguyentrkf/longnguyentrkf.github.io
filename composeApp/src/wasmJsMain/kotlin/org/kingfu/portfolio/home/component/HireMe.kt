@@ -96,7 +96,7 @@ fun HireMe(
                 value = message,
                 onValueChange = setMessage,
                 focusRequester = focusRequester,
-                placeholder = "Message"
+                placeholder = "Message",
             )
 
             OutlinedButton(
