@@ -20,11 +20,4 @@ sealed class Screen(
         iconOutlined = Icons.Outlined.Home
     )
 
-
-    data object Settings: Screen(
-        route = "settings",
-        name = "Settings",
-        iconFilled = Icons.Filled.Settings,
-        iconOutlined = Icons.Outlined.Settings
-    )
 }

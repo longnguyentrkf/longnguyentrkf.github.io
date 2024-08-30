@@ -18,43 +18,57 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
-import org.kingfu.portfolio.home.component.Clok
-import org.kingfu.portfolio.home.component.Imaginate
-import org.kingfu.portfolio.home.component.ImaginateExperience
-import org.kingfu.portfolio.home.component.Introduction
-import org.kingfu.portfolio.home.component.NorthropGrummanExperience
-import org.kingfu.portfolio.home.component.WeatherAI
-import org.kingfu.portfolio.home.component.WebDeveloperExperience
+import org.kingfu.portfolio.home.component.DetailImage
+import org.kingfu.portfolio.home.component.Experience
+import org.kingfu.portfolio.home.component.Header
+import org.kingfu.portfolio.home.component.HireMe
+import org.kingfu.portfolio.home.component.ImageDetail
 import org.kingfu.portfolio.home.component.WhatIDo
-import org.kingfu.portfolio.navigation.Screen
 import org.kingfu.portfolio.topBar.MenuTopBar
+import org.kingfu.portfolio.ui.theme.ThemeType
+import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.clok
+import portfolio.composeapp.generated.resources.imaginate
+import portfolio.composeapp.generated.resources.weatherai
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
-    toggleDrawer: () -> Unit
+    theme: ThemeType,
+    setTheme: (ThemeType) -> Unit,
+    firstName: String,
+    setFirstName: (String) -> Unit,
+    lastName: String,
+    setLastName: (String) -> Unit,
+    message: String,
+    setMessage: (String) -> Unit,
 ) {
     val scrollState = rememberScrollState()
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val fontSize = 42.sp
     val lineHeight = 52.sp
+    val uriHandler = LocalUriHandler.current
+
+
 
     Scaffold(
         modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
             MenuTopBar(
-                title = Screen.Home.name,
-                toggleDrawer = toggleDrawer,
-                scrollBehavior = scrollBehavior
+                title = "Long Nguyen",
+                scrollBehavior = scrollBehavior,
+                theme = theme,
+                setTheme = setTheme,
+                scrollState = scrollState
             )
         }
     ) {
-
 
         Column(
             modifier = Modifier
@@ -65,7 +79,7 @@ fun HomeScreen(
 
         ) {
 
-            Introduction()
+            Header()
 
             Spacer(modifier = Modifier.height(height = 128.dp))
 
@@ -81,11 +95,48 @@ fun HomeScreen(
                     textAlign = TextAlign.Center
                 )
 
-                Imaginate()
+                ImageDetail(
+                    title = "Imaginate",
+                    subTitle = "Android Application",
+                    body = "Imaginate brings creative innovation to life with AI-generated masterpieces that " +
+                            "you can download or set as wallpapers. Enjoy intuitive search, and customize your experience with themes.",
+                    buttonText = "Download",
+                    resource = Res.drawable.imaginate,
+                    buttonAction = {
+                        val url =
+                            "https://play.google.com/store/apps/details?id=com.kingfu.aigallery&hl=en_US"
+                        uriHandler.openUri(uri = url)
+                    }
+                )
 
-                WeatherAI()
+                DetailImage(
+                    title = "WeatherAI",
+                    subTitle = "Android Application",
+                    body = "WeatherAI is a sleek weather app offering accurate 7-day forecasts and hourly updates. " +
+                            "AI-powered weather answers from ChatGPT, and unique wallpapers created by AI.",
+                    buttonText = "Download",
+                    resource = Res.drawable.weatherai,
+                    buttonAction = {
+                        val url =
+                            "https://play.google.com/store/apps/details?id=com.kingfu.weatherai&hl=en_US"
+                        uriHandler.openUri(uri = url)
+                    }
+                )
 
-                Clok()
+                ImageDetail(
+                    title = "Clok",
+                    subTitle = "Android Application",
+                    body = "Clok is a versatile time management app that combines a Stopwatch and Timer with " +
+                            "automatic data saving. Its user-friendly " +
+                            "design adapts to your device’s theme, tracks laps, and enhances productivity with smooth performance.",
+                    buttonText = "Download",
+                    resource = Res.drawable.clok,
+                    buttonAction = {
+                        val url =
+                            "https://play.google.com/store/apps/details?id=com.kingfu.clok&hl=en_US"
+                        uriHandler.openUri(uri = url)
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(height = 68.dp))
 
@@ -104,11 +155,23 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(space = 42.dp)
                 ) {
 
-                    WebDeveloperExperience()
+                    Experience(
+                        title = "Portfolio",
+                        subTitle = "Web Developer",
+                        body = "August 2024 - Present"
+                    )
 
-                    ImaginateExperience()
+                    Experience(
+                        title = "Imaginate",
+                        subTitle = "Software Engineer, Android",
+                        body = "December 2023 - Present"
+                    )
 
-                    NorthropGrummanExperience()
+                    Experience(
+                        title = "Northrop Grumman",
+                        subTitle = "Software Engineer",
+                        body = "August - May 2021"
+                    )
                 }
 
 
@@ -125,6 +188,18 @@ fun HomeScreen(
                 WhatIDo()
 
                 Spacer(modifier = Modifier.height(height = 68.dp))
+
+                HireMe(
+                    firstName = firstName,
+                    setFirstName = setFirstName,
+                    lastName = lastName,
+                    setLastName = setLastName,
+                    message = message,
+                    setMessage = setMessage
+                )
+
+                Spacer(modifier = Modifier.height(height = 68.dp))
+
 
             }
         }

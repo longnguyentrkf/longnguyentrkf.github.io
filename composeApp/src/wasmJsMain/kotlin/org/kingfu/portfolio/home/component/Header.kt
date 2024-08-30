@@ -20,31 +20,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.jetbrains.compose.resources.painterResource
+import org.kingfu.portfolio.core.ScaleMultiplier
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.longnguyen
-import kotlin.math.log10
 
 @Composable
-fun Introduction(modifier: Modifier = Modifier) {
+fun Header(modifier: Modifier = Modifier) {
     BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
         propagateMinConstraints = true
     ) {
-        val maxWidth = this.maxWidth
         val introduction = "Hello, I am Long Nguyen"
-        val scaleMultiplier =
-            log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
-        val introductionFontSize = 42.sp * scaleMultiplier
-        val introductionLineHeight = 52.sp * scaleMultiplier
+        val multiplier = ScaleMultiplier(float = maxWidth.value)
+        val introductionFontSize = 42.sp * multiplier
+        val introductionLineHeight = 52.sp * multiplier
         val whatIDo = "A software engineer and graphic designer based in California"
-        val whatIDoFontSize = 62.sp * scaleMultiplier
-        val whatIDoLineHeight = 72.sp * scaleMultiplier
+        val whatIDoFontSize = 62.sp * multiplier
+        val whatIDoLineHeight = 72.sp * multiplier
         val scale = 1f
         val aspectRatio = 1f
         val resource = Res.drawable.longnguyen
@@ -91,7 +90,7 @@ fun Introduction(modifier: Modifier = Modifier) {
                     ) {
                         TextBodyLarge(
                             text = linkedIn,
-                            fontWeight = FontWeight.Bold,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }

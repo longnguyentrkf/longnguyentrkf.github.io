@@ -16,48 +16,51 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale.Companion.Crop
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.kingfu.portfolio.core.ScaleMultiplier
 import org.kingfu.portfolio.ui.theme.Shape
-import portfolio.composeapp.generated.resources.Res
-import portfolio.composeapp.generated.resources.clok
-import kotlin.math.log10
 
 @Composable
-fun Clok(modifier: Modifier = Modifier) {
+fun ImageDetail(
+    modifier: Modifier = Modifier,
+    title: String,
+    subTitle: String,
+    body: String,
+    resource: DrawableResource,
+    buttonText: String,
+    buttonAction: () -> Unit,
+    titleFontSize: TextUnit = 42.sp,
+    titleLineHeight: TextUnit = 52.sp,
+    subTitleFontSize: TextUnit = 24.sp,
+    subTitleLineHeight: TextUnit = 34.sp,
+    bodyFontSize: TextUnit = 24.sp,
+    bodyLineHeight: TextUnit = 34.sp,
+    downloadFontSize: TextUnit = 16.sp,
+    downloadLineHeight: TextUnit = 26.sp,
+    width: Float = 1024f,
+    height: Float = 500f,
+    shape: Shape = Shape.medium,
+    aspectRatio: Float = width / height
+) {
+    val imageModifier = Modifier
+                .clip(shape = shape)
+                .aspectRatio(ratio = aspectRatio)
+                .size(width = width.dp, height = height.dp)
 
     BoxWithConstraints(
         modifier = modifier.padding(horizontal = 16.dp),
         propagateMinConstraints = true
     ) {
         val maxWidth = this.maxWidth
-        val title = "Clok"
-        val scaleMultiplier =
-            log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
-        val titleFontSize = 42.sp * scaleMultiplier
-        val titleLineHeight = 52.sp * scaleMultiplier
-        val subTitle = "Android Application"
-        val subTitleFontSize = 24.sp * scaleMultiplier
-        val subTitleLineHeight = 34.sp * scaleMultiplier
-        val body =
-            "Clok is a versatile time management app that combines a Stopwatch and Timer with " +
-                    "automatic data saving. Its user-friendly " +
-                    "design adapts to your device’s theme, tracks laps, and enhances productivity with smooth performance."
-
-        val bodyFontSize = 24.sp * scaleMultiplier
-        val bodyLineHeight = 34.sp * scaleMultiplier
-        val shape = Shape.medium
-        val resource = Res.drawable.clok
-        val download = "Download"
-        val downloadFontSize = 16.sp
-        val downloadLineHeight = 26.sp
-        val uriHandler = LocalUriHandler.current
-        val url = "https://play.google.com/store/apps/details?id=com.kingfu.clok&hl=en_US"
-
+        val multiplier = ScaleMultiplier(float = maxWidth.value)
 
         if (maxWidth <= 700.dp) {
             Column(
@@ -65,45 +68,40 @@ fun Clok(modifier: Modifier = Modifier) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    modifier = Modifier
-                        .clip(shape = shape)
-                        .aspectRatio(ratio = 256f / 125f)
-                        .size(width = 1024.dp, height = 500.dp),
+                    modifier = imageModifier,
                     painter = painterResource(resource = resource),
                     contentDescription = null,
-                    contentScale = ContentScale.Crop
+                    contentScale = Crop
                 )
 
                 Column {
                     TextBodyLarge(
                         text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
+                        fontSize = titleFontSize * multiplier,
+                        lineHeight = titleLineHeight * multiplier,
                     )
 
                     Spacer(modifier = Modifier.height(height = 8.dp))
 
                     TextBodyLarge(
                         text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+                        fontSize = subTitleFontSize * multiplier,
+                        lineHeight = subTitleLineHeight * multiplier,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
 
                     TextBodyLarge(
                         text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        fontSize = bodyFontSize * multiplier,
+                        lineHeight = bodyLineHeight * multiplier
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
 
-                    OutlinedButton(
-                        onClick = { uriHandler.openUri(uri = url) }
-                    ) {
+                    OutlinedButton(onClick = buttonAction) {
                         TextBodyLarge(
-                            text = download,
+                            text = buttonText,
                             fontSize = downloadFontSize,
                             lineHeight = downloadLineHeight
                         )
@@ -117,14 +115,10 @@ fun Clok(modifier: Modifier = Modifier) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .clip(shape = shape)
-                        .aspectRatio(ratio = 256f / 125f)
-                        .size(width = 1024.dp, height = 500.dp),
+                    modifier = imageModifier.weight(weight = 0.5f),
                     painter = painterResource(resource = resource),
                     contentDescription = null,
-                    contentScale = ContentScale.Crop
+                    contentScale = Crop
                 )
 
                 Spacer(modifier = Modifier.width(width = 32.dp))
@@ -132,33 +126,31 @@ fun Clok(modifier: Modifier = Modifier) {
                 Column(modifier = Modifier.weight(weight = 0.5f)) {
                     TextBodyLarge(
                         text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
+                        fontSize = titleFontSize * multiplier,
+                        lineHeight = titleLineHeight * multiplier,
                     )
 
                     Spacer(modifier = Modifier.height(height = 8.dp))
 
                     TextBodyLarge(
                         text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+                        fontSize = subTitleFontSize * multiplier,
+                        lineHeight = subTitleLineHeight * multiplier,
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
 
                     TextBodyLarge(
                         text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        fontSize = bodyFontSize * multiplier,
+                        lineHeight = bodyLineHeight * multiplier
                     )
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
 
-                    OutlinedButton(
-                        onClick = { uriHandler.openUri(uri = url) }
-                    ) {
+                    OutlinedButton(onClick = buttonAction) {
                         TextBodyLarge(
-                            text = download,
+                            text = buttonText,
                             fontSize = downloadFontSize,
                             lineHeight = downloadLineHeight
                         )

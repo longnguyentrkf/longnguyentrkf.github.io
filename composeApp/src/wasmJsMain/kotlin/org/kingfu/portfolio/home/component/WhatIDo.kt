@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,17 +37,16 @@ fun WhatIDo(modifier: Modifier = Modifier) {
         propagateMinConstraints = true
     ) {
         val maxWidth = this.maxWidth
-        val title = "KingFu"
         val scaleMultiplier =
             log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
-        val titleFontSize = 42.sp * scaleMultiplier
-        val titleLineHeight = 52.sp * scaleMultiplier
-        val subTitle = "• Web Developer\n• Brand Design\n• Logo Design\n• Native Android Engineer\n• Mentor"
-        val subTitleFontSize = 24.sp * scaleMultiplier
-        val subTitleLineHeight = 34.sp * scaleMultiplier
-        val body = "Simple, elegant, productivity"
-        val bodyFontSize = 24.sp * scaleMultiplier
-        val bodyLineHeight = 34.sp * scaleMultiplier
+        val list = listOf(
+            "Web Developer",
+            "Brand Design",
+            "Logo Design",
+            "Native Android Engineer",
+            "Mentor"
+        )
+        val titleFontSize = 30.sp * scaleMultiplier
         val shape = Shape.medium
         val resource = Res.drawable.kingfu
         val download = "View"
@@ -75,24 +75,15 @@ fun WhatIDo(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(space = 8.dp)
                 ) {
-                    TextBodyLarge(
-                        text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
-                    )
+                    for(item in list) {
+                        TextBodyLarge(
+                            text = "• $item",
+                            fontSize = titleFontSize
+                        )
 
-                    TextBodyLarge(
-                        text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
-                    )
+                        Spacer(modifier = Modifier.height(height = 8.dp))
 
-
-                    TextBodyLarge(
-                        text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
-                    )
+                    }
 
 
                     OutlinedButton(
@@ -126,27 +117,14 @@ fun WhatIDo(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(width = 32.dp))
 
                 Column(modifier = Modifier.weight(weight = 0.5f)) {
-                    TextBodyLarge(
-                        text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
-                    )
+                    for(item in list) {
+                        TextBodyLarge(
+                            text = "• $item",
+                            fontSize = titleFontSize
+                        )
 
-                    Spacer(modifier = Modifier.height(height = 8.dp))
-
-                    TextBodyLarge(
-                        text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
-                    )
-
-                    Spacer(modifier = Modifier.height(height = 32.dp))
-
-                    TextBodyLarge(
-                        text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
-                    )
+                        Spacer(modifier = Modifier.height(height = 8.dp))
+                    }
 
                     Spacer(modifier = Modifier.height(height = 32.dp))
 

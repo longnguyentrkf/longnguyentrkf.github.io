@@ -9,27 +9,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kingfu.imaginate.ui.theme.TextBodyLarge
-import kotlin.math.log10
+import org.kingfu.portfolio.core.ScaleMultiplier
+
 
 @Composable
-fun NorthropGrummanExperience(modifier: Modifier = Modifier) {
-
+fun Experience(
+    modifier: Modifier = Modifier,
+    title: String,
+    subTitle: String,
+    body: String
+) {
     BoxWithConstraints(
         modifier = modifier,
         propagateMinConstraints = true
     ) {
-        val maxWidth = this.maxWidth
-        val scaleMultiplier =
-            log10((maxWidth.value + 10).coerceIn(1f, 1000f)) * 0.25f // Adjust 0.2f as needed
-        val title = "Northrop Grumman"
-        val titleFontSize = 42.sp * scaleMultiplier
-        val titleLineHeight = 52.sp * scaleMultiplier
-        val subTitle = "Software Engineer"
-        val subTitleFontSize = 24.sp * scaleMultiplier
-        val subTitleLineHeight = 34.sp * scaleMultiplier
-        val body = "August 2020 - May 2021"
-        val bodyTitleFontSize = 24.sp * scaleMultiplier
-        val bodyTitleLineHeight = 34.sp * scaleMultiplier
+        val multiplier = ScaleMultiplier(float = maxWidth.value)
+        val titleFontSize = 42.sp * multiplier
+        val titleLineHeight = 52.sp * multiplier
+        val subTitleFontSize = 24.sp * multiplier
+        val subTitleLineHeight = 34.sp * multiplier
+        val bodyTitleFontSize = 24.sp * multiplier
+        val bodyTitleLineHeight = 34.sp * multiplier
 
         Column(
             modifier = Modifier.padding(horizontal = if (maxWidth <= 700.dp) 16.dp else 32.dp),

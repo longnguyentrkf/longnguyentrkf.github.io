@@ -7,13 +7,19 @@ import org.kingfu.portfolio.home.viewModel.HomeViewModel
 import org.kingfu.portfolio.navigation.Screen
 
 fun NavGraphBuilder.homeGraph(
-    toggleDrawer: () -> Unit,
     vm: HomeViewModel
 ) {
     composable(route = Screen.Home.route) {
 
         HomeScreen(
-            toggleDrawer = toggleDrawer,
+            theme = vm.state.theme,
+            setTheme = vm::setTheme,
+            firstName = vm.state.firstName,
+            setFirstName = vm::setFirstName,
+            lastName = vm.state.lastName,
+            setLastName = vm::setLastName,
+            message = vm.state.message,
+            setMessage = vm::setMessage
         )
     }
 }
