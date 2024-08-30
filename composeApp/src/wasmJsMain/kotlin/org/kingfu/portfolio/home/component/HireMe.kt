@@ -92,8 +92,6 @@ fun HireMe(
                 )
             }
 
-            Spacer(modifier = Modifier.width(width = 16.dp))
-
             MyTextField(
                 value = message,
                 onValueChange = setMessage,
