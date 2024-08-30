@@ -49,8 +49,7 @@ fun MenuTopBar(
     TopAppBar(
         scrollBehavior = scrollBehavior,
         modifier = modifier,
-        colors = TopAppBarDefaults.topAppBarColors(
-        ),
+        colors = TopAppBarDefaults.topAppBarColors(),
         title = {
             if (title != null) {
                 Box(

@@ -15,9 +15,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -54,6 +58,14 @@ fun HomeScreen(
     val fontSize = 42.sp
     val lineHeight = 52.sp
     val uriHandler = LocalUriHandler.current
+    val focusManager = LocalFocusManager.current
+
+
+
+    LaunchedEffect(key1 = scrollState.isScrollInProgress) {
+        if (scrollState.isScrollInProgress) focusManager.clearFocus()
+    }
+
 
 
 
@@ -195,7 +207,7 @@ fun HomeScreen(
                     lastName = lastName,
                     setLastName = setLastName,
                     message = message,
-                    setMessage = setMessage
+                    setMessage = setMessage,
                 )
 
                 Spacer(modifier = Modifier.height(height = 68.dp))

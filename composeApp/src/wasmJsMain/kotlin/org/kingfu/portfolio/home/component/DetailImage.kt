@@ -26,7 +26,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.kingfu.portfolio.core.ScaleMultiplier
 import org.kingfu.portfolio.ui.theme.Shape
-import org.w3c.dom.svg.SVGPreserveAspectRatio
 
 @Composable
 fun DetailImage(

@@ -27,7 +27,7 @@ fun HireMe(
     lastName: String,
     setLastName: (String) -> Unit,
     message: String,
-    setMessage: (String) -> Unit
+    setMessage: (String) -> Unit,
 ) {
 
     BoxWithConstraints(
@@ -35,7 +35,6 @@ fun HireMe(
         propagateMinConstraints = true
     ) {
         val multiplier = ScaleMultiplier(float = maxWidth.value)
-        val focusRequester = remember { FocusRequester() }
         val title = "Let's Create Something Amazing Together"
         val titleFontSize = 42.sp * multiplier
         val titleLineHeight = 52.sp * multiplier
@@ -46,9 +45,14 @@ fun HireMe(
         val subTitleFontSize = 24.sp * multiplier
         val subTitleLineHeight = 34.sp * multiplier
         val toEmail = "longnguyentrkf@gmail.com"
+        val focusRequester = remember { FocusRequester() }
+
+
+
 
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = if (maxWidth <= 700.dp) 16.dp else 32.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
