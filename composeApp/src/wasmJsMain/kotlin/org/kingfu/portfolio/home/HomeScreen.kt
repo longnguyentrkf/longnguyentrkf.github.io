@@ -38,6 +38,7 @@ import org.kingfu.portfolio.ui.theme.ThemeType
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.clok
 import portfolio.composeapp.generated.resources.imaginate
+import portfolio.composeapp.generated.resources.kingfu
 import portfolio.composeapp.generated.resources.longnguyen
 import portfolio.composeapp.generated.resources.weatherai
 
@@ -225,7 +226,7 @@ fun HomeScreen(
                                     "https://play.google.com/store/apps/dev?id=6685291617439812065&hl=en_US"
                                 uriHandler.openUri(uri = url)
                             },
-                            resource = Res.drawable.imaginate,
+                            resource = Res.drawable.kingfu,
                             maxWidth = maxWidth,
                         )
                     }
