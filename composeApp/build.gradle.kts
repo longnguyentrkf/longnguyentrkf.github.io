@@ -10,19 +10,7 @@ plugins {
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
+        browser()
         binaries.executable()
     }
 
@@ -45,9 +33,12 @@ kotlin {
             implementation(libs.material3)
 
             // Icons
-//            implementation(libs.androidx.material.icons.extended)
             implementation(compose.materialIconsExtended)
 
+            // Coil
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha08")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha08")
+            implementation("io.ktor:ktor-client-core:3.0.0-wasm2")
 
 
 

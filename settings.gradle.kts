@@ -22,6 +22,9 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("androidx")
                 includeGroupAndSubgroups("com.android")
                 includeGroupAndSubgroups("com.google")
+
+                // Needed to use ktor-client-core to use Coil
+                maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
             }
         }
         mavenCentral()

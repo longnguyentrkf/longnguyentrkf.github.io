@@ -1,4 +1,4 @@
-package org.kingfu.portfolio.home.component
+package org.kingfu.portfolio.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,10 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import org.kingfu.portfolio.ui.theme.Shape
+import org.kingfu.portfolio.ui.theme.Space
+import org.kingfu.portfolio.ui.theme.Typography
 
 
 @Composable
@@ -58,13 +59,14 @@ fun MyTextField(
                 Box(
                     modifier = Modifier
                         .weight(weight = 1f)
-                        .padding(start = 8.dp),
+                        .padding(start = Space().small_8),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     if (value.isEmpty()) {
-                        TextBodyLarge(
+                        Text(
                             text = placeholder,
-                            color = colorScheme.outline
+                            color = colorScheme.outline,
+                            style = Typography.bodySmall
                         )
                     }
                     innerTextField()

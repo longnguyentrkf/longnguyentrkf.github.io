@@ -2,7 +2,6 @@ package org.kingfu.portfolio.topBar
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -28,9 +28,9 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kingfu.imaginate.ui.theme.TextBodyLarge
 import kotlinx.coroutines.launch
 import org.kingfu.portfolio.ui.theme.ThemeType
+import org.kingfu.portfolio.ui.theme.Typography
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,7 +56,7 @@ fun MenuTopBar(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    TextBodyLarge(
+                    Text(
                         text = title,
                         modifier = Modifier
                             .clip(shape = CircleShape)
@@ -67,7 +67,8 @@ fun MenuTopBar(
                             }
                             .padding(vertical = 8.dp, horizontal = 16.dp),
                         textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        style = Typography.bodySmall
                     )
                 }
             }
@@ -94,7 +95,10 @@ fun MenuTopBar(
                     }
                 }
             ) {
-                TextBodyLarge(text = "Hire me")
+                Text(
+                    text = "Hire me",
+                    style = Typography.bodySmall
+                )
             }
 
         }
