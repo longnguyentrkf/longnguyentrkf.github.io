@@ -14,6 +14,7 @@ import org.kingfu.portfolio.ui.theme.PortfolioTheme
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     ComposeViewport(document.body!!) {
+        // This is a test
         val homeViewModel by remember { mutableStateOf(value = HomeViewModel()) }
 
         PortfolioTheme(
