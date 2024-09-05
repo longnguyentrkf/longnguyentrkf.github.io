@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -45,7 +46,6 @@ fun DetailImage(
     bodyFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
     downloadFontSize: TextUnit = Typography.bodySmall.fontSize,
-    downloadLineHeight: TextUnit = Typography.bodySmall.lineHeight,
     width: Float = 1024f,
     height: Float = 500f,
     shape: Shape = Shape.medium
@@ -70,7 +70,7 @@ fun DetailImage(
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
-                Column {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     if (title != null) {
                         Text(
                             text = title,
@@ -137,7 +137,6 @@ fun DetailImage(
                         )
                     }
                 }
-
 
                 if (body != null) {
                     Text(

@@ -48,7 +48,6 @@ fun ImageDetail(
     bodyFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
     downloadFontSize: TextUnit = Typography.bodySmall.fontSize,
-    downloadLineHeight: TextUnit = Typography.bodySmall.lineHeight,
     listFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     width: Float = 1024f,
     height: Float = 500f,
@@ -77,7 +76,7 @@ fun ImageDetail(
 
             Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
                 if (title != null || subTitle != null) {
-                    Column {
+                    Column(modifier = Modifier.fillMaxWidth()) {
                         if (title != null) {
                             Text(
                                 text = title,
@@ -122,8 +121,7 @@ fun ImageDetail(
                     OutlinedButton(onClick = buttonAction) {
                         Text(
                             text = buttonText,
-                            fontSize = downloadFontSize,
-//                            lineHeight = downloadLineHeight
+                            fontSize = downloadFontSize
                         )
                     }
                 }
@@ -195,8 +193,7 @@ fun ImageDetail(
                     OutlinedButton(onClick = buttonAction) {
                         Text(
                             text = buttonText,
-                            fontSize = downloadFontSize,
-//                            lineHeight = downloadLineHeight
+                            fontSize = downloadFontSize
                         )
                     }
                 }

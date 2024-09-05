@@ -1,6 +1,7 @@
 [versions]
 androidx-lifecycle = "2.8.0"
 compose-plugin = "1.6.11"
+
 junit = "4.13.2"
 kotlin = "2.0.0"
 navigation = "2.7.0-alpha07"
