@@ -25,7 +25,7 @@ fun AppNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Shop.route
+        startDestination = Screen.Home.route
     ) {
         homeGraph(
             vm = homeViewModel,
