@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -38,7 +40,7 @@ import space.kingfu.webpage.home.components.Header
 import space.kingfu.webpage.home.components.HireMe
 import space.kingfu.webpage.home.components.ImageDetail
 import space.kingfu.webpage.navigation.Screen
-import space.kingfu.webpage.topBar.MenuTopBar
+import space.kingfu.webpage.topBar.HomeTopBar
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.ThemeType
 import space.kingfu.webpage.ui.theme.Typography
@@ -72,7 +74,7 @@ fun HomeScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
-            MenuTopBar(
+            HomeTopBar(
                 title = "KingFu",
                 titleOnClick = { scope.launch { scrollState.animateScrollTo(value = 0) } },
                 scrollBehavior = scrollBehavior,
@@ -80,7 +82,8 @@ fun HomeScreen(
                 setTheme = setTheme,
                 actionText = Screen.Shop.name,
                 actionOnClick = goToShop,
-                navigationIconOnClick = toggleDrawer
+                navigationIconOnClick = toggleDrawer,
+                actionIcon = Icons.Default.Storefront
             )
         }
     ) {

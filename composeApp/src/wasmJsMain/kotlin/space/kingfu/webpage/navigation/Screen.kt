@@ -3,8 +3,10 @@ package space.kingfu.webpage.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Shop
+import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Shop
+import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(
@@ -23,8 +25,8 @@ sealed class Screen(
     data object Shop : Screen(
         route = "shop",
         name = "Shop",
-        iconFilled = Icons.Filled.Shop,
-        iconOutlined = Icons.Outlined.Shop
+        iconFilled = Icons.Filled.Storefront,
+        iconOutlined = Icons.Outlined.Storefront
     )
 
 }

@@ -20,11 +20,11 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import kingfu.composeapp.generated.resources.Res
-import kingfu.composeapp.generated.resources.kingfu
 import kingfu.composeapp.generated.resources.kingfu_rectangle
 import space.kingfu.webpage.home.components.ImageDetail
 import space.kingfu.webpage.navigation.Screen
-import space.kingfu.webpage.topBar.MenuTopBar
+import space.kingfu.webpage.topBar.HomeTopBar
+import space.kingfu.webpage.topBar.ShopTopBar
 import space.kingfu.webpage.ui.theme.Space
 
 
@@ -40,7 +40,7 @@ fun ShopScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
-            MenuTopBar(
+            ShopTopBar(
                 title = Screen.Shop.name,
                 navigationIconOnClick = toggleDrawer,
                 scrollBehavior = scrollBehavior
