@@ -158,7 +158,7 @@ private val lightColorScheme = lightColorScheme(
 
 
 @Composable
-fun PortfolioTheme(
+fun KingFuTheme(
     content: @Composable () -> Unit,
     theme: ThemeType
 ) {

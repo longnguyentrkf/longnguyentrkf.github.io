@@ -17,16 +17,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import space.kingfu.webpage.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import space.kingfu.webpage.core.isSmallScreenWidth
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
+import space.kingfu.webpage.ui.theme.Typography
 
 
 @Composable
@@ -37,7 +38,7 @@ fun ImageDetail(
     body: String? = null,
     resource: DrawableResource,
     buttonText: String? = null,
-    buttonAction: () -> Unit,
+    buttonAction: () -> Unit  = {},
     maxWidth: Dp,
     fontScale: Float = space.kingfu.webpage.core.fontScale(maxWidth.value),
     titleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
@@ -54,6 +55,7 @@ fun ImageDetail(
     shape: Shape = Shape.medium,
     aspectRatio: Float = width / height,
     list: List<String> = listOf(),
+    imageContentScale: ContentScale = Crop
 ) {
     val imageModifier = Modifier
         .clip(shape = shape)
@@ -70,11 +72,11 @@ fun ImageDetail(
                 modifier = imageModifier,
                 painter = painterResource(resource = resource),
                 contentDescription = null,
-                contentScale = Crop
+                contentScale = imageContentScale
             )
 
             Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
-                if(title != null || subTitle != null) {
+                if (title != null || subTitle != null) {
                     Column {
                         if (title != null) {
                             Text(
@@ -121,7 +123,7 @@ fun ImageDetail(
                         Text(
                             text = buttonText,
                             fontSize = downloadFontSize,
-                            lineHeight = downloadLineHeight
+//                            lineHeight = downloadLineHeight
                         )
                     }
                 }
@@ -137,7 +139,7 @@ fun ImageDetail(
                 modifier = imageModifier.weight(weight = 0.5f),
                 painter = painterResource(resource = resource),
                 contentDescription = null,
-                contentScale = Crop
+                contentScale = imageContentScale
             )
 
             Spacer(modifier = Modifier.width(width = Space().large_32))
@@ -146,7 +148,7 @@ fun ImageDetail(
                 modifier = Modifier.weight(weight = 0.5f),
                 verticalArrangement = Arrangement.spacedBy(space = Space().large_32)
             ) {
-                if(title != null || subTitle != null) {
+                if (title != null || subTitle != null) {
                     Column {
                         if (title != null) {
                             Text(
@@ -194,7 +196,7 @@ fun ImageDetail(
                         Text(
                             text = buttonText,
                             fontSize = downloadFontSize,
-                            lineHeight = downloadLineHeight
+//                            lineHeight = downloadLineHeight
                         )
                     }
                 }

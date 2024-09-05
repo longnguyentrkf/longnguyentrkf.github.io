@@ -102,8 +102,7 @@ fun DetailImage(
                     OutlinedButton(onClick = buttonAction) {
                         Text(
                             text = buttonText,
-                            fontSize = downloadFontSize,
-                            lineHeight = downloadLineHeight
+                            fontSize = downloadFontSize
                         )
                     }
                 }
@@ -152,8 +151,7 @@ fun DetailImage(
                     OutlinedButton(onClick = buttonAction) {
                         Text(
                             text = buttonText,
-                            fontSize = downloadFontSize,
-                            lineHeight = downloadLineHeight
+                            fontSize = downloadFontSize
                         )
                     }
                 }

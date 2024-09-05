@@ -1,6 +1,5 @@
 package space.kingfu.webpage.home.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -10,6 +9,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,12 +33,12 @@ fun Header(
     modifier: Modifier = Modifier,
     maxWidth: Dp,
     fontScale: Float = space.kingfu.webpage.core.fontScale(maxWidth.value),
-    introductionFontSize: TextUnit = Typography.titleMedium.fontSize * fontScale,
-    introductionLineHeight: TextUnit = Typography.titleMedium.lineHeight * fontScale,
-    whatIDoFontSize: TextUnit = Typography.displaySmall.fontSize * fontScale,
-    whatIDoLineHeight: TextUnit = Typography.displaySmall.lineHeight * fontScale,
-    introduction: String? = null,
-    whatIDo: String? = null,
+    titleFontSize: TextUnit = Typography.displaySmall.fontSize * fontScale,
+    titleLineHeight: TextUnit = Typography.displaySmall.lineHeight * fontScale,
+    subTitleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
+    subTitleLineHeight: TextUnit = Typography.titleSmall.lineHeight * fontScale,
+    title: String? = null,
+    subTitle: String? = null,
     imageScale: Float = 1f,
     aspectRatio: Float = 1f,
     resource: DrawableResource,
@@ -54,32 +55,34 @@ fun Header(
             modifier = modifier
                 .height(intrinsicSize = IntrinsicSize.Max)
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(space = Space().large_32)
+            verticalArrangement = Arrangement.spacedBy(space = Space().large_32),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
+            Icon(
                 modifier = imageModifier,
                 painter = painterResource(resource = resource),
-                contentDescription = null
+                contentDescription = null,
+                tint = colorScheme.inverseSurface
             )
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(space = Space().medium_16)
             ) {
-                if (introduction != null) {
+                if (title != null) {
                     Text(
-                        text = introduction,
-                        fontSize = introductionFontSize,
-                        lineHeight = introductionLineHeight,
+                        text = title,
+                        fontSize = titleFontSize,
+                        lineHeight = titleLineHeight,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
-                if (whatIDo != null) {
+                if (subTitle != null) {
                     Text(
-                        text = whatIDo,
-                        fontSize = whatIDoFontSize,
-                        lineHeight = whatIDoLineHeight,
-                        fontWeight = FontWeight.Bold
+                        text = subTitle,
+                        fontSize = subTitleFontSize,
+                        lineHeight = subTitleLineHeight
                     )
                 }
 
@@ -102,10 +105,11 @@ fun Header(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
+            Icon(
                 modifier = imageModifier.weight(weight = 0.5f),
                 painter = painterResource(resource = resource),
-                contentDescription = null
+                contentDescription = null,
+                tint = colorScheme.inverseSurface
             )
 
             Spacer(modifier = Modifier.width(width = Space().medium_16))
@@ -116,20 +120,20 @@ fun Header(
                     .weight(weight = 0.5f),
                 verticalArrangement = Arrangement.spacedBy(space = Space().medium_16)
             ) {
-                if (introduction != null) {
+                if (title != null) {
                     Text(
-                        text = introduction,
-                        fontSize = introductionFontSize,
-                        lineHeight = introductionLineHeight,
+                        text = title,
+                        fontSize = titleFontSize,
+                        lineHeight = titleLineHeight,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
-                if (whatIDo != null) {
+                if (subTitle != null) {
                     Text(
-                        text = whatIDo,
-                        fontSize = whatIDoFontSize,
-                        lineHeight = whatIDoLineHeight,
-                        fontWeight = FontWeight.Bold,
+                        text = subTitle,
+                        fontSize = subTitleFontSize,
+                        lineHeight = subTitleLineHeight
                     )
                 }
 

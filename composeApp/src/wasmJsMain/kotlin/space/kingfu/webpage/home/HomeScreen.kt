@@ -1,16 +1,14 @@
 package space.kingfu.webpage.home
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -18,9 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
@@ -28,21 +28,23 @@ import androidx.compose.ui.unit.dp
 import kingfu.composeapp.generated.resources.Res
 import kingfu.composeapp.generated.resources.clok
 import kingfu.composeapp.generated.resources.imaginate
+import kingfu.composeapp.generated.resources.kingfu_no_background
 import kingfu.composeapp.generated.resources.kingfu_rectangle
 import kingfu.composeapp.generated.resources.longnguyen
 import kingfu.composeapp.generated.resources.weatherai
+import kotlinx.coroutines.launch
 import space.kingfu.webpage.home.components.DetailImage
-import space.kingfu.webpage.home.components.Experience
 import space.kingfu.webpage.home.components.Header
 import space.kingfu.webpage.home.components.HireMe
 import space.kingfu.webpage.home.components.ImageDetail
+import space.kingfu.webpage.navigation.Screen
 import space.kingfu.webpage.topBar.MenuTopBar
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.ThemeType
 import space.kingfu.webpage.ui.theme.Typography
 
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     theme: ThemeType,
@@ -53,11 +55,14 @@ fun HomeScreen(
     setLastName: (String) -> Unit,
     message: String,
     setMessage: (String) -> Unit,
+    toggleDrawer: () -> Unit,
+    goToShop: () -> Unit,
+    scrollState: ScrollState,
 ) {
-    val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val uriHandler = LocalUriHandler.current
     val focusManager = LocalFocusManager.current
+    val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = scrollState.isScrollInProgress) {
         if (scrollState.isScrollInProgress) focusManager.clearFocus()
@@ -68,11 +73,14 @@ fun HomeScreen(
         modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
         topBar = {
             MenuTopBar(
-                title = "Long Nguyen",
+                title = "KingFu",
+                titleOnClick = { scope.launch { scrollState.animateScrollTo(value = 0) } },
                 scrollBehavior = scrollBehavior,
                 theme = theme,
                 setTheme = setTheme,
-                scrollState = scrollState
+                actionText = Screen.Shop.name,
+                actionOnClick = goToShop,
+                navigationIconOnClick = toggleDrawer
             )
         }
     ) {
@@ -90,23 +98,19 @@ fun HomeScreen(
                     .verticalScroll(state = scrollState),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(space = Space().xxLarge_128)
-
-
             ) {
                 Header(
                     maxWidth = maxWidth,
-                    resource = Res.drawable.longnguyen,
-                    introduction = "Hello, I am Long Nguyen",
-                    whatIDo = "A software engineer and graphic designer based in California",
-                    linkedInUrl = "https://www.linkedin.com/in/longnguyentrkf/"
+                    resource = Res.drawable.kingfu_no_background,
+                    title = "Introducing KingFu",
+                    subTitle = "Create your platform with cutting-edge technologies",
+                    imageScale = 0.5f
                 )
 
                 Column(
                     modifier = Modifier.widthIn(max = 1200.dp),
                     verticalArrangement = Arrangement.spacedBy(space = Space().xxLarge_128)
                 ) {
-
-
                     Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
@@ -117,6 +121,20 @@ fun HomeScreen(
                         )
 
                         ImageDetail(
+                            title = "Portfolio",
+                            subTitle = "Web Application",
+                            body = "A sleek designed webpage showcasing achievements, experiences, and services.",
+                            buttonText = "View",
+                            resource = Res.drawable.longnguyen,
+                            buttonAction = {
+                                val url = "https://kingfu.space/longnguyen/"
+                                uriHandler.openUri(uri = url)
+                            },
+                            maxWidth = maxWidth,
+                            imageContentScale = ContentScale.Fit
+                        )
+
+                        DetailImage(
                             title = "Imaginate",
                             subTitle = "Android Application",
                             body = "Imaginate brings creative innovation to life with AI-generated masterpieces that " +
@@ -131,7 +149,7 @@ fun HomeScreen(
                             maxWidth = maxWidth
                         )
 
-                        DetailImage(
+                        ImageDetail(
                             title = "WeatherAI",
                             subTitle = "Android Application",
                             body = "WeatherAI is a sleek weather app offering accurate 7-day forecasts and hourly updates. " +
@@ -146,7 +164,7 @@ fun HomeScreen(
                             maxWidth = maxWidth
                         )
 
-                        ImageDetail(
+                        DetailImage(
                             title = "Clok",
                             subTitle = "Android Application",
                             body = "Clok is a versatile time management app that combines a Stopwatch and Timer with " +
@@ -166,44 +184,6 @@ fun HomeScreen(
                     Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = "Work Experience",
-                            fontSize = labelFontSize,
-                            lineHeight = labelLineHeight,
-                            textAlign = TextAlign.Center
-                        )
-
-                        FlowRow(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(space = Space().xLarge_64),
-                            verticalArrangement = Arrangement.spacedBy(space = Space().xLarge_64),
-                        ) {
-
-                            Experience(
-                                title = "Portfolio",
-                                subTitle = "Web Developer",
-                                body = "August 2024 - Present",
-                                maxWidth = maxWidth.value
-                            )
-
-                            Experience(
-                                title = "Imaginate",
-                                subTitle = "Software Engineer, Android",
-                                body = "December 2023 - Present",
-                                maxWidth = maxWidth.value
-                            )
-
-                            Experience(
-                                title = "Northrop Grumman",
-                                subTitle = "Software Engineer",
-                                body = "August 2020 - May 2021",
-                                maxWidth = maxWidth.value
-                            )
-                        }
-                    }
-
-                    Column(verticalArrangement = Arrangement.spacedBy(space = Space().large_32)) {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
                             text = "What I do",
                             fontSize = labelFontSize,
                             lineHeight = labelLineHeight,
@@ -218,12 +198,6 @@ fun HomeScreen(
                                 "Native Android Engineer",
                                 "Mentor"
                             ),
-                            buttonText = "View",
-                            buttonAction = {
-                                val url =
-                                    "https://play.google.com/store/apps/dev?id=6685291617439812065&hl=en_US"
-                                uriHandler.openUri(uri = url)
-                            },
                             resource = Res.drawable.kingfu_rectangle,
                             maxWidth = maxWidth,
                         )

@@ -12,7 +12,7 @@ class HomeViewModel: ViewModel() {
         private set
 
     fun setTheme(theme: ThemeType){
-        state = state.copy(theme = theme)
+        state = state.copy(theme = if (theme == ThemeType.LIGHT) ThemeType.DARK else ThemeType.LIGHT)
     }
 
     fun setFirstName(string: String){
