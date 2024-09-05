@@ -65,7 +65,7 @@ fun ShopScreen(
                 Spacer(modifier = Modifier.height(height = Space().xLarge_64))
 
                 ImageDetail(
-                    title = "Webpage",
+                    title = "Webpage (Test Mode)",
                     subTitle = "Web Application\nPrice: $100",
                     body = "A sleek designed webpage based on a template.",
                     buttonText = "Buy",
