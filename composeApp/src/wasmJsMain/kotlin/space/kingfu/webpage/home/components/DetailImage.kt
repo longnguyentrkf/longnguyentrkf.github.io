@@ -4,13 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.Typography
@@ -35,8 +36,6 @@ fun DetailImage(
     subTitle: String? = null,
     body: String? = null,
     resource: DrawableResource? = null,
-    buttonText: String? = null,
-    buttonAction: () -> Unit,
     maxWidth: Dp,
     fontScale: Float = space.kingfu.webpage.core.fontScale(float = maxWidth.value),
     titleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
@@ -45,10 +44,10 @@ fun DetailImage(
     subTitleLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
     bodyFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
-    downloadFontSize: TextUnit = Typography.bodySmall.fontSize,
     width: Float = 1024f,
     height: Float = 500f,
-    shape: Shape = Shape.medium
+    shape: Shape = Shape.medium,
+    buttonList: @Composable RowScope.() -> Unit = {}
 ) {
 
     if (isSmallScreenWidth(maxWidth = maxWidth)) {
@@ -98,14 +97,8 @@ fun DetailImage(
                     )
                 }
 
-                if (buttonText != null) {
-                    OutlinedButton(onClick = buttonAction) {
-                        Text(
-                            text = buttonText,
-                            fontSize = downloadFontSize
-                        )
-                    }
-                }
+                MyOutLinedButtonRow(content = buttonList)
+
             }
         }
     } else {
@@ -146,14 +139,8 @@ fun DetailImage(
                     )
                 }
 
-                if (buttonText != null) {
-                    OutlinedButton(onClick = buttonAction) {
-                        Text(
-                            text = buttonText,
-                            fontSize = downloadFontSize
-                        )
-                    }
-                }
+                MyOutLinedButtonRow(content = buttonList)
+
             }
 
             Spacer(modifier = Modifier.width(width = Space().large_32))

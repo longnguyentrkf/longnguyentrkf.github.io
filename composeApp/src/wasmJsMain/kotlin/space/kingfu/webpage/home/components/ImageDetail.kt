@@ -4,13 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.Typography
@@ -37,8 +38,6 @@ fun ImageDetail(
     subTitle: String? = null,
     body: String? = null,
     resource: DrawableResource,
-    buttonText: String? = null,
-    buttonAction: () -> Unit  = {},
     maxWidth: Dp,
     fontScale: Float = space.kingfu.webpage.core.fontScale(maxWidth.value),
     titleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
@@ -47,14 +46,14 @@ fun ImageDetail(
     subTitleLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
     bodyFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
-    downloadFontSize: TextUnit = Typography.bodySmall.fontSize,
     listFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     width: Float = 1024f,
     height: Float = 500f,
     shape: Shape = Shape.medium,
     aspectRatio: Float = width / height,
     list: List<String> = listOf(),
-    imageContentScale: ContentScale = Crop
+    imageContentScale: ContentScale = Crop,
+    buttonList: @Composable RowScope.() -> Unit = {}
 ) {
     val imageModifier = Modifier
         .clip(shape = shape)
@@ -117,14 +116,7 @@ fun ImageDetail(
                     }
                 }
 
-                if (buttonText != null) {
-                    OutlinedButton(onClick = buttonAction) {
-                        Text(
-                            text = buttonText,
-                            fontSize = downloadFontSize
-                        )
-                    }
-                }
+                MyOutLinedButtonRow(content = buttonList)
             }
         }
     } else {
@@ -133,6 +125,7 @@ fun ImageDetail(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
+
             Image(
                 modifier = imageModifier.weight(weight = 0.5f),
                 painter = painterResource(resource = resource),
@@ -168,7 +161,6 @@ fun ImageDetail(
                     }
                 }
 
-
                 if (body != null) {
                     Text(
                         text = body,
@@ -176,7 +168,6 @@ fun ImageDetail(
                         lineHeight = bodyLineHeight
                     )
                 }
-
 
                 if (list.isNotEmpty()) {
                     Column(modifier = Modifier.fillMaxWidth()) {
@@ -189,14 +180,7 @@ fun ImageDetail(
                     }
                 }
 
-                if (buttonText != null) {
-                    OutlinedButton(onClick = buttonAction) {
-                        Text(
-                            text = buttonText,
-                            fontSize = downloadFontSize
-                        )
-                    }
-                }
+                MyOutLinedButtonRow(content = buttonList)
             }
         }
     }

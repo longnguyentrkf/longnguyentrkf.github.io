@@ -5,10 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.createGraph
 import space.kingfu.webpage.home.viewModel.HomeViewModel
 import space.kingfu.webpage.navigation.navGraphBuilder.homeGraph
 import space.kingfu.webpage.navigation.navGraphBuilder.shopGraph
-import space.kingfu.webpage.ui.theme.ThemeType
+import space.kingfu.webpage.navigation.navGraphBuilder.templatesGraph
 
 
 @Composable
@@ -19,23 +20,16 @@ fun AppNavHost(
     navController: NavHostController
 ) {
 
-    val homeScrollState = rememberScrollState()
-
 
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = Screen.Home.route
     ) {
-        homeGraph(
-            vm = homeViewModel,
-            toggleDrawer = toggleDrawer,
-            navController = navController,
-            homeScrollState = homeScrollState
-        )
+        homeGraph(vm = homeViewModel)
 
-        shopGraph(
-            toggleDrawer = toggleDrawer
-        )
+        shopGraph()
+
+        templatesGraph()
     }
 }

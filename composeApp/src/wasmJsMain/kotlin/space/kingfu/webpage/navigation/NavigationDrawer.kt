@@ -3,19 +3,27 @@ package space.kingfu.webpage.navigation
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.rememberSplineBasedDecay
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bedtime
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -25,16 +33,21 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import space.kingfu.webpage.core.isSmallScreenWidth
 import space.kingfu.webpage.home.viewModel.HomeViewModel
+import space.kingfu.webpage.topBar.MyTopBar
 import space.kingfu.webpage.ui.theme.ThemeType
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationDrawer(
     homeViewModel: HomeViewModel
@@ -50,10 +63,11 @@ fun NavigationDrawer(
     val draggableState = rememberDraggableState(onDelta = { dragAmount ->
         scope.launch { translationX.snapTo(targetValue = translationX.value + dragAmount) }
     })
-    val isDragEnabled = true
     val isDrawerOpen = drawerState == DrawerValue.Open
     val snackBarHostState = remember { SnackbarHostState() }
-    val screens = listOf(Screen.Home, Screen.Shop)
+    val screens = listOf(Screen.Home, Screen.Templates, Screen.Shop)
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
 
 //    ObserveAsEvents(
 //        flow = SnackbarController.events,
@@ -85,14 +99,13 @@ fun NavigationDrawer(
 
     fun onDragStopped(velocity: Float) {
         val decayX = decay.calculateTargetValue(
-            translationX.value,
-            velocity
+            translationX.value, velocity
         )
 
         scope.launch {
             val targetX = if (decayX > drawerWidth * 0.5) drawerWidth else 0f
-            val canReachTargetWithDecay = (decayX > targetX && targetX == drawerWidth) ||
-                    (decayX < targetX && targetX == 0f)
+            val canReachTargetWithDecay =
+                (decayX > targetX && targetX == drawerWidth) || (decayX < targetX && targetX == 0f)
 
             if (canReachTargetWithDecay) {
                 translationX.animateDecay(initialVelocity = velocity, animationSpec = decay)
@@ -105,63 +118,91 @@ fun NavigationDrawer(
         }
     }
 
-    Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
-    ) {
-        DrawerContent(
-            navController = navController,
-            toggleDrawer = ::toggleDrawer,
-            route = route,
-            modifier = Modifier
-                .width(width = drawerWidth.dp)
-                .graphicsLayer { this.translationX = -drawerWidth + translationX.value }
-                .draggable(
-                    enabled = isDragEnabled,
-                    state = draggableState,
-                    orientation = Orientation.Horizontal,
-                    onDragStopped = { onDragStopped(velocity = it) }
-                ),
-            screens = screens
-        )
+    BoxWithConstraints {
+        val maxWidth = maxWidth
+        val isDragEnabled = isSmallScreenWidth(maxWidth = maxWidth)
 
-        Box {
-            if (translationX.value > 0f) {
-                Box(
+        Scaffold(
+            modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
+            topBar = {
+                MyTopBar(
                     modifier = Modifier
-                        .zIndex(zIndex = 1f)
-                        .matchParentSize()
                         .graphicsLayer { this.translationX = translationX.value }
-                        .background(
-                            color = colorScheme.surface.copy(
-                                alpha = 0.5f * (translationX.value / drawerWidth).coerceIn(0f, 1f)
+                        .alpha(
+                            alpha = 1 - 0.5f * (translationX.value / drawerWidth).coerceIn(
+                                0f,
+                                1f
                             )
-                        )
-                        .clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                            onClick = { toggleDrawer() }
-                        )
-                        .draggable(
-                            enabled = isDragEnabled,
-                            state = draggableState,
-                            orientation = Orientation.Horizontal,
-                            onDragStopped = { onDragStopped(velocity = it) }
-                        )
+                        ),
+                    scrollBehavior = scrollBehavior,
+                    screens = screens,
+                    navigationIconOnClick = { toggleDrawer() },
+                    actionContent = {
+                        IconButton(
+                            colors = IconButtonDefaults.iconButtonColors(),
+                            onClick = { homeViewModel.setTheme(homeViewModel.state.theme) }) {
+                            Icon(
+                                imageVector = if (homeViewModel.state.theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
+                                contentDescription = null
+                            )
+                        }
+                    },
+                    route = route,
+                    isSmallScreenWidth = isSmallScreenWidth(maxWidth),
+                    navController = navController
                 )
-            }
-
-            AppNavHost(
-                modifier = Modifier
-                    .graphicsLayer { this.translationX = translationX.value }
-                    .draggable(
-                        enabled = isDragEnabled,
+            }, snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
+            DrawerContent(navController = navController,
+                toggleDrawer = ::toggleDrawer,
+                route = route,
+                modifier = Modifier.width(width = drawerWidth.dp * 0.5f)
+                    .graphicsLayer { this.translationX = translationX.value - drawerWidth }
+                    .draggable(enabled = isDragEnabled,
                         state = draggableState,
                         orientation = Orientation.Horizontal,
                         onDragStopped = { onDragStopped(velocity = it) }),
-                toggleDrawer = { toggleDrawer() },
-                navController = navController,
-                homeViewModel = homeViewModel
+                screens = screens
             )
+
+            Box {
+                if (translationX.value > 0f) {
+                    Box(
+                        modifier = Modifier.zIndex(zIndex = 1f)
+                            .matchParentSize()
+                            .graphicsLayer { this.translationX = translationX.value }
+                            .clickable(
+                                indication = null,
+                                interactionSource = remember { MutableInteractionSource() },
+                                onClick = { toggleDrawer() })
+                            .draggable(enabled = isDragEnabled,
+                                state = draggableState,
+                                orientation = Orientation.Horizontal,
+                                onDragStopped = {
+                                    onDragStopped(velocity = it)
+                                }
+                            )
+                    )
+                }
+
+                AppNavHost(
+                    modifier = Modifier
+                        .alpha(
+                            alpha = 1 - 0.5f * (translationX.value / drawerWidth).coerceIn(
+                                0f,
+                                1f
+                            )
+                        )
+                        .padding(paddingValues = it)
+                        .graphicsLayer { this.translationX = translationX.value }
+                        .draggable(enabled = isDragEnabled,
+                            state = draggableState,
+                            orientation = Orientation.Horizontal,
+                            onDragStopped = { onDragStopped(velocity = it) }),
+                    toggleDrawer = { toggleDrawer() },
+                    navController = navController,
+                    homeViewModel = homeViewModel
+                )
+            }
         }
     }
 }

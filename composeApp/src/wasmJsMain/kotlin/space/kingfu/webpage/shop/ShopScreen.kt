@@ -10,76 +10,78 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import kingfu.composeapp.generated.resources.Res
 import kingfu.composeapp.generated.resources.kingfu_rectangle
 import space.kingfu.webpage.home.components.ImageDetail
-import space.kingfu.webpage.navigation.Screen
-import space.kingfu.webpage.topBar.HomeTopBar
-import space.kingfu.webpage.topBar.ShopTopBar
 import space.kingfu.webpage.ui.theme.Space
+import space.kingfu.webpage.ui.theme.Typography
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShopScreen(
-    toggleDrawer: () -> Unit
-) {
+fun ShopScreen() {
     val scrollState = rememberScrollState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val uriHandler = LocalUriHandler.current
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
-        topBar = {
-            ShopTopBar(
-                title = Screen.Shop.name,
-                navigationIconOnClick = toggleDrawer,
-                scrollBehavior = scrollBehavior
-            )
-        }
+    BoxWithConstraints(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
-        BoxWithConstraints(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+        val maxWidth = maxWidth
+        Column(
+            modifier = Modifier
+                .verticalScroll(state = scrollState)
+                .widthIn(max = 1200.dp)
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            val maxWidth = maxWidth
-            Column(
-                modifier = Modifier
-                    .verticalScroll(state = scrollState)
-                    .padding(paddingValues = it)
-                    .widthIn(max = 1200.dp)
-                    .padding(horizontal = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
 
-                Spacer(modifier = Modifier.height(height = Space().xLarge_64))
+            Spacer(modifier = Modifier.height(height = Space().xLarge_64))
 
-                ImageDetail(
-                    title = "Webpage (Test Mode)",
-                    subTitle = "Web Application\nPrice: $100",
-                    body = "A sleek designed webpage based on a template.",
-                    buttonText = "Buy",
-                    resource = Res.drawable.kingfu_rectangle,
-                    buttonAction = {
-                        val url = "https://buy.stripe.com/test_bIY9D81D05JS0WQ9AA"
-                        uriHandler.openUri(uri = url)
-                    },
-                    maxWidth = maxWidth
-                )
+            ImageDetail(
+                title = "Webpage (Test Mode)",
+                subTitle = "Price: $100",
+                body = "A sleek designed webpage based on a template.",
+                resource = Res.drawable.kingfu_rectangle,
+                maxWidth = maxWidth,
+                buttonList = {
+                    OutlinedButton(
+                        onClick = {
+                            val url = "https://kingfu.space/longnguyen/"
+                            uriHandler.openUri(uri = url)
+                        }
+                    ) {
+                        Text(
+                            text = "Preview template",
+                            style = Typography.bodySmall
+                        )
+                    }
 
-                Spacer(modifier = Modifier.height(height = 1200.dp))
+                    OutlinedButton(
+                        onClick = {
+                            val url = "https://buy.stripe.com/test_00geXs2H42xG6hadQR"
+                            uriHandler.openUri(uri = url)
+                        }
+                    ) {
+                        Text(
+                            text = "Buy",
+                            style = Typography.bodySmall
+                        )
+                    }
+                }
+            )
 
-            }
+            Spacer(modifier = Modifier.height(height = 1200.dp))
+
         }
     }
 }
+
+

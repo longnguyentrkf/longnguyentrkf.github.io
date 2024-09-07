@@ -1,6 +1,7 @@
 package space.kingfu.webpage.navigation
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,7 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
@@ -61,7 +64,8 @@ fun DrawerContent(
                         text = screen.name,
                         overflow = TextOverflow.Ellipsis,
                         color = color,
-                        style = Typography.bodySmall
+                        style = Typography.bodySmall,
+                        maxLines = 2
                     )
                 },
                 selected = selected,
