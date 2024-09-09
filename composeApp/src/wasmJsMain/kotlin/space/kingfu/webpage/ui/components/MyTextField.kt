@@ -96,7 +96,7 @@ fun MyTextField(
 
                 if (done != null) {
                     IconButton(
-                        modifier = Modifier,
+                        modifier = Modifier.weight(weight = 0.1f),
                         onClick = { done(true) }
                     ) {
                         Icon(

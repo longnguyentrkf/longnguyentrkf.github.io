@@ -14,9 +14,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +51,11 @@ fun FlowScreen(
 ) {
 
     val scrollState = rememberScrollState()
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(key1 = scrollState.isScrollInProgress) {
+        if (scrollState.isScrollInProgress) focusManager.clearFocus()
+    }
 
     BoxWithConstraints(
         modifier = Modifier.fillMaxWidth(),
