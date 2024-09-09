@@ -4,13 +4,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ViewQuilt
 import androidx.compose.material.icons.automirrored.outlined.ViewQuilt
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Shop
 import androidx.compose.material.icons.filled.Storefront
-import androidx.compose.material.icons.filled.ViewQuilt
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material.icons.outlined.Storefront
-import androidx.compose.material.icons.outlined.ViewQuilt
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(
@@ -38,6 +34,11 @@ sealed class Screen(
         name = "Templates",
         iconFilled = Icons.AutoMirrored.Filled.ViewQuilt,
         iconOutlined = Icons.AutoMirrored.Outlined.ViewQuilt
+    )
+
+    data object Flow : Screen(
+        route = "flow",
+        name = "Flow",
     )
 
 }

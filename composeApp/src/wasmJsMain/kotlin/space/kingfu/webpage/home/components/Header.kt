@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.TextUnit
 import space.kingfu.webpage.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.core.isSmallScreen
 import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Space
 
@@ -33,10 +33,10 @@ fun Header(
     modifier: Modifier = Modifier,
     maxWidth: Dp,
     fontScale: Float = space.kingfu.webpage.core.fontScale(maxWidth.value),
-    titleFontSize: TextUnit = Typography.displaySmall.fontSize * fontScale,
-    titleLineHeight: TextUnit = Typography.displaySmall.lineHeight * fontScale,
-    subTitleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
-    subTitleLineHeight: TextUnit = Typography.titleSmall.lineHeight * fontScale,
+//    titleFontSize: TextUnit = Typography.displaySmall.fontSize * fontScale,
+//    titleLineHeight: TextUnit = Typography.displaySmall.lineHeight * fontScale,
+//    subTitleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
+//    subTitleLineHeight: TextUnit = Typography.titleSmall.lineHeight * fontScale,
     title: String? = null,
     subTitle: String? = null,
     imageScale: Float = 1f,
@@ -49,7 +49,7 @@ fun Header(
         .aspectRatio(ratio = aspectRatio)
 
 
-    if (isSmallScreenWidth(maxWidth = maxWidth)) {
+    if (isSmallScreen(width = maxWidth)) {
         Column(
             modifier = modifier
                 .height(intrinsicSize = IntrinsicSize.Max)
@@ -71,21 +71,23 @@ fun Header(
                 if (title != null) {
                     Text(
                         text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
-                        fontWeight = FontWeight.Bold
+//                        fontSize = titleFontSize,
+//                        lineHeight = titleLineHeight,
+                        fontWeight = FontWeight.Bold,
+                        style = Typography.titleSmall
                     )
                 }
 
                 if (subTitle != null) {
                     Text(
                         text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+//                        fontSize = subTitleFontSize,
+//                        lineHeight = subTitleLineHeight
+                        style = Typography.bodyLarge
                     )
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
 
             }
         }
@@ -113,21 +115,23 @@ fun Header(
                 if (title != null) {
                     Text(
                         text = title,
-                        fontSize = titleFontSize,
-                        lineHeight = titleLineHeight,
-                        fontWeight = FontWeight.Bold
+//                        fontSize = titleFontSize,
+//                        lineHeight = titleLineHeight,
+                        fontWeight = FontWeight.Bold,
+                        style = Typography.titleSmall
                     )
                 }
 
                 if (subTitle != null) {
                     Text(
                         text = subTitle,
-                        fontSize = subTitleFontSize,
-                        lineHeight = subTitleLineHeight
+//                        fontSize = subTitleFontSize,
+//                        lineHeight = subTitleLineHeight
+                        style = Typography.bodyLarge
                     )
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
 
             }
         }

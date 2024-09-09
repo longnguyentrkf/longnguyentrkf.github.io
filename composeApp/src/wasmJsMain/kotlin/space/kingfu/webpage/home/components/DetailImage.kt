@@ -23,7 +23,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.core.fontScale
+import space.kingfu.webpage.core.isSmallScreen
 import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
@@ -37,7 +38,7 @@ fun DetailImage(
     body: String? = null,
     resource: DrawableResource? = null,
     maxWidth: Dp,
-    fontScale: Float = space.kingfu.webpage.core.fontScale(float = maxWidth.value),
+    fontScale: Float = fontScale(float = maxWidth.value),
     titleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
     titleLineHeight: TextUnit = Typography.titleSmall.lineHeight * fontScale,
     subTitleFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
@@ -50,7 +51,7 @@ fun DetailImage(
     buttonList: @Composable RowScope.() -> Unit = {}
 ) {
 
-    if (isSmallScreenWidth(maxWidth = maxWidth)) {
+    if (isSmallScreen(width = maxWidth)) {
         Column(
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(space = Space().large_32),
@@ -97,7 +98,7 @@ fun DetailImage(
                     )
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
 
             }
         }
@@ -139,7 +140,7 @@ fun DetailImage(
                     )
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
 
             }
 

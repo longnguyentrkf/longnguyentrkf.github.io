@@ -15,6 +15,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import space.kingfu.webpage.core.sendMail
+import space.kingfu.webpage.ui.components.MyTextField
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.Typography
 
@@ -76,8 +77,9 @@ fun HireMe(
                 modifier = Modifier.weight(weight = 0.5f),
                 value = firstName,
                 onValueChange = setFirstName,
-                focusRequester = focusRequester,
-                placeholder = "First Name"
+//                focusRequester = focusRequester,
+                placeholder = "First Name",
+//                focusRequester = focusRequester
             )
 
             Spacer(modifier = Modifier.width(width = Space().medium_16))
@@ -86,16 +88,18 @@ fun HireMe(
                 modifier = Modifier.weight(weight = 0.5f),
                 value = lastName,
                 onValueChange = setLastName,
-                focusRequester = focusRequester,
-                placeholder = "Last Name"
+//                focusRequester = focusRequester,
+                placeholder = "Last Name",
+//                focusRequester = focusRequester
             )
         }
 
         MyTextField(
             value = message,
             onValueChange = setMessage,
-            focusRequester = focusRequester,
+//            focusRequester = focusRequester,
             placeholder = "Message",
+//            focusRequester = focusRequester,
         )
 
         if (toEmail != null) {

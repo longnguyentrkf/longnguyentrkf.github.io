@@ -20,11 +20,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.core.fontScale
+import space.kingfu.webpage.core.isSmallScreen
 import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
@@ -39,14 +39,14 @@ fun ImageDetail(
     body: String? = null,
     resource: DrawableResource,
     maxWidth: Dp,
-    fontScale: Float = space.kingfu.webpage.core.fontScale(maxWidth.value),
-    titleFontSize: TextUnit = Typography.titleSmall.fontSize * fontScale,
-    titleLineHeight: TextUnit = Typography.titleSmall.lineHeight * fontScale,
-    subTitleFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
-    subTitleLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
-    bodyFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
-    bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
-    listFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
+    fontScale: Float = fontScale(maxWidth.value),
+//    titleFontSize: TextUnit = Typography.bodyLarge.fontSize * fontScale,
+//    titleLineHeight: TextUnit = Typography.bodyLarge.lineHeight * fontScale,
+//    subTitleFontSize: TextUnit = Typography.bodySmall.fontSize * fontScale,
+//    subTitleLineHeight: TextUnit = Typography.bodySmall.lineHeight * fontScale,
+//    bodyFontSize: TextUnit = Typography.bodySmall.fontSize * fontScale,
+//    bodyLineHeight: TextUnit = Typography.bodySmall.lineHeight * fontScale,
+//    listFontSize: TextUnit = Typography.bodyMedium.fontSize * fontScale,
     width: Float = 1024f,
     height: Float = 500f,
     shape: Shape = Shape.medium,
@@ -60,7 +60,7 @@ fun ImageDetail(
         .aspectRatio(ratio = aspectRatio)
         .size(width = width.dp, height = height.dp)
 
-    if (isSmallScreenWidth(maxWidth = maxWidth)) {
+    if (isSmallScreen(width = maxWidth)) {
         Column(
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(space = Space().large_32),
@@ -79,8 +79,9 @@ fun ImageDetail(
                         if (title != null) {
                             Text(
                                 text = title,
-                                fontSize = titleFontSize,
-                                lineHeight = titleLineHeight,
+//                                fontSize = titleFontSize,
+//                                lineHeight = titleLineHeight,
+                                style = Typography.bodyLarge
                             )
 
                             Spacer(modifier = Modifier.height(height = Space().small_8))
@@ -90,8 +91,9 @@ fun ImageDetail(
                         if (subTitle != null) {
                             Text(
                                 text = subTitle,
-                                fontSize = subTitleFontSize,
-                                lineHeight = subTitleLineHeight,
+                                style = Typography.bodySmall
+//                                fontSize = subTitleFontSize,
+//                                lineHeight = subTitleLineHeight,
                             )
                         }
                     }
@@ -100,8 +102,9 @@ fun ImageDetail(
                 if (body != null) {
                     Text(
                         text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        style = Typography.bodySmall
+//                        fontSize = bodyFontSize,
+//                        lineHeight = bodyLineHeight
                     )
                 }
 
@@ -110,13 +113,14 @@ fun ImageDetail(
                         for (item in list) {
                             Text(
                                 text = "• $item",
-                                fontSize = listFontSize
+                                style = Typography.bodyMedium
+//                                fontSize = listFontSize
                             )
                         }
                     }
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
             }
         }
     } else {
@@ -144,8 +148,9 @@ fun ImageDetail(
                         if (title != null) {
                             Text(
                                 text = title,
-                                fontSize = titleFontSize,
-                                lineHeight = titleLineHeight,
+//                                fontSize = titleFontSize,
+//                                lineHeight = titleLineHeight,
+                                style = Typography.bodyLarge
                             )
                             Spacer(modifier = Modifier.height(height = Space().small_8))
 
@@ -154,8 +159,9 @@ fun ImageDetail(
                         if (subTitle != null) {
                             Text(
                                 text = subTitle,
-                                fontSize = subTitleFontSize,
-                                lineHeight = subTitleLineHeight,
+//                                fontSize = subTitleFontSize,
+//                                lineHeight = subTitleLineHeight,
+                                style = Typography.bodySmall
                             )
                         }
                     }
@@ -164,23 +170,28 @@ fun ImageDetail(
                 if (body != null) {
                     Text(
                         text = body,
-                        fontSize = bodyFontSize,
-                        lineHeight = bodyLineHeight
+                        style = Typography.bodySmall
+//                        fontSize = bodyFontSize,
+//                        lineHeight = bodyLineHeight
                     )
                 }
 
                 if (list.isNotEmpty()) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(space = Space().small_8)
+                    ) {
                         for (item in list) {
                             Text(
                                 text = "• $item",
-                                fontSize = listFontSize
+//                                fontSize = listFontSize
+                                style = Typography.bodyMedium
                             )
                         }
                     }
                 }
 
-                MyOutLinedButtonRow(content = buttonList)
+//                MyOutLinedButtonRow(content = buttonList)
             }
         }
     }

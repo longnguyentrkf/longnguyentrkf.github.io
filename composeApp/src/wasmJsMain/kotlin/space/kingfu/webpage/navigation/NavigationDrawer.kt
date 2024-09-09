@@ -41,7 +41,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
-import space.kingfu.webpage.core.isSmallScreenWidth
+import space.kingfu.webpage.core.isSmallScreen
 import space.kingfu.webpage.home.viewModel.HomeViewModel
 import space.kingfu.webpage.topBar.MyTopBar
 import space.kingfu.webpage.ui.theme.ThemeType
@@ -120,7 +120,7 @@ fun NavigationDrawer(
 
     BoxWithConstraints {
         val maxWidth = maxWidth
-        val isDragEnabled = isSmallScreenWidth(maxWidth = maxWidth)
+        val isDragEnabled = isSmallScreen(width = maxWidth)
 
         Scaffold(
             modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
@@ -148,7 +148,7 @@ fun NavigationDrawer(
                         }
                     },
                     route = route,
-                    isSmallScreenWidth = isSmallScreenWidth(maxWidth),
+                    isSmallScreenWidth = isSmallScreen(maxWidth),
                     navController = navController
                 )
             }, snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
