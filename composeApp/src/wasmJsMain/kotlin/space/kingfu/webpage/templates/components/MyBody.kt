@@ -13,12 +13,16 @@ fun MyBody(
     modifier: Modifier = Modifier,
     body: String,
     style: TextStyle = Typography.bodySmall,
-    textAlign: TextAlign = TextAlign.Justify
+    textAlign: TextAlign = TextAlign.Justify,
+    maxLines: Int = 2000
 ) {
     Text(
-        modifier = modifier.fillMaxWidth(),
+//        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         text = body,
         style = style,
-        textAlign = textAlign
+        textAlign = textAlign,
+        maxLines = maxLines,
+
     )
 }

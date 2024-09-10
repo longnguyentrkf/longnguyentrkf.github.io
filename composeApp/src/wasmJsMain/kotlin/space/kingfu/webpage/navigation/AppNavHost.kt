@@ -2,8 +2,10 @@ package space.kingfu.webpage.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import space.kingfu.webpage.flow.viewModel.FlowViewModel
 import space.kingfu.webpage.home.viewModel.HomeViewModel
 import space.kingfu.webpage.navigation.navGraphBuilder.homeGraph
 import space.kingfu.webpage.navigation.navGraphBuilder.flowGraph
@@ -18,6 +20,8 @@ fun AppNavHost(
     toggleDrawer: () -> Unit,
     navController: NavHostController
 ) {
+    val flowViewModel = viewModel { FlowViewModel() }
+
 
 
     NavHost(
@@ -31,6 +35,8 @@ fun AppNavHost(
 
         templatesGraph(navController = navController)
 
-        flowGraph()
+        flowGraph(
+            vm = flowViewModel
+        )
     }
 }

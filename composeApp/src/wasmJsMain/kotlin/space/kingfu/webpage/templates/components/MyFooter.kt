@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import space.kingfu.webpage.ui.theme.Typography
 
 
@@ -15,12 +17,14 @@ fun MyFooter(
     modifier: Modifier = Modifier,
     footer: String,
     style: TextStyle = Typography.bodySmall,
-    color: Color = colorScheme.outline
+    color: Color = colorScheme.outline,
+    textAlign: TextAlign = TextAlign.Justify
 ) {
     Text(
         modifier = modifier.fillMaxWidth(),
         text = footer,
         style = style,
-        color = color
+        color = color,
+        textAlign = textAlign
     )
 }

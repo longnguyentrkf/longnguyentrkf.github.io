@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import space.kingfu.webpage.flow.model.FlowTextStyle
 import space.kingfu.webpage.ui.theme.Space
 
 
@@ -18,6 +19,8 @@ fun MyOutLinedButtonRow(
     modifier: Modifier = Modifier,
     arrangement: Arrangement.Horizontal = Arrangement.spacedBy(space = Space().small_8),
     pair: List<Pair<String, String>>
+//    pair: List<FlowSectionType>
+//    buttons: List<FlowTextStyle>
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -30,6 +33,7 @@ fun MyOutLinedButtonRow(
     ) {
         pair.forEachIndexed { _, pair ->
             OutlinedButton(
+//                onClick = { uriHandler.openUri(uri = pair.second) }
                 onClick = { uriHandler.openUri(uri = pair.second) }
             ) {
                 Text(text = pair.first)
