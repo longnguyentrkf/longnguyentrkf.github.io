@@ -66,7 +66,7 @@ fun NavigationDrawer(
     val isDrawerOpen = drawerState == DrawerValue.Open
     val snackBarHostState = remember { SnackbarHostState() }
     val screens = listOf(Screen.Home, Screen.Templates, Screen.Shop)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
 
 //    ObserveAsEvents(
@@ -151,7 +151,8 @@ fun NavigationDrawer(
                     isSmallScreenWidth = isSmallScreen(maxWidth),
                     navController = navController
                 )
-            }, snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
+            },
+            snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
             DrawerContent(navController = navController,
                 toggleDrawer = ::toggleDrawer,
                 route = route,

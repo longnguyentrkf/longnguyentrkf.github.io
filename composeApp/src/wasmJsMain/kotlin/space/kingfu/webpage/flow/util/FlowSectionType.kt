@@ -5,5 +5,6 @@ enum class FlowSectionType {
     SUBTITLE,
     BODY,
     FOOTER,
-    BUTTONS
+    BUTTONS,
+    IMAGE
 }

@@ -20,11 +20,12 @@ fun TwoColumnLayout(
     leftWeight: Float = 1f,
     rightWeight: Float = 1f,
     isSmallScreenReverseLayout: Boolean = false,
+    isReverseLayout: Boolean = false
 ) {
     if (isSmallScreen(width = width)) {
         Column {
             Column(modifier = modifier) {
-                if(isSmallScreenReverseLayout) right() else  left()
+                if(isSmallScreenReverseLayout) right() else left()
             }
             Column(modifier = modifier) {
                 if(isSmallScreenReverseLayout) left() else right()
@@ -33,13 +34,47 @@ fun TwoColumnLayout(
     } else {
         Row(modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max)) {
             Column(modifier = modifier.weight(weight = leftWeight)) {
-                left()
+                if(isReverseLayout) right () else left()
             }
             Column(modifier = modifier.weight(weight = rightWeight)) {
-                right()
+                if(isReverseLayout) left() else right()
             }
         }
     }
 
 }
+
+//@Composable
+//fun ImageDetail2(
+//    modifier: Modifier = Modifier.padding(all = 24.dp),
+//    left: @Composable () -> Unit = {},
+//    right: @Composable () -> Unit = {},
+//    width: Dp,
+//    leftWeight: Float = 1f,
+//    rightWeight: Float = 1f,
+//    isSmallScreenReverseLayout: Boolean = false,
+//    isReverseLayout: Boolean = false
+//) {
+//    if (isSmallScreen(width = width)) {
+//        Column {
+//            Column(modifier = modifier) {
+//                 left()
+//            }
+//            Column(modifier = modifier) {
+//                 right()
+//            }
+//        }
+//    } else {
+//        Row(modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max)) {
+//            Column(modifier = modifier.weight(weight = leftWeight)) {
+//                left()
+//            }
+//            Column(modifier = modifier.weight(weight = rightWeight)) {
+//                right()
+//            }
+//        }
+//    }
+//
+//}
+
 

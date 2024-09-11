@@ -79,7 +79,6 @@ fun HireMe(
                 onValueChange = setFirstName,
 //                focusRequester = focusRequester,
                 placeholder = "First Name",
-//                focusRequester = focusRequester
             )
 
             Spacer(modifier = Modifier.width(width = Space().medium_16))
@@ -90,7 +89,6 @@ fun HireMe(
                 onValueChange = setLastName,
 //                focusRequester = focusRequester,
                 placeholder = "Last Name",
-//                focusRequester = focusRequester
             )
         }
 
@@ -99,7 +97,6 @@ fun HireMe(
             onValueChange = setMessage,
 //            focusRequester = focusRequester,
             placeholder = "Message",
-//            focusRequester = focusRequester,
         )
 
         if (toEmail != null) {

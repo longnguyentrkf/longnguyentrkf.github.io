@@ -19,8 +19,6 @@ fun MyOutLinedButtonRow(
     modifier: Modifier = Modifier,
     arrangement: Arrangement.Horizontal = Arrangement.spacedBy(space = Space().small_8),
     pair: List<Pair<String, String>>
-//    pair: List<FlowSectionType>
-//    buttons: List<FlowTextStyle>
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -33,7 +31,6 @@ fun MyOutLinedButtonRow(
     ) {
         pair.forEachIndexed { _, pair ->
             OutlinedButton(
-//                onClick = { uriHandler.openUri(uri = pair.second) }
                 onClick = { uriHandler.openUri(uri = pair.second) }
             ) {
                 Text(text = pair.first)

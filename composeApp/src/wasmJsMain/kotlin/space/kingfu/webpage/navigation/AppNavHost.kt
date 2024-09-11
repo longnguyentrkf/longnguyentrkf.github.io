@@ -36,7 +36,8 @@ fun AppNavHost(
         templatesGraph(navController = navController)
 
         flowGraph(
-            vm = flowViewModel
+            vm = flowViewModel,
+            navController = navController
         )
     }
 }
