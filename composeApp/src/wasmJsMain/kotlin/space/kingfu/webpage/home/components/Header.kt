@@ -19,12 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import space.kingfu.webpage.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import space.kingfu.webpage.core.isSmallScreen
-import space.kingfu.webpage.ui.components.MyOutLinedButtonRow
 import space.kingfu.webpage.ui.theme.Space
 
 
