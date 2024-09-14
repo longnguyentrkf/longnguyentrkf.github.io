@@ -2,67 +2,63 @@ package space.kingfu.webpage.flow
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import space.kingfu.webpage.core.variables.maxWidth
-import space.kingfu.webpage.flow.components.MyBody
-import space.kingfu.webpage.flow.components.MyFooter
-import space.kingfu.webpage.flow.components.MyImage
-import space.kingfu.webpage.flow.components.MySubtitle
-import space.kingfu.webpage.flow.components.MyTextField
-import space.kingfu.webpage.flow.components.MyTitle
-import space.kingfu.webpage.flow.components.TwoColumnLayout
-import space.kingfu.webpage.flow.model.FlowSection
-import space.kingfu.webpage.flow.model.FlowStyleData
-import space.kingfu.webpage.flow.util.FlowSectionType
+import space.kingfu.webpage.flow.components.FlowBody
+import space.kingfu.webpage.flow.components.FlowButton
+import space.kingfu.webpage.flow.components.FlowFooter
+import space.kingfu.webpage.flow.components.FlowImage
+import space.kingfu.webpage.flow.components.FlowSubtitle
+import space.kingfu.webpage.flow.components.FlowTitle
+import space.kingfu.webpage.flow.viewModel.Banner
+import space.kingfu.webpage.flow.viewModel.ButtonData
+import space.kingfu.webpage.flow.viewModel.ImageData
+import space.kingfu.webpage.flow.viewModel.TextData
 import space.kingfu.webpage.navigation.Screen
 import space.kingfu.webpage.topBar.BackTopBar
+import space.kingfu.webpage.ui.components.TwoColumnLayout
 import space.kingfu.webpage.ui.theme.Shape
-import space.kingfu.webpage.ui.theme.Typography
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FlowScreen(
-    details: List<FlowSection>,
-    setStyle: (FlowStyleData) -> Unit,
+    banners: List<Banner>,
     addDetails: () -> Unit,
     goToTemplate: () -> Unit,
     removeButton: (index: Int, buttonIndex: Int) -> Unit,
-    addButton: (indexSection: Int) -> Unit
+    addButton: (indexSection: Int) -> Unit,
+    setTitle: (index: Int, textData: TextData) -> Unit,
+    setSubtitle: (index: Int, textData: TextData) -> Unit,
+    setBody: (index: Int, textData: TextData) -> Unit,
+    setFooter: (index: Int, textData: TextData) -> Unit,
+    setButtons: (index: Int, buttonIndex: Int, buttonData: ButtonData) -> Unit,
+    setImage: (index: Int, image: ImageData) -> Unit
 ) {
+
+
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
 
@@ -87,387 +83,58 @@ fun FlowScreen(
             verticalArrangement = Arrangement.spacedBy(space = 64.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            details.forEachIndexed { index, flowSection ->
+            banners.forEachIndexed { index, banner ->
                 TwoColumnLayout(
                     modifier = Modifier.widthIn(max = 1200.dp),
                     isReverseLayout = index % 2 != 0,
                     width = maxWidth,
                     left = {
-                        MyImage(
-                            modifier = Modifier
-                                .clip(shape = Shape.medium)
-                                .background(color = colorScheme.surfaceContainer)
-                                .clickable {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.IMAGE,
-                                        isEdit = !flowSection.image.isEdit,
-                                        imageUrl = flowSection.image.imageUrl
-                                    )
-                                    setStyle(data)
-                                },
-                            url = flowSection.image.imageUrl,
+                        FlowImage(
+                            index = index,
+                            banner = banner,
+                            setImage = setImage
                         )
-
-                        Spacer(modifier = Modifier.height(height = 12.dp))
-
-                        if (flowSection.image.isEdit) {
-                            MyTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(height = 40.dp),
-                                value = flowSection.image.imageUrl ?: "",
-                                placeholder = "url",
-                                onValueChange = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.IMAGE,
-                                        imageUrl = it
-                                    )
-                                    setStyle(data)
-                                },
-                                contentAlignment = Alignment.Center,
-                                style = Typography.bodySmall,
-                                textAlign = TextAlign.Center,
-                                maxChar = 500,
-                                isSingleLine = true
-                            )
-                        }
                     },
                     right = {
-                        if (flowSection.title.isEdit) {
-                            MyTextField(
-                                modifier = Modifier.padding(vertical = 4.dp),
-                                value = flowSection.title.text,
-                                placeholder = "title",
-                                onValueChange = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.TITLE,
-                                        text = it
-                                    )
-                                    setStyle(data)
+                        FlowTitle(
+                            index = index,
+                            banner = banner,
+                            setTitle = setTitle
+                        )
 
-                                },
-                                contentAlignment = Alignment.Center,
-                                style = Typography.bodyLarge,
-                                fontWeight = FontWeight.Bold,
-                                done = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.TITLE,
-                                        isEdit = false
-                                    )
-                                    setStyle(data)
-                                },
-                                textAlign = TextAlign.Center
-                            )
-                        } else {
-                            MyTitle(
-                                modifier = Modifier
-                                    .padding(vertical = if (flowSection.title.text.isBlank()) 4.dp else 0.dp)
-                                    .clickable {
-                                        val data = FlowStyleData(
-                                            index = index,
-                                            section = FlowSectionType.TITLE,
-                                            isEdit = true
-                                        )
-                                        setStyle(data)
-                                    }
-                                    .background(
-                                        if (flowSection.title.text.isBlank()) {
-                                            colorScheme.surfaceContainer
-                                        } else {
-                                            Transparent
-                                        },
-                                        shape = Shape.extraSmall
-                                    ),
-                                title = flowSection.title.text
-                            )
-                        }
+                        FlowSubtitle(
+                            index = index,
+                            setSubtitle = setSubtitle,
+                            banner = banner
+                        )
 
-                        if (flowSection.subtitle.isEdit) {
-                            MyTextField(
-                                modifier = Modifier.padding(vertical = 4.dp),
-                                value = flowSection.subtitle.text,
-                                placeholder = "subtitle",
-                                onValueChange = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.SUBTITLE,
-                                        text = it
-                                    )
-                                    setStyle(data)
-                                },
-                                contentAlignment = Alignment.Center,
-                                style = Typography.bodySmall,
-                                done = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.SUBTITLE,
-                                        isEdit = false
-                                    )
-                                    setStyle(data)
-                                },
-                                textAlign = TextAlign.Center,
-                                fontStyle = FontStyle.Italic
-                            )
-                        } else {
-                            MySubtitle(
-                                modifier = Modifier
-                                    .padding(vertical = if (flowSection.subtitle.text.isBlank()) 4.dp else 0.dp)
-                                    .clickable {
-                                        val data = FlowStyleData(
-                                            index = index,
-                                            section = FlowSectionType.SUBTITLE,
-                                            isEdit = true
-                                        )
-                                        setStyle(data)
-                                    }
-                                    .background(
-                                        if (flowSection.subtitle.text.isBlank()) {
-                                            colorScheme.surfaceContainer
-                                        } else {
-                                            Transparent
-                                        },
-                                        shape = Shape.extraSmall
-                                    ),
-                                subtitle = flowSection.subtitle.text
-                            )
-                        }
+                        FlowBody(
+                            index = index,
+                            setBody = setBody,
+                            banner = banner
+                        )
 
-                        if (flowSection.body.isEdit) {
-                            MyTextField(
-                                modifier = Modifier.padding(vertical = 4.dp),
-                                value = flowSection.body.text,
-                                placeholder = "body",
-                                onValueChange = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.BODY,
-                                        text = it
-                                    )
-                                    setStyle(data)
-                                },
-                                contentAlignment = Alignment.TopStart,
-                                style = Typography.bodySmall,
-                                done = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.BODY,
-                                        isEdit = false
-                                    )
-                                    setStyle(data)
-                                },
-                                textAlign = TextAlign.Justify,
-                                maxChar = 500
-                            )
-                        } else {
-                            MyBody(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = if (flowSection.body.text.isBlank()) 4.dp else 0.dp)
-                                    .clickable {
-                                        val data = FlowStyleData(
-                                            index = index,
-                                            section = FlowSectionType.BODY,
-                                            isEdit = true
-                                        )
-                                        setStyle(data)
-                                    }
-                                    .background(
-                                        if (flowSection.body.text.isBlank()) {
-                                            colorScheme.surfaceContainer
-                                        } else {
-                                            Transparent
-                                        },
-                                        shape = Shape.extraSmall
-                                    ),
-                                body = details[index].body.text
-                            )
-                        }
+                        FlowFooter(
+                            index = index,
+                            setFooter = setFooter,
+                            banner = banner
+                        )
 
-                        if (flowSection.footer.isEdit) {
-                            MyTextField(
-                                modifier = Modifier.padding(vertical = 4.dp),
-                                value = flowSection.footer.text,
-                                placeholder = "footer",
-                                onValueChange = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.FOOTER,
-                                        text = it
-                                    )
-                                    setStyle(data)
-                                },
-                                contentAlignment = Alignment.TopStart,
-                                style = Typography.bodySmall,
-                                done = {
-                                    val data = FlowStyleData(
-                                        index = index,
-                                        section = FlowSectionType.FOOTER,
-                                        isEdit = false
-                                    )
-                                    setStyle(data)
-                                },
-                                textAlign = TextAlign.Justify,
-                                placeHolderColor = colorScheme.outline.copy(alpha = 0.5f),
-                                editTextColor = colorScheme.outline
-                            )
-                        } else {
-                            MyFooter(
-                                modifier = Modifier
-                                    .padding(vertical = if (flowSection.footer.text.isBlank()) 4.dp else 0.dp)
-                                    .clickable {
-                                        val data = FlowStyleData(
-                                            index = index,
-                                            section = FlowSectionType.FOOTER,
-                                            isEdit = true
-                                        )
-                                        setStyle(data)
-                                    }
-                                    .background(
-                                        if (flowSection.footer.text.isBlank()) {
-                                            colorScheme.surfaceContainer
-                                        } else {
-                                            Transparent
-                                        },
-                                        shape = Shape.extraSmall
-                                    ),
-                                footer = flowSection.footer.text,
-                                textAlign = TextAlign.Justify
-                            )
-                        }
-
-                        Row(
-                            modifier = Modifier.horizontalScroll(state = rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
-                        ) {
-                            flowSection.buttons.forEachIndexed { buttonIndex, flowButton ->
-                                if (flowButton.isEdit) {
-                                    Column(
-                                        verticalArrangement = Arrangement.spacedBy(space = 16.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally
-                                    ) {
-                                        MyTextField(
-                                            modifier = Modifier.width(width = 160.dp),
-                                            value = flowButton.text,
-                                            placeholder = "button",
-                                            onValueChange = {
-                                                val data = FlowStyleData(
-                                                    index = index,
-                                                    section = FlowSectionType.BUTTONS,
-                                                    text = it,
-                                                    buttonIndex = buttonIndex,
-                                                    buttonUrl = flowButton.buttonUrl
-                                                )
-                                                setStyle(data)
-                                            },
-                                            contentAlignment = Alignment.Center,
-                                            style = Typography.bodySmall,
-                                            done = {
-                                                val data = FlowStyleData(
-                                                    index = index,
-                                                    section = FlowSectionType.BUTTONS,
-                                                    isEdit = false,
-                                                    buttonIndex = buttonIndex,
-                                                    buttonUrl = flowButton.buttonUrl
-                                                )
-                                                setStyle(data)
-                                            },
-                                            textAlign = TextAlign.Center,
-                                            maxChar = 30,
-                                            borderColor = colorScheme.inverseSurface,
-                                            isSingleLine = true,
-                                            weight = 0.75f
-                                        )
-                                        MyTextField(
-                                            modifier = Modifier
-                                                .clip(shape = Shape.medium)
-                                                .width(width = 160.dp)
-                                                .height(height = 42.dp),
-                                            value = flowButton.buttonUrl ?: "",
-                                            placeholder = "url",
-                                            onValueChange = {
-                                                val data = FlowStyleData(
-                                                    index = index,
-                                                    section = FlowSectionType.BUTTONS,
-                                                    buttonIndex = buttonIndex,
-                                                    buttonUrl = it
-                                                )
-                                                setStyle(data)
-                                            },
-                                            style = Typography.bodySmall,
-                                            isSingleLine = true,
-                                            contentAlignment = Alignment.Center,
-                                            textAlign = TextAlign.Center
-                                        )
-
-                                        IconButton(
-                                            onClick = {
-                                                removeButton(
-                                                    index,
-                                                    buttonIndex
-                                                )
-                                            }
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Default.Remove,
-                                                contentDescription = null,
-                                                tint = colorScheme.error
-                                            )
-                                        }
-                                    }
-                                } else {
-                                    OutlinedButton(
-                                        modifier = Modifier.widthIn(min = 80.dp),
-                                        onClick = {
-                                            val data = FlowStyleData(
-                                                index = index,
-                                                section = FlowSectionType.BUTTONS,
-                                                isEdit = true,
-                                                buttonIndex = buttonIndex,
-                                                buttonUrl = flowButton.buttonUrl
-                                            )
-                                            setStyle(data)
-                                        }
-                                    ) {
-                                        MyBody(
-                                            modifier = Modifier
-                                                .background(
-                                                    if (flowButton.text.isBlank()) {
-                                                        colorScheme.surfaceContainer
-                                                    } else {
-                                                        Transparent
-                                                    },
-                                                    shape = Shape.extraSmall
-                                                ),
-                                            body = flowButton.text,
-                                            textAlign = TextAlign.Center
-                                        )
-                                    }
-                                }
-
-                            }
-
-                            if (flowSection.buttons.size < 2) {
-                                IconButton(
-                                    onClick = { addButton(index) }
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Add,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-                        }
+                        FlowButton(
+                            index = index,
+                            setButtons = setButtons,
+                            banner = banner,
+                            addButton = addButton,
+                            removeButton = removeButton
+                        )
                     }
                 )
             }
 
-            if (details.size < 5) {
+            if (banners.size < 5) {
                 Box(
                     modifier = Modifier
+                        .widthIn(max = 1200.dp)
                         .fillMaxWidth()
                         .height(height = 240.dp)
                         .padding(horizontal = 24.dp)

@@ -15,7 +15,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import space.kingfu.webpage.core.sendMail
-import space.kingfu.webpage.flow.components.MyTextField
+import space.kingfu.webpage.ui.components.MyTextField
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.Typography
 

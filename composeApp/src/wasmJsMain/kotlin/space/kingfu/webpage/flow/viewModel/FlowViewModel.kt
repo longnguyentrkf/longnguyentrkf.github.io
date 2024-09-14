@@ -5,10 +5,6 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import space.kingfu.webpage.flow.model.FlowSection
-import space.kingfu.webpage.flow.model.FlowStyleData
-import space.kingfu.webpage.flow.model.FlowTextStyle
-import space.kingfu.webpage.flow.util.FlowSectionType
 
 class FlowViewModel : ViewModel() {
 
@@ -16,96 +12,142 @@ class FlowViewModel : ViewModel() {
         private set
 
     fun addStyle() {
-
         val data =
-            FlowSection(
-                title = FlowTextStyle(),
-                subtitle = FlowTextStyle(),
-                body = FlowTextStyle(),
-                footer = FlowTextStyle(),
-                buttons = mutableStateListOf(FlowTextStyle()),
-                image = FlowTextStyle()
+            Banner(
+                title = TextData(),
+                subtitle = TextData(),
+                body = TextData(),
+                footer = TextData(),
+                buttons = mutableStateListOf(ButtonData()),
+                image = ImageData()
             )
-        state.details.add(element = data)
-        state = state.copy(details = state.details)
+        state.banners.add(element = data)
+        state = state.copy(banners = state.banners)
     }
 
     fun removeButton(index: Int, buttonIndex: Int) {
-        if (index !in state.details.indices || buttonIndex !in state.details[index].buttons.indices) return
+        if (index !in state.banners.indices || buttonIndex !in state.banners[index].buttons.indices) return
 
-        state.details[index].buttons.removeAt(buttonIndex)
+        state.banners[index].buttons.removeAt(buttonIndex)
     }
 
     fun addButton(sectionIndex: Int) {
+        state.banners[sectionIndex].buttons.add(ButtonData())
+    }
 
-        state.details[sectionIndex].buttons.add(FlowTextStyle())
+    fun setTitle(index: Int, text: TextData) {
+        if (index !in state.banners.indices) return
+        val banner = state.banners[index]
+
+        val title = banner.title.copy(
+            text = text.text,
+            isEdit = text.isEdit
+        )
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                element = banner.copy(title = title)
+            )
+        })
+    }
+
+    fun setSubtitle(index: Int, text: TextData) {
+        if (index !in state.banners.indices) return
+        val banner = state.banners[index]
+
+        val subtitle = banner.subtitle.copy(
+            text = text.text,
+            isEdit = text.isEdit
+        )
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                element = banner.copy(subtitle = subtitle)
+            )
+        })
+    }
+
+    fun setBody(index: Int, text: TextData) {
+        if (index !in state.banners.indices) return
+        val banner = state.banners[index]
+
+        val body = banner.body.copy(
+            text = text.text,
+            isEdit = text.isEdit
+        )
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                element = banner.copy(body = body)
+            )
+        })
     }
 
 
-    fun setStyle(style: FlowStyleData) {
-        if (style.index !in state.details.indices) return
+    fun setFooter(index: Int, text: TextData) {
+        if (index !in state.banners.indices) return
+        val banner = state.banners[index]
 
-        val currentDetail = state.details[style.index]
+        val footer = banner.footer.copy(
+            text = text.text,
+            isEdit = text.isEdit
+        )
 
-        val updatedFontDetails =
-            when (style.section) {
-                FlowSectionType.TITLE -> currentDetail.title.copy(
-                    isEdit = style.isEdit ?: true,
-                    text = style.text ?: currentDetail.title.text
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                element = banner.copy(footer = footer)
+            )
+        })
+    }
+
+    fun setButtons(
+        index: Int,
+        buttonIndex: Int,
+        buttonData: ButtonData,
+    ) {
+        if (index !in state.banners.indices) return
+        if (buttonIndex !in state.banners[index].buttons.indices) return
+
+        val banner = state.banners[index]
+
+        val buttons = banner.buttons.apply {
+            set(
+                buttonIndex,
+                banner.buttons[buttonIndex].copy(
+                    text = buttonData.text,
+                    url = buttonData.url,
+                    isEdit = buttonData.isEdit
                 )
-
-                FlowSectionType.SUBTITLE -> currentDetail.subtitle.copy(
-                    isEdit = style.isEdit ?: true,
-                    text = style.text ?: currentDetail.subtitle.text
-                )
-
-                FlowSectionType.BODY -> currentDetail.body.copy(
-                    isEdit = style.isEdit ?: true,
-                    text = style.text ?: currentDetail.body.text
-                )
-
-                FlowSectionType.FOOTER -> currentDetail.footer.copy(
-                    isEdit = style.isEdit ?: true,
-                    text = style.text ?: currentDetail.footer.text
-                )
-
-                FlowSectionType.BUTTONS -> {
-
-                    if (style.buttonIndex == null || style.buttonIndex !in currentDetail.buttons.indices) return
-
-                    currentDetail.buttons[style.buttonIndex].copy(
-                        isEdit = style.isEdit ?: true,
-                        text = style.text ?: currentDetail.buttons[style.buttonIndex].text,
-                        buttonUrl = style.buttonUrl ?: ""
-                    )
-
-                }
-
-                FlowSectionType.IMAGE -> currentDetail.image.copy(
-                    isEdit = style.isEdit ?: true,
-                    imageUrl = style.imageUrl
-                )
-            }
-
-        val updatedDetails = when (style.section) {
-            FlowSectionType.TITLE -> currentDetail.copy(title = updatedFontDetails)
-            FlowSectionType.SUBTITLE -> currentDetail.copy(subtitle = updatedFontDetails)
-            FlowSectionType.BODY -> currentDetail.copy(body = updatedFontDetails)
-            FlowSectionType.FOOTER -> currentDetail.copy(footer = updatedFontDetails)
-            FlowSectionType.BUTTONS -> {
-                if (style.buttonIndex == null || style.buttonIndex !in currentDetail.buttons.indices) return
-                val updatedButtons = currentDetail.buttons
-                    .apply {
-                        this[style.buttonIndex] = updatedFontDetails
-                    }
-
-                currentDetail.copy(buttons = updatedButtons)
-
-            }
-
-            FlowSectionType.IMAGE -> currentDetail.copy(image = updatedFontDetails)
+            )
         }
-        state.details[style.index] = updatedDetails
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                banner.copy(buttons = buttons)
+            )
+        })
+    }
+
+    fun setImage(index: Int, image: ImageData) {
+        if (index !in state.banners.indices) return
+        val banner = state.banners[index]
+
+        val updatedImage = banner.image.copy(
+            url = image.url,
+            isEdit = image.isEdit
+        )
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index,
+                banner.copy(image = updatedImage)
+            )
+        })
     }
 
 }

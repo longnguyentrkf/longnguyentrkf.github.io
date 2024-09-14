@@ -12,12 +12,17 @@ fun NavGraphBuilder.flowGraph(vm: FlowViewModel, navController: NavHostControlle
     composable(route = Screen.Flow.route) {
 
         FlowScreen(
-            details = vm.state.details,
+            banners = vm.state.banners,
             addDetails = vm::addStyle,
-            setStyle = vm::setStyle,
             goToTemplate = {navController.navigate(route = Screen.Templates.route)},
             removeButton = vm::removeButton,
-            addButton = vm::addButton
+            addButton = vm::addButton,
+            setTitle = vm::setTitle,
+            setSubtitle = vm::setSubtitle,
+            setBody = vm::setBody,
+            setFooter = vm::setFooter,
+            setButtons = vm::setButtons,
+            setImage = vm::setImage
         )
     }
 }
