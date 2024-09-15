@@ -1,7 +1,9 @@
 package space.kingfu.webpage.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -14,6 +16,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import space.kingfu.webpage.ui.theme.Shape
 
 @Composable
@@ -25,23 +29,34 @@ fun MyImage(
 //    height: Dp = 500.dp,
     shape: Shape = Shape.medium,
     contentScale: ContentScale = ContentScale.Crop,
-    url: String?,
+    url: String? = null,
     onClick: () -> Unit = {},
-    backgroundColor: Color = colorScheme.surfaceContainer
+    backgroundColor: Color = colorScheme.surfaceContainer,
+    resource: DrawableResource? = null
 ) {
     val imageModifier = modifier
         .clip(shape = shape)
-        .background(color = backgroundColor, shape = shape)
+        .background(color = if(url.isNullOrBlank() && resource == null) backgroundColor else Color.Transparent, shape = shape)
         .clickable { onClick() }
         .aspectRatio(ratio = width.value / height.value)
         .size(width = width, height = height)
 
-    AsyncImage(
-        modifier = imageModifier,
-        model = url,
-        contentDescription = null,
-        contentScale = contentScale
-    )
 
-
+    if (resource != null) {
+        Image(
+            modifier = imageModifier,
+            painter = painterResource(resource = resource),
+            contentDescription = null
+        )
+    } else if (url != null) {
+        AsyncImage(
+            modifier = imageModifier,
+            model = url,
+            contentDescription = null,
+            contentScale = contentScale
+        )
+    } else {
+        Box(modifier = imageModifier.background(color = colorScheme.surfaceContainer)) {}
+    }
 }
+

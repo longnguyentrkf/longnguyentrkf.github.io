@@ -58,6 +58,13 @@ val Typography = Typography(
         lineHeight = 74.sp
     ),
 
+    displayMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 72.sp,
+        lineHeight = 82.sp
+    ),
+
 
 
 

@@ -22,7 +22,14 @@ fun NavGraphBuilder.flowGraph(vm: FlowViewModel, navController: NavHostControlle
             setBody = vm::setBody,
             setFooter = vm::setFooter,
             setButtons = vm::setButtons,
-            setImage = vm::setImage
+            setImage = vm::setImage,
+            setImageHeader = vm::setImageHeader,
+            header = vm.state.header,
+            setTitleHeader = vm::setTitleHeader,
+            setSubtitleHeader = vm::setSubtitleHeader,
+            setButtonsHeader = vm::setButtonsHeader,
+            addButtonHeader = vm::addButtonHeader,
+            removeButtonHeader = vm::removeButtonHeader
         )
     }
 }

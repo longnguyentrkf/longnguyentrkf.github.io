@@ -23,7 +23,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import space.kingfu.webpage.flow.viewModel.Banner
 import space.kingfu.webpage.flow.viewModel.ButtonData
 import space.kingfu.webpage.ui.components.MyBody
 import space.kingfu.webpage.ui.components.MyTextField
@@ -35,15 +34,16 @@ fun FlowButton(
     modifier: Modifier = Modifier,
     index: Int,
     removeButton: (sectionIndex: Int, buttonIndex: Int) -> Unit,
+//    removeButton: (buttonIndex: Int, buttons: MutableList<ButtonData>) -> Unit,
     addButton: (sectionIndex: Int) -> Unit,
     setButtons: (index: Int, buttonIndex: Int, buttonData: ButtonData) -> Unit,
-    banner: Banner
+    buttons: List<ButtonData>
 ) {
     Row(
         modifier = modifier.horizontalScroll(state = rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
     ) {
-        banner.buttons.forEachIndexed { buttonIndex, button ->
+        buttons.forEachIndexed { buttonIndex, button ->
             if (button.isEdit) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(space = 16.dp),
@@ -60,7 +60,7 @@ fun FlowButton(
                                 ButtonData(
                                     text = it,
                                     isEdit = true,
-                                    url = banner.buttons[buttonIndex].url,
+                                    url = buttons[buttonIndex].url
                                 )
                             )
                         },
@@ -71,12 +71,11 @@ fun FlowButton(
                                 index,
                                 buttonIndex,
                                 ButtonData(
-                                    text = banner.buttons[buttonIndex].text,
+                                    text = button.text,
                                     isEdit = false,
-                                    url = banner.buttons[buttonIndex].url
+                                    url = button.url
                                 )
                             )
-
                         },
                         textAlign = TextAlign.Center,
                         maxChar = 30,
@@ -98,10 +97,9 @@ fun FlowButton(
                                 ButtonData(
                                     url = it,
                                     isEdit = true,
-                                    text = banner.buttons[buttonIndex].text
+                                    text = buttons[buttonIndex].text
                                 )
                             )
-
                         },
                         style = Typography.bodySmall,
                         isSingleLine = true,
@@ -133,22 +131,17 @@ fun FlowButton(
                             index,
                             buttonIndex,
                             ButtonData(
-                                text = banner.buttons[buttonIndex].text,
+                                text = buttons[buttonIndex].text,
                                 isEdit = true,
-                                url = banner.buttons[buttonIndex].url
+                                url = buttons[buttonIndex].url
                             )
                         )
-
                     }
                 ) {
                     MyBody(
                         modifier = Modifier
                             .background(
-                                if (button.text.isBlank()) {
-                                    colorScheme.surfaceContainer
-                                } else {
-                                    Transparent
-                                },
+                                color = if (button.text.isBlank()) colorScheme.surfaceContainer else Transparent,
                                 shape = Shape.extraSmall
                             ),
                         body = button.text,
@@ -158,7 +151,7 @@ fun FlowButton(
             }
         }
 
-        if (banner.buttons.size < 2) {
+        if (buttons.size < 2) {
             IconButton(
                 onClick = { addButton(index) }
             ) {

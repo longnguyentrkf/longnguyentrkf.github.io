@@ -24,35 +24,31 @@ fun FlowSubtitle(
     modifier: Modifier = Modifier,
     index: Int,
     setSubtitle: (index: Int, textData: TextData) -> Unit,
-    banner: Banner
+    subtitle: TextData
 ) {
     Column(modifier = modifier) {
-        if (banner.subtitle.isEdit) {
+        if (subtitle.isEdit) {
             MyTextField(
                 modifier = Modifier.padding(vertical = 4.dp),
-                value = banner.subtitle.text,
+                value = subtitle.text,
                 placeholder = "subtitle",
                 onValueChange = { setSubtitle(index, TextData(isEdit = true, text = it)) },
                 contentAlignment = Alignment.Center,
                 style = Typography.bodySmall,
-                done = { setSubtitle(index, TextData(isEdit = false, text = banner.subtitle.text)) },
+                done = { setSubtitle(index, TextData(isEdit = false, text = subtitle.text)) },
                 textAlign = TextAlign.Center,
                 fontStyle = FontStyle.Italic
             )
         } else {
             MySubtitle(
                 modifier = Modifier
-                    .padding(vertical = if (banner.subtitle.text.isBlank()) 4.dp else 0.dp)
-                    .clickable { setSubtitle(index, TextData(isEdit = true, text = banner.subtitle.text)) }
+                    .padding(vertical = if (subtitle.text.isBlank()) 4.dp else 0.dp)
+                    .clickable { setSubtitle(index, TextData(isEdit = true, text = subtitle.text)) }
                     .background(
-                        if (banner.subtitle.text.isBlank()) {
-                            colorScheme.surfaceContainer
-                        } else {
-                            Transparent
-                        },
+                        color = if (subtitle.text.isBlank()) colorScheme.surfaceContainer else Transparent,
                         shape = Shape.extraSmall
                     ),
-                subtitle = banner.subtitle.text
+                subtitle = subtitle.text
             )
         }
     }

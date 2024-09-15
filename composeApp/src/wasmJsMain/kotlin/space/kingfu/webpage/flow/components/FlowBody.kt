@@ -22,20 +22,20 @@ import space.kingfu.webpage.ui.theme.Typography
 @Composable
 fun FlowBody(
     modifier: Modifier = Modifier,
-    banner: Banner,
+    body: TextData,
     index: Int,
     setBody: (index: Int, textData: TextData) -> Unit
 ) {
     Column(modifier = modifier) {
-        if (banner.body.isEdit) {
+        if (body.isEdit) {
             MyTextField(
                 modifier = Modifier.padding(vertical = 4.dp),
-                value = banner.body.text,
+                value = body.text,
                 placeholder = "body",
                 onValueChange = { setBody(index, TextData(isEdit = true, text = it)) },
                 contentAlignment = Alignment.TopStart,
                 style = Typography.bodySmall,
-                done = { setBody(index, TextData(isEdit = false, text = banner.body.text)) },
+                done = { setBody(index, TextData(isEdit = false, text = body.text)) },
                 textAlign = TextAlign.Justify,
                 maxChar = 500
             )
@@ -43,17 +43,13 @@ fun FlowBody(
             MyBody(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = if (banner.body.text.isBlank()) 4.dp else 0.dp)
-                    .clickable { setBody(index, TextData(isEdit = true, text = banner.body.text)) }
+                    .padding(vertical = if (body.text.isBlank()) 4.dp else 0.dp)
+                    .clickable { setBody(index, TextData(isEdit = true, text = body.text)) }
                     .background(
-                        if (banner.body.text.isBlank()) {
-                            colorScheme.surfaceContainer
-                        } else {
-                            Transparent
-                        },
+                        color = if (body.text.isBlank()) colorScheme.surfaceContainer else Transparent,
                         shape = Shape.extraSmall
                     ),
-                body = banner.body.text
+                body = body.text
             )
         }
     }

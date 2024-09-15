@@ -66,7 +66,7 @@ fun NavigationDrawer(
     val isDrawerOpen = drawerState == DrawerValue.Open
     val snackBarHostState = remember { SnackbarHostState() }
     val screens = listOf(Screen.Home, Screen.Templates, Screen.Shop)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
 
 //    ObserveAsEvents(

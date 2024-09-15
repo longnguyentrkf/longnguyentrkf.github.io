@@ -26,17 +26,14 @@ class FlowViewModel : ViewModel() {
     }
 
     fun removeButton(index: Int, buttonIndex: Int) {
-        if (index !in state.banners.indices || buttonIndex !in state.banners[index].buttons.indices) return
-
         state.banners[index].buttons.removeAt(buttonIndex)
     }
 
-    fun addButton(sectionIndex: Int) {
-        state.banners[sectionIndex].buttons.add(ButtonData())
+    fun addButton(index: Int) {
+        state.banners[index].buttons.add(ButtonData())
     }
 
     fun setTitle(index: Int, text: TextData) {
-        if (index !in state.banners.indices) return
         val banner = state.banners[index]
 
         val title = banner.title.copy(
@@ -53,7 +50,6 @@ class FlowViewModel : ViewModel() {
     }
 
     fun setSubtitle(index: Int, text: TextData) {
-        if (index !in state.banners.indices) return
         val banner = state.banners[index]
 
         val subtitle = banner.subtitle.copy(
@@ -70,7 +66,6 @@ class FlowViewModel : ViewModel() {
     }
 
     fun setBody(index: Int, text: TextData) {
-        if (index !in state.banners.indices) return
         val banner = state.banners[index]
 
         val body = banner.body.copy(
@@ -88,7 +83,6 @@ class FlowViewModel : ViewModel() {
 
 
     fun setFooter(index: Int, text: TextData) {
-        if (index !in state.banners.indices) return
         val banner = state.banners[index]
 
         val footer = banner.footer.copy(
@@ -109,7 +103,6 @@ class FlowViewModel : ViewModel() {
         buttonIndex: Int,
         buttonData: ButtonData,
     ) {
-        if (index !in state.banners.indices) return
         if (buttonIndex !in state.banners[index].buttons.indices) return
 
         val banner = state.banners[index]
@@ -134,7 +127,6 @@ class FlowViewModel : ViewModel() {
     }
 
     fun setImage(index: Int, image: ImageData) {
-        if (index !in state.banners.indices) return
         val banner = state.banners[index]
 
         val updatedImage = banner.image.copy(
@@ -149,5 +141,56 @@ class FlowViewModel : ViewModel() {
             )
         })
     }
+
+    fun setImageHeader(image: ImageData) {
+        state = state.copy(
+            header = state.header.copy(
+                image = state.header.image.copy(
+                    isEdit = image.isEdit,
+                    url = image.url
+                )
+            )
+        )
+    }
+
+
+    fun setTitleHeader(text: TextData) {
+        state = state.copy(
+            header = state.header.copy(
+                title = state.header.title.copy(
+                    isEdit = text.isEdit,
+                    text = text.text
+                )
+            )
+        )
+    }
+
+    fun setSubtitleHeader(text: TextData) {
+        state = state.copy(
+            header = state.header.copy(
+                subtitle = state.header.subtitle.copy(
+                    isEdit = text.isEdit,
+                    text = text.text
+                )
+            )
+        )
+    }
+
+    fun setButtonsHeader(index: Int, button: ButtonData) {
+        state = state.copy(
+            header = state.header.copy(
+                buttons = state.header.buttons.apply { this[index] = button }
+            )
+        )
+    }
+
+    fun addButtonHeader(){
+        state.header.buttons.add(element = ButtonData())
+    }
+
+    fun removeButtonHeader(index: Int){
+        state.header.buttons.removeAt(index)
+    }
+
 
 }

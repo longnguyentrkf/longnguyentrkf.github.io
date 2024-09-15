@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import space.kingfu.webpage.flow.viewModel.Banner
 import space.kingfu.webpage.flow.viewModel.TextData
 import space.kingfu.webpage.ui.components.MyTextField
 import space.kingfu.webpage.ui.components.MyTitle
@@ -25,35 +24,35 @@ fun FlowTitle(
     modifier: Modifier = Modifier,
     index: Int,
     setTitle: (index: Int, textData: TextData) -> Unit,
-    banner: Banner
+    title: TextData
 ) {
     Column(modifier = modifier) {
-        if (banner.title.isEdit) {
+        if (title.isEdit) {
             MyTextField(
                 modifier = Modifier.padding(vertical = 4.dp),
-                value = banner.title.text,
+                value = title.text,
                 placeholder = "title",
                 onValueChange = { setTitle(index, TextData(isEdit = true, text = it)) },
                 contentAlignment = Alignment.Center,
                 style = Typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                done = { setTitle(index, TextData(isEdit = false, text = banner.title.text)) },
+                done = { setTitle(index, TextData(isEdit = false, text = title.text)) },
                 textAlign = TextAlign.Center
             )
         } else {
             MyTitle(
                 modifier = Modifier
-                    .padding(vertical = if (banner.title.text.isBlank()) 4.dp else 0.dp)
-                    .clickable { setTitle(index, TextData(isEdit = true, text = banner.title.text)) }
+                    .padding(vertical = if (title.text.isBlank()) 4.dp else 0.dp)
+                    .clickable { setTitle(index, TextData(isEdit = true, text = title.text)) }
                     .background(
-                        if (banner.title.text.isBlank()) {
+                        if (title.text.isBlank()) {
                             colorScheme.surfaceContainer
                         } else {
                             Transparent
                         },
                         shape = Shape.extraSmall
                     ),
-                title = banner.title.text
+                title = title.text
             )
         }
     }
