@@ -42,6 +42,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import space.kingfu.webpage.core.isSmallScreen
+import space.kingfu.webpage.core.setTheme
+import space.kingfu.webpage.core.Variables.theme
 import space.kingfu.webpage.home.viewModel.HomeViewModel
 import space.kingfu.webpage.topBar.MyTopBar
 import space.kingfu.webpage.ui.theme.ThemeType
@@ -120,37 +122,41 @@ fun NavigationDrawer(
 
     BoxWithConstraints {
         val maxWidth = maxWidth
-        val isDragEnabled = isSmallScreen(width = maxWidth)
+        val isDragEnabled = isSmallScreen(width = maxWidth) && route == Screen.Home.route || route == Screen.Templates.route || route == Screen.Shop.route
 
         Scaffold(
             modifier = Modifier.nestedScroll(connection = scrollBehavior.nestedScrollConnection),
             topBar = {
-                MyTopBar(
-                    modifier = Modifier
-                        .graphicsLayer { this.translationX = translationX.value }
-                        .alpha(
-                            alpha = 1 - 0.5f * (translationX.value / drawerWidth).coerceIn(
-                                0f,
-                                1f
-                            )
-                        ),
-                    scrollBehavior = scrollBehavior,
-                    screens = screens,
-                    navigationIconOnClick = { toggleDrawer() },
-                    actionContent = {
-                        IconButton(
-                            colors = IconButtonDefaults.iconButtonColors(),
-                            onClick = { homeViewModel.setTheme(homeViewModel.state.theme) }) {
-                            Icon(
-                                imageVector = if (homeViewModel.state.theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                    route = route,
-                    isSmallScreenWidth = isSmallScreen(maxWidth),
-                    navController = navController
-                )
+                if (route == Screen.Home.route || route == Screen.Templates.route || route == Screen.Shop.route) {
+                    MyTopBar(
+                        modifier = Modifier
+                            .graphicsLayer { this.translationX = translationX.value }
+                            .alpha(
+                                alpha = 1 - 0.5f * (translationX.value / drawerWidth).coerceIn(
+                                    0f,
+                                    1f
+                                )
+                            ),
+                        scrollBehavior = scrollBehavior,
+                        screens = screens,
+                        navigationIconOnClick = { toggleDrawer() },
+                        actionContent = {
+                            IconButton(
+                                colors = IconButtonDefaults.iconButtonColors(),
+//                            onClick = { homeViewModel.setTheme(homeViewModel.state.theme) }) {
+                                onClick = { setTheme(theme) }) {
+                                Icon(
+//                                imageVector = if (homeViewModel.state.theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
+                                    imageVector = if (theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        route = route,
+                        isSmallScreenWidth = isSmallScreen(maxWidth),
+                        navController = navController
+                    )
+                }
             },
             snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
             DrawerContent(navController = navController,
@@ -170,12 +176,14 @@ fun NavigationDrawer(
                     Box(
                         modifier = Modifier.zIndex(zIndex = 1f)
                             .matchParentSize()
+
                             .graphicsLayer { this.translationX = translationX.value }
                             .clickable(
                                 indication = null,
                                 interactionSource = remember { MutableInteractionSource() },
                                 onClick = { toggleDrawer() })
-                            .draggable(enabled = isDragEnabled,
+                            .draggable(
+                                enabled = isDragEnabled,
                                 state = draggableState,
                                 orientation = Orientation.Horizontal,
                                 onDragStopped = {
@@ -199,7 +207,6 @@ fun NavigationDrawer(
                             state = draggableState,
                             orientation = Orientation.Horizontal,
                             onDragStopped = { onDragStopped(velocity = it) }),
-                    toggleDrawer = { toggleDrawer() },
                     navController = navController,
                     homeViewModel = homeViewModel
                 )

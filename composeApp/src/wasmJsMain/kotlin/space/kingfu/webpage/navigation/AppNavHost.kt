@@ -17,7 +17,6 @@ import space.kingfu.webpage.navigation.navGraphBuilder.templatesGraph
 fun AppNavHost(
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel,
-    toggleDrawer: () -> Unit,
     navController: NavHostController
 ) {
     val flowViewModel = viewModel { FlowViewModel() }

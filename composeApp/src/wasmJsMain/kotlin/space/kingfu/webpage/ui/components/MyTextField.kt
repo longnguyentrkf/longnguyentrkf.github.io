@@ -51,22 +51,21 @@ fun MyTextField(
     maxChar: Int = 100,
     fontStyle: FontStyle = FontStyle.Normal,
     editTextColor: Color = colorScheme.inverseSurface,
-    borderColor: Color? = null,
-    borderShape: Shape = CircleShape,
-    weight: Float = 0.9f
+//    borderColor: Color? = null,
+//    borderShape: Shape = CircleShape
 ) {
     val focusRequester =  FocusRequester()
 
     BasicTextField(
         modifier = modifier
-            .clip(shape = if (borderColor != null) borderShape else Shape.medium)
-            .border(
-                width = if (borderColor != null) 1.dp else 0.dp,
-                color = borderColor ?: Color.Transparent,
-                shape = borderShape
-            )
+//            .clip(shape = if (borderColor != null) borderShape else Shape.medium)
+//            .border(
+//                width = if (borderColor != null) 1.dp else 0.dp,
+//                color = borderColor ?: Color.Transparent,
+//                shape = borderShape
+//            )
             .focusRequester(focusRequester = focusRequester)
-            .fillMaxWidth()
+//            .fillMaxWidth()
             .background(color = colorScheme.surfaceContainer),
         value = value,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
@@ -89,7 +88,7 @@ fun MyTextField(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
-                        .weight(weight = weight)
+                        .weight(weight = 1f)
                         .padding(start = Space().small_8),
                     contentAlignment = contentAlignment
                 ) {
@@ -108,7 +107,6 @@ fun MyTextField(
 
                 if (done != null) {
                     IconButton(
-                        modifier = Modifier.weight(weight = 1 - weight),
                         onClick = { done(true) }
                     ) {
                         Icon(

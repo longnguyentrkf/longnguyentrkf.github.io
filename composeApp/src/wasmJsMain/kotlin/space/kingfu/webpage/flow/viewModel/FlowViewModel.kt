@@ -192,5 +192,12 @@ class FlowViewModel : ViewModel() {
         state.header.buttons.removeAt(index)
     }
 
+    fun setTopBarTitle(text: TextData){
+        state = state.copy(topBarTitle = state.topBarTitle.copy(
+            isEdit = text.isEdit,
+            text = text.text
+        ))
+    }
+
 
 }

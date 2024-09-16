@@ -29,7 +29,9 @@ fun NavGraphBuilder.flowGraph(vm: FlowViewModel, navController: NavHostControlle
             setSubtitleHeader = vm::setSubtitleHeader,
             setButtonsHeader = vm::setButtonsHeader,
             addButtonHeader = vm::addButtonHeader,
-            removeButtonHeader = vm::removeButtonHeader
+            removeButtonHeader = vm::removeButtonHeader,
+            setTopBarTitle = vm::setTopBarTitle,
+            topBarTitle = vm.state.topBarTitle
         )
     }
 }

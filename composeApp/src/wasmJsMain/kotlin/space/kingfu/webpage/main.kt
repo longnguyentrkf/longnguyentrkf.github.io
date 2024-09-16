@@ -9,7 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeViewport
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.browser.document
-import space.kingfu.webpage.core.variables
+import space.kingfu.webpage.core.Variables
+import space.kingfu.webpage.core.Variables.theme
 import space.kingfu.webpage.home.viewModel.HomeViewModel
 import space.kingfu.webpage.navigation.NavigationDrawer
 import space.kingfu.webpage.ui.theme.KingFuTheme
@@ -26,10 +27,11 @@ fun main() {
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
-            variables.maxWidth = maxWidth
+            Variables.maxWidth = maxWidth
 
             KingFuTheme(
-                theme = homeViewModel.state.theme,
+//                theme = homeViewModel.state.theme,
+                theme = theme,
                 content = {
                     Surface {
                         NavigationDrawer(

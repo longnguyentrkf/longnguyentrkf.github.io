@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -36,27 +37,33 @@ fun MyImage(
 ) {
     val imageModifier = modifier
         .clip(shape = shape)
-        .background(color = if(url.isNullOrBlank() && resource == null) backgroundColor else Color.Transparent, shape = shape)
+        .background(
+            color = if (url.isNullOrBlank() && resource == null) backgroundColor else Color.Transparent,
+            shape = shape
+        )
         .clickable { onClick() }
         .aspectRatio(ratio = width.value / height.value)
         .size(width = width, height = height)
 
 
-    if (resource != null) {
-        Image(
-            modifier = imageModifier,
-            painter = painterResource(resource = resource),
-            contentDescription = null
-        )
-    } else if (url != null) {
-        AsyncImage(
-            modifier = imageModifier,
-            model = url,
-            contentDescription = null,
-            contentScale = contentScale
-        )
-    } else {
-        Box(modifier = imageModifier.background(color = colorScheme.surfaceContainer)) {}
+    Box {
+        if (resource != null) {
+            Image(
+                modifier = imageModifier,
+                painter = painterResource(resource = resource),
+                contentDescription = null
+            )
+        } else if (url != null) {
+            AsyncImage(
+                modifier = imageModifier,
+                model = url,
+                contentDescription = null,
+                contentScale = contentScale
+            )
+        } else {
+            Box(modifier = imageModifier.background(color = colorScheme.surfaceContainer)) {}
+        }
+        Box(modifier = imageModifier.zIndex(zIndex = -1f).background(color = colorScheme.surfaceContainer)) {}
     }
 }
 

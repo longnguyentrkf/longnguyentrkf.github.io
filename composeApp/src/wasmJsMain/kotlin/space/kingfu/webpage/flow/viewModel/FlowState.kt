@@ -11,7 +11,8 @@ data class FlowState(
             ButtonData()
         ),
         image = ImageData()
-    )
+    ),
+    val topBarTitle: TextData = TextData()
 )
 
 data class Header(

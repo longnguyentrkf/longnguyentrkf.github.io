@@ -44,25 +44,27 @@ fun BackTopBar(
                 scrolledContainerColor = Transparent,
                 containerColor = Transparent
             ),
-//            navigationIcon = {
-//                IconButton(
-//                    colors = IconButtonDefaults.iconButtonColors(
-//                        containerColor = iconContainerColor
-//                    ),
-//                    onClick = navigationIconOnClick
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-//                        contentDescription = null
-//                    )
-//                }
-//
-//            },
+            navigationIcon = {
+                IconButton(
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = iconContainerColor
+                    ),
+                    onClick = navigationIconOnClick
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = null
+                    )
+                }
+            },
             title = {
                 Text(
                     text = name,
-                    style = Typography.bodySmall,
+                    style = Typography.bodySmall
                 )
+            },
+            actions = {
+
             }
         )
     }

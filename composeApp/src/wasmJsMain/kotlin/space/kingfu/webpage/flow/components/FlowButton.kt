@@ -1,17 +1,21 @@
 package space.kingfu.webpage.flow.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Done
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -34,14 +38,13 @@ fun FlowButton(
     modifier: Modifier = Modifier,
     index: Int,
     removeButton: (sectionIndex: Int, buttonIndex: Int) -> Unit,
-//    removeButton: (buttonIndex: Int, buttons: MutableList<ButtonData>) -> Unit,
     addButton: (sectionIndex: Int) -> Unit,
     setButtons: (index: Int, buttonIndex: Int, buttonData: ButtonData) -> Unit,
     buttons: List<ButtonData>
 ) {
     Row(
         modifier = modifier.horizontalScroll(state = rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
+        horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
     ) {
         buttons.forEachIndexed { buttonIndex, button ->
             if (button.isEdit) {
@@ -50,7 +53,17 @@ fun FlowButton(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     MyTextField(
-                        modifier = Modifier.width(width = 160.dp),
+                        modifier = Modifier
+                            .width(width = 120.dp)
+                            .clip(shape = CircleShape)
+                            .background(color = colorScheme.surfaceContainer)
+                            .border(
+                                width = 1.dp,
+                                color = colorScheme.inverseSurface,
+                                shape = CircleShape
+                            )
+                            .padding(start = 8.dp, end = 16.dp)
+                            .height(height = 48.dp),
                         value = button.text,
                         placeholder = "button",
                         onValueChange = {
@@ -60,34 +73,24 @@ fun FlowButton(
                                 ButtonData(
                                     text = it,
                                     isEdit = true,
-                                    url = buttons[buttonIndex].url
+                                    url = button.url
                                 )
                             )
                         },
                         contentAlignment = Alignment.Center,
                         style = Typography.bodySmall,
-                        done = {
-                            setButtons(
-                                index,
-                                buttonIndex,
-                                ButtonData(
-                                    text = button.text,
-                                    isEdit = false,
-                                    url = button.url
-                                )
-                            )
-                        },
                         textAlign = TextAlign.Center,
                         maxChar = 30,
-                        borderColor = colorScheme.inverseSurface,
-                        isSingleLine = true,
-                        weight = 0.75f
+//                        borderColor = colorScheme.inverseSurface,
+                        isSingleLine = true
                     )
                     MyTextField(
                         modifier = Modifier
-                            .clip(shape = Shape.medium)
-                            .width(width = 160.dp)
-                            .height(height = 42.dp),
+                            .width(width = 120.dp)
+                            .clip(shape = Shape.small)
+                            .background(color = colorScheme.surfaceContainer)
+                            .height(height = 48.dp)
+                            .padding(start = 8.dp, end = 16.dp),
                         value = button.url,
                         placeholder = "url",
                         onValueChange = {
@@ -97,7 +100,7 @@ fun FlowButton(
                                 ButtonData(
                                     url = it,
                                     isEdit = true,
-                                    text = buttons[buttonIndex].text
+                                    text = button.text
                                 )
                             )
                         },
@@ -108,32 +111,55 @@ fun FlowButton(
                         maxChar = 500
                     )
 
-                    IconButton(
-                        onClick = {
-                            removeButton(
-                                index,
-                                buttonIndex
+                    Row {
+                        IconButton(
+                            onClick = {
+                                removeButton(
+                                    index,
+                                    buttonIndex
+                                )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Remove,
+                                contentDescription = null,
+                                tint = colorScheme.error
                             )
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Remove,
-                            contentDescription = null,
-                            tint = colorScheme.error
-                        )
+
+                        IconButton(
+                            onClick = {
+                                setButtons(
+                                    index,
+                                    buttonIndex,
+                                    ButtonData(
+                                        text = button.text,
+                                        isEdit = false,
+                                        url = button.url
+                                    )
+                                )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Done,
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             } else {
                 OutlinedButton(
-                    modifier = Modifier.widthIn(min = 80.dp),
+                    modifier = Modifier
+                        .widthIn(min = 120.dp)
+                        .height(height = 48.dp),
                     onClick = {
                         setButtons(
                             index,
                             buttonIndex,
                             ButtonData(
-                                text = buttons[buttonIndex].text,
+                                text = button.text,
                                 isEdit = true,
-                                url = buttons[buttonIndex].url
+                                url = button.url
                             )
                         )
                     }
@@ -156,7 +182,7 @@ fun FlowButton(
                 onClick = { addButton(index) }
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
+                    imageVector = Icons.Rounded.Add,
                     contentDescription = null
                 )
             }
