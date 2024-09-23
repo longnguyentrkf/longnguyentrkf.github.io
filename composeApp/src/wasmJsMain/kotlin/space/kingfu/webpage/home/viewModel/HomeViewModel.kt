@@ -11,10 +11,6 @@ class HomeViewModel: ViewModel() {
     var state by mutableStateOf(value = HomeState())
         private set
 
-//    fun setTheme(theme: ThemeType){
-//        state = state.copy(theme = if (theme == ThemeType.LIGHT) ThemeType.DARK else ThemeType.LIGHT)
-//    }
-
     fun setFirstName(string: String){
         state = state.copy(firstName = string)
     }

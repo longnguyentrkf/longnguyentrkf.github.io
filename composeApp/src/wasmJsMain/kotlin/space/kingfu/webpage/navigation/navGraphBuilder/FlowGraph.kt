@@ -3,7 +3,7 @@ package space.kingfu.webpage.navigation.navGraphBuilder
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import space.kingfu.webpage.flow.FlowScreen
+import space.kingfu.webpage.flow.screen.FlowScreen
 import space.kingfu.webpage.flow.viewModel.FlowViewModel
 import space.kingfu.webpage.navigation.Screen
 
@@ -13,8 +13,10 @@ fun NavGraphBuilder.flowGraph(vm: FlowViewModel, navController: NavHostControlle
 
         FlowScreen(
             banners = vm.state.banners,
-            addDetails = vm::addStyle,
-            goToTemplate = {navController.navigate(route = Screen.Templates.route)},
+            addBanner = vm::addBanner,
+             deleteBanner = vm::deleteBanner,
+
+            goToTemplate = { navController.navigate(route = Screen.Templates.route) },
             removeButton = vm::removeButton,
             addButton = vm::addButton,
             setTitle = vm::setTitle,
@@ -25,13 +27,14 @@ fun NavGraphBuilder.flowGraph(vm: FlowViewModel, navController: NavHostControlle
             setImage = vm::setImage,
             setImageHeader = vm::setImageHeader,
             header = vm.state.header,
-            setTitleHeader = vm::setTitleHeader,
-            setSubtitleHeader = vm::setSubtitleHeader,
+            setHeaderTitle2 = vm::setHeaderTitle2,
+            setHeadertitle1 = vm::setHeaderTitle1,
             setButtonsHeader = vm::setButtonsHeader,
             addButtonHeader = vm::addButtonHeader,
             removeButtonHeader = vm::removeButtonHeader,
             setTopBarTitle = vm::setTopBarTitle,
-            topBarTitle = vm.state.topBarTitle
+            topBarTitle = vm.state.topBarTitle,
+            setBannerTitle = vm::setBannerTitle
         )
     }
 }

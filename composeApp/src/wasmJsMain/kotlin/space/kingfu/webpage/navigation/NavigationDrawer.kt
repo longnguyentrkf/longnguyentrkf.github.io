@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bedtime
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.rounded.Bedtime
+import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -68,7 +70,7 @@ fun NavigationDrawer(
     val isDrawerOpen = drawerState == DrawerValue.Open
     val snackBarHostState = remember { SnackbarHostState() }
     val screens = listOf(Screen.Home, Screen.Templates, Screen.Shop)
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
 
 //    ObserveAsEvents(
@@ -143,11 +145,9 @@ fun NavigationDrawer(
                         actionContent = {
                             IconButton(
                                 colors = IconButtonDefaults.iconButtonColors(),
-//                            onClick = { homeViewModel.setTheme(homeViewModel.state.theme) }) {
                                 onClick = { setTheme(theme) }) {
                                 Icon(
-//                                imageVector = if (homeViewModel.state.theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
-                                    imageVector = if (theme == ThemeType.LIGHT) Icons.Default.Bedtime else Icons.Default.LightMode,
+                                    imageVector = if (theme == ThemeType.LIGHT) Icons.Rounded.Bedtime else Icons.Rounded.LightMode,
                                     contentDescription = null
                                 )
                             }

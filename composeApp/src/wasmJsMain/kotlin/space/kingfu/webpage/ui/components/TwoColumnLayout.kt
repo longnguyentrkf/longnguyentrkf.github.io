@@ -25,6 +25,7 @@ fun TwoColumnLayout(
     rightWeight: Float = 1f,
     isReverseLayout: Boolean = false,
     padding: Dp = 24.dp
+//    padding: Dp = 0.dp
 ) {
     if (isSmallScreen(width = width)) {
         Column(

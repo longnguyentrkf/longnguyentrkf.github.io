@@ -1,12 +1,9 @@
 package space.kingfu.webpage.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -18,19 +15,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Space
 import space.kingfu.webpage.ui.theme.Typography
 
@@ -43,29 +37,20 @@ fun MyTextField(
     placeholder: String,
     style: TextStyle = Typography.bodySmall,
     placeHolderColor: Color = colorScheme.outline,
-    contentAlignment: Alignment = Alignment.CenterStart,
+    contentAlignment: Alignment = Alignment.TopStart,
     fontWeight: FontWeight = FontWeight.Normal,
-    done: ((Boolean) -> Unit)? = null,
+    done: (() -> Unit)? = null,
     isSingleLine: Boolean = false,
     textAlign: TextAlign = TextAlign.Start,
     maxChar: Int = 100,
     fontStyle: FontStyle = FontStyle.Normal,
     editTextColor: Color = colorScheme.inverseSurface,
-//    borderColor: Color? = null,
-//    borderShape: Shape = CircleShape
 ) {
     val focusRequester =  FocusRequester()
 
     BasicTextField(
         modifier = modifier
-//            .clip(shape = if (borderColor != null) borderShape else Shape.medium)
-//            .border(
-//                width = if (borderColor != null) 1.dp else 0.dp,
-//                color = borderColor ?: Color.Transparent,
-//                shape = borderShape
-//            )
             .focusRequester(focusRequester = focusRequester)
-//            .fillMaxWidth()
             .background(color = colorScheme.surfaceContainer),
         value = value,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
@@ -89,7 +74,7 @@ fun MyTextField(
                 Box(
                     modifier = Modifier
                         .weight(weight = 1f)
-                        .padding(start = Space().small_8),
+                        .padding(start = 8.dp),
                     contentAlignment = contentAlignment
                 ) {
 
@@ -99,16 +84,16 @@ fun MyTextField(
                             color = placeHolderColor,
                             style = style,
                             fontStyle = fontStyle,
+                            fontWeight = fontWeight
                         )
                     }
+
                     innerTextField()
 
                 }
 
                 if (done != null) {
-                    IconButton(
-                        onClick = { done(true) }
-                    ) {
+                    IconButton(onClick = done ){
                         Icon(
                             imageVector = Icons.Default.Done,
                             contentDescription = null

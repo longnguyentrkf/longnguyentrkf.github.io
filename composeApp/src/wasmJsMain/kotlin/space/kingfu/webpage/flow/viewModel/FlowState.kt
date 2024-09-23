@@ -1,23 +1,23 @@
 package space.kingfu.webpage.flow.viewModel
 
 import androidx.compose.runtime.mutableStateListOf
+import space.kingfu.webpage.home.components.Header
 
 data class FlowState(
     val banners: MutableList<Banner> = mutableStateListOf(),
     val header: Header = Header(
-        title = TextData(),
-        subtitle = TextData(),
-        buttons = mutableStateListOf(
-            ButtonData()
-        ),
+        headerTitle1 = TextData(),
+        headerTitle2 = TextData(),
+        buttons = mutableStateListOf(ButtonData()),
         image = ImageData()
     ),
-    val topBarTitle: TextData = TextData()
+    val topBarTitle: TextData = TextData(),
+//    val footer: Footer =
 )
 
 data class Header(
-    val title: TextData,
-    val subtitle: TextData,
+    val headerTitle1: TextData,
+    val headerTitle2: TextData,
     val buttons: MutableList<ButtonData>,
     val image: ImageData
 )
@@ -44,6 +44,9 @@ data class Banner(
     val body: TextData,
     val footer: TextData,
     val buttons: MutableList<ButtonData>,
-    val image: ImageData
+    val image: ImageData,
+    val bannerTitle: TextData
 )
+
+
 

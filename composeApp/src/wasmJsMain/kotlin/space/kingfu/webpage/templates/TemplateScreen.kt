@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -42,10 +41,9 @@ import space.kingfu.webpage.navigation.Screen
 import space.kingfu.webpage.ui.theme.Shape
 import space.kingfu.webpage.ui.theme.Typography
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TemplateScreen(goToPureFrame: () -> Unit) {
-//    var isHovered by remember { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
     val interactionSource = remember { MutableInteractionSource() }
@@ -78,7 +76,8 @@ fun TemplateScreen(goToPureFrame: () -> Unit) {
         ) {
             Text(
                 text = Screen.Templates.name,
-                style = Typography.bodyLarge)
+                style = Typography.bodyLarge
+            )
 
             Spacer(modifier = Modifier.height(height = 48.dp))
 

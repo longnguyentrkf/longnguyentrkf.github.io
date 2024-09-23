@@ -1,4 +1,4 @@
-package com.kingfu.imaginate.ui.theme
+package space.kingfu.webpage.ui.theme
 
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable

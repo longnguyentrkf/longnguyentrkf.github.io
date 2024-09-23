@@ -30,7 +30,6 @@ fun main() {
             Variables.maxWidth = maxWidth
 
             KingFuTheme(
-//                theme = homeViewModel.state.theme,
                 theme = theme,
                 content = {
                     Surface {

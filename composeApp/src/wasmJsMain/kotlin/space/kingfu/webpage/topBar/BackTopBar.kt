@@ -1,6 +1,7 @@
 package space.kingfu.webpage.topBar
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -30,7 +31,8 @@ fun BackTopBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
     iconContainerColor: Color = Transparent,
     navigationIconOnClick: () -> Unit = {},
-    name: String
+    name: String,
+    actions: @Composable RowScope.() -> Unit = { }
 ) {
 
     Box(
@@ -63,9 +65,7 @@ fun BackTopBar(
                     style = Typography.bodySmall
                 )
             },
-            actions = {
-
-            }
+            actions = actions
         )
     }
 }

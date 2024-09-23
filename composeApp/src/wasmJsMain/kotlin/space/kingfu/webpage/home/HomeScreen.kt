@@ -72,7 +72,6 @@ fun HomeScreen(
         ) {
 
             Header(
-
                 maxWidth = maxWidth,
                 resource = Res.drawable.kingfu_no_background,
                 title = "Introducing KingFu",

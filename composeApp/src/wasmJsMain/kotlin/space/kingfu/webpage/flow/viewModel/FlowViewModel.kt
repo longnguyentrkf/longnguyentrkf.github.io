@@ -11,7 +11,7 @@ class FlowViewModel : ViewModel() {
     var state by mutableStateOf(value = FlowState())
         private set
 
-    fun addStyle() {
+    fun addBanner() {
         val data =
             Banner(
                 title = TextData(),
@@ -19,10 +19,15 @@ class FlowViewModel : ViewModel() {
                 body = TextData(),
                 footer = TextData(),
                 buttons = mutableStateListOf(ButtonData()),
-                image = ImageData()
+                image = ImageData(),
+                bannerTitle = TextData()
             )
         state.banners.add(element = data)
         state = state.copy(banners = state.banners)
+    }
+
+    fun deleteBanner(index: Int) {
+        state.banners.removeAt(index = index)
     }
 
     fun removeButton(index: Int, buttonIndex: Int) {
@@ -31,6 +36,22 @@ class FlowViewModel : ViewModel() {
 
     fun addButton(index: Int) {
         state.banners[index].buttons.add(ButtonData())
+    }
+
+    fun setBannerTitle(index: Int, text: TextData) {
+        val banner = state.banners[index]
+
+        val title = banner.bannerTitle.copy(
+            text = text.text,
+            isEdit = text.isEdit
+        )
+
+        state = state.copy(banners = state.banners.apply {
+            set(
+                index = index,
+                element = banner.copy(bannerTitle = title)
+            )
+        })
     }
 
     fun setTitle(index: Int, text: TextData) {
@@ -73,12 +94,15 @@ class FlowViewModel : ViewModel() {
             isEdit = text.isEdit
         )
 
-        state = state.copy(banners = state.banners.apply {
-            set(
-                index = index,
-                element = banner.copy(body = body)
-            )
-        })
+
+        state = state.copy(banners = state.banners
+            .apply {
+                set(
+                    index = index,
+                    element = banner.copy(body = body)
+                )
+            }
+        )
     }
 
 
@@ -103,8 +127,6 @@ class FlowViewModel : ViewModel() {
         buttonIndex: Int,
         buttonData: ButtonData,
     ) {
-        if (buttonIndex !in state.banners[index].buttons.indices) return
-
         val banner = state.banners[index]
 
         val buttons = banner.buttons.apply {
@@ -153,11 +175,10 @@ class FlowViewModel : ViewModel() {
         )
     }
 
-
-    fun setTitleHeader(text: TextData) {
+    fun setHeaderTitle1(text: TextData) {
         state = state.copy(
             header = state.header.copy(
-                title = state.header.title.copy(
+                headerTitle1 = state.header.headerTitle1.copy(
                     isEdit = text.isEdit,
                     text = text.text
                 )
@@ -165,10 +186,10 @@ class FlowViewModel : ViewModel() {
         )
     }
 
-    fun setSubtitleHeader(text: TextData) {
+    fun setHeaderTitle2(text: TextData) {
         state = state.copy(
             header = state.header.copy(
-                subtitle = state.header.subtitle.copy(
+                headerTitle2 = state.header.headerTitle2.copy(
                     isEdit = text.isEdit,
                     text = text.text
                 )
@@ -184,19 +205,21 @@ class FlowViewModel : ViewModel() {
         )
     }
 
-    fun addButtonHeader(){
+    fun addButtonHeader() {
         state.header.buttons.add(element = ButtonData())
     }
 
-    fun removeButtonHeader(index: Int){
+    fun removeButtonHeader(index: Int) {
         state.header.buttons.removeAt(index)
     }
 
-    fun setTopBarTitle(text: TextData){
-        state = state.copy(topBarTitle = state.topBarTitle.copy(
-            isEdit = text.isEdit,
-            text = text.text
-        ))
+    fun setTopBarTitle(text: TextData) {
+        state = state.copy(
+            topBarTitle = state.topBarTitle.copy(
+                isEdit = text.isEdit,
+                text = text.text
+            )
+        )
     }
 
 
