@@ -1,10 +1,10 @@
 package space.kingfu.sidePanel.banner
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
-import androidx.compose.foundation.gestures.scrollBy
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
+import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -34,18 +35,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import space.kingfu.main.editor.state.Banner
 import space.kingfu.main.ui.components.MyTextField
@@ -222,66 +221,86 @@ fun BannerScreen(
                             horizontalArrangement = Arrangement.End,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            LazyRow(
-                                modifier = Modifier
-                                    .height(height = 300.dp)
-                                    .fillMaxWidth(),
-                                state = lazyRowState,
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(space = 4.dp)
-                            ) {
+                            Box {
+                                LazyRow(
+                                    modifier = Modifier
+                                        .height(height = 300.dp)
+                                        .padding(bottom = 16.dp)
+                                        .fillMaxWidth(),
+                                    state = lazyRowState,
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
 
-                                item {
-                                    Box(modifier = Modifier.width(width = 30.dp))
-                                }
+                                    items(count = banner.texts.size) { index ->
+                                        val text = banner.texts[index]
 
+                                        Row {
 
-                                items(count = banner.texts.size) { index ->
-                                    val text = banner.texts[index]
-
-                                    MyTextField(
-                                        modifier = Modifier
-                                            .width(width = 232.dp)
-                                            .fillMaxHeight(),
-                                        value = text.text,
-                                        onValueChange = { setBannerText(bannerIndex, index, it) },
-                                        labelIconOnClick = {
-                                            TextMenu(
-                                                onDelete = { },
-                                                onEdit = { },
-                                                iconPadding = 0.dp
+                                            MyTextField(
+                                                modifier = Modifier
+                                                    .width(width = 256.dp)
+                                                    .fillMaxHeight(),
+                                                value = text.text,
+                                                onValueChange = {
+                                                    setBannerText(
+                                                        bannerIndex,
+                                                        index,
+                                                        it
+                                                    )
+                                                },
+                                                labelIconOnClick = {
+                                                    TextMenu(
+                                                        onDelete = { },
+                                                        onEdit = { },
+                                                        iconPadding = 0.dp
+                                                    )
+                                                },
+                                                label = text.name,
+                                                labelMaxLines = 2
                                             )
-                                        },
-                                        label = text.name,
-                                        labelMaxLines = 2,
-                                    )
-                                }
 
+                                            Spacer(modifier = Modifier.width(width = 4.dp))
 
-                                item {
-                                    Box(
-                                        modifier = Modifier
-                                            .width(width = 30.dp)
-                                            .clickable {
-                                                scope.launch {
-                                                    addBannerText(bannerIndex)
-                                                    lazyRowState.animateScrollToItem(
-                                                        index = banner.texts.size - 1,
-                                                        scrollOffset = 500
+                                            if (index == banner.texts.lastIndex) {
+                                                Box(
+                                                    modifier = Modifier
+                                                        .width(width = 40.dp)
+                                                        .clickable {
+                                                            scope.launch {
+                                                                addBannerText(bannerIndex)
+                                                                lazyRowState.animateScrollToItem(
+                                                                    index = banner.texts.size - 1,
+                                                                    scrollOffset = 500
+                                                                )
+                                                            }
+                                                        }
+                                                        .fillMaxHeight()
+                                                        .background(color = colorScheme.surfaceContainer),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Icon(
+                                                        imageVector = Icons.Rounded.Add,
+                                                        contentDescription = null
                                                     )
                                                 }
                                             }
-                                            .fillMaxHeight()
-                                            .background(color = colorScheme.surfaceContainer),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Icon(
-                                            modifier = Modifier.size(size = 20.dp),
-                                            imageVector = Icons.Rounded.Add,
-                                            contentDescription = null
-                                        )
+                                        }
+
                                     }
                                 }
+
+                                HorizontalScrollbar(
+                                    modifier = Modifier
+                                        .align(alignment = Alignment.BottomStart)
+                                        .fillMaxWidth(),
+                                    adapter = rememberScrollbarAdapter(scrollState = lazyRowState),
+                                    style = defaultScrollbarStyle().copy(
+                                        thickness = 12.dp,
+                                        unhoverColor = colorScheme.surfaceContainer,
+                                        hoverColor = colorScheme.inverseSurface.copy(alpha = 0.5f),
+                                        minimalHeight = 24.dp
+                                    )
+                                )
                             }
                         }
                     }
