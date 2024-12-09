@@ -1,0 +1,172 @@
+package space.kingfu.main.navigation
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bedtime
+import androidx.compose.material.icons.rounded.LightMode
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
+import kingfu.composeapp.generated.resources.Res
+import kingfu.composeapp.generated.resources.kingfu_no_background_stroke_15
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
+import space.kingfu.main.core.formatEnumName
+import space.kingfu.main.home.viewModel.HomeViewModel
+import space.kingfu.main.ui.components.MyIconButton
+import space.kingfu.main.ui.theme.ThemeType
+import space.kingfu.main.ui.theme.Typography
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppScaffold(
+    modifier: Modifier = Modifier,
+    currentDestination: NavDestination?,
+    drawerState: DrawerState,
+    screens: List<AppDestination>,
+    navController: NavHostController,
+    homeViewModel: HomeViewModel,
+    setTheme: (ThemeType) -> Unit,
+    theme: ThemeType,
+    isSmallScreen: Boolean,
+    screenWidth: Dp,
+) {
+    val scope = rememberCoroutineScope()
+    val snackBarHostState = remember { SnackbarHostState() }
+
+
+    Scaffold(
+        topBar = {
+            if (currentDestination?.hierarchy?.any {
+                    it.hasRoute(route = Screen.Home::class) ||
+                            it.hasRoute(route = Screen.Editor::class) ||
+                            it.hasRoute(route = Screen.Shop::class)
+                } == true) {
+
+                TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Transparent
+                    ),
+                    navigationIcon = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            if (isSmallScreen) {
+                                MyIconButton(
+                                    imageVector = Icons.Rounded.Menu,
+                                    onClick = {
+                                        scope.launch {
+                                            if (drawerState.isOpen) {
+                                                drawerState.close()
+                                            } else {
+                                                drawerState.open()
+                                            }
+                                        }
+                                    }
+                                )
+                            }
+                            Icon(
+                                modifier = Modifier
+                                    .padding(
+                                        start = if (isSmallScreen) 0.dp else 12.dp,
+                                        end = 8.dp
+                                    )
+                                    .size(size = 24.dp),
+                                painter = painterResource(resource = Res.drawable.kingfu_no_background_stroke_15),
+                                contentDescription = null,
+                                tint = colorScheme.inverseSurface
+                            )
+
+                            Text(
+                                text = AppDestination.HOME.label,
+                                style = Typography.bodySmall
+                            )
+                        }
+                    },
+                    title = {
+                        if (isSmallScreen) return@TopAppBar
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            screens.forEach { screen ->
+                                val isSelected = currentDestination.hierarchy.any {
+                                    it.hasRoute(route = screen.screen::class)
+                                }
+
+                                val color by animateColorAsState(
+                                    targetValue = if (isSelected) colorScheme.primary else colorScheme.outline.copy(
+                                        alpha = 0.5f
+                                    ),
+                                    label = ""
+                                )
+
+                                TextButton(
+                                    onClick = {
+                                        if (isSelected) return@TextButton
+                                        navController.navigate(route = screen.screen) {
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                    }
+                                ) {
+                                    Text(
+                                        modifier = Modifier.padding(horizontal = 8.dp),
+                                        text = screen.name.formatEnumName(),
+                                        style = Typography.bodySmall,
+                                        color = color
+                                    )
+                                }
+
+                            }
+                        }
+
+                    },
+                    actions = {
+                        MyIconButton(
+                            imageVector = if (theme == ThemeType.LIGHT) Icons.Rounded.Bedtime else Icons.Rounded.LightMode,
+                            onClick = { setTheme(theme) }
+                        )
+                    }
+                )
+            }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
+    ) {
+        AppNavHost(
+            modifier = Modifier.padding(paddingValues = it),
+            navController = navController,
+            homeViewModel = homeViewModel,
+            isSmallScreen = isSmallScreen,
+            screenWidth = screenWidth
+        )
+    }
+}

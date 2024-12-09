@@ -1,11 +1,12 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+
 }
 
 kotlin {
@@ -39,13 +40,17 @@ kotlin {
             implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha08")
             implementation("io.ktor:ktor-client-core:3.0.0-wasm2")
 
-
+            // Serializable
+            implementation(libs.kotlinx.serialization.json)
 
 
 
         }
+
     }
 }
+
+
 
 
 
