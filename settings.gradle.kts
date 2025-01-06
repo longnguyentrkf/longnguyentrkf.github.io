@@ -1,4 +1,4 @@
-rootProject.name = "KingFu"
+rootProject.name = "Kingfuspace"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

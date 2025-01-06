@@ -1,0 +1,30 @@
+package com.kingfuspace.sidePanel.navigation.navGraphBuilder
+
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
+import com.kingfuspace.main.editor.state.Banner
+import com.kingfuspace.sidePanel.components.ComponentImage
+import com.kingfuspace.sidePanel.navigation.Screen
+
+fun NavGraphBuilder.componentImageGraph(
+    navController: NavHostController,
+    banners: MutableList<Banner>,
+    bannerIndex: Int?
+) {
+    composable<Screen.ComponentImage> { backStackEntry ->
+        val data: Screen.ComponentImage = backStackEntry.toRoute()
+
+        if(bannerIndex != null ) {
+
+            val banner = banners[bannerIndex]
+            if (banner is Banner.Banner1) {
+                ComponentImage(
+                    goBack = navController::navigateUp,
+                    image = banner.images[data.index]
+                )
+            }
+        }
+    }
+}
