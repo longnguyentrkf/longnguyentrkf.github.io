@@ -23,8 +23,8 @@ enum class SidePanelDestination(
         label = "Banner",
         screen = Screen.Banner
     ),
-    COMPONENT_IMAGE(
-        label = "Image",
-        screen = Screen.ComponentImage(index = 0)
-    )
+//    COMPONENT_IMAGE(
+//        label = "Image",
+//        screen = Screen.ComponentImage(index = 0)
+//    )
 }

@@ -1,7 +1,6 @@
 package com.kingfuspace.main.home.viewModel
 
 import kingfuspace.composeapp.generated.resources.Res
-import kingfuspace.composeapp.generated.resources.kingfu_no_background
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 import org.jetbrains.compose.resources.DrawableResource
 
@@ -13,7 +12,6 @@ data class HomeState(
     val header: Header = Header(
         title1 = "Introducing Kingfuspace",
         title2 = "Create your platform with cutting-edge technology",
-//        image = Res.drawable.kingfu_no_background
         image = Res.drawable.kingfuspace_logo_no_background
     )
 )

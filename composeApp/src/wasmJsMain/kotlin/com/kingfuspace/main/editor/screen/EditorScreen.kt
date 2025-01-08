@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.pager.HorizontalPager
@@ -29,7 +29,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -38,6 +37,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
@@ -49,11 +49,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
-import kotlinx.browser.window
-import kotlinx.coroutines.launch
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.TwoColumnLayout
 import com.kingfuspace.main.ui.theme.Typography
+import kotlinx.browser.window
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -70,7 +70,10 @@ fun EditorScreen(
 //    val screenWidth = LocalConfiguration.current.screenWidthDp // screen width in dp
     val screenWidth2 = window.innerWidth // Get the window's width in pixels
     val screenWidthTotal = window.screen.width.sp.value
-    val scaleFactor = (screenWidth2 / screenWidthTotal).coerceIn(0.5f, 1f) // Assuming 1920px as your 100% scale width
+    val scaleFactor = (screenWidth2 / screenWidthTotal).coerceIn(
+        0.5f,
+        1f
+    ) // Assuming 1920px as your 100% scale width
 
     val scope = rememberCoroutineScope()
 
@@ -132,7 +135,9 @@ fun EditorScreen(
                             TwoColumnLayout(
                                 isReverseLayout = banner.isReverse,
                                 left = {
-                                    Box {
+                                    Box(
+                                        contentAlignment = Alignment.BottomCenter
+                                    ) {
                                         HorizontalPager(
                                             modifier = Modifier
                                                 .height(height = banner.height)
@@ -149,60 +154,58 @@ fun EditorScreen(
                                         }
 
                                         Row(
-                                            Modifier
-                                                .wrapContentHeight()
-                                                .fillMaxWidth()
-                                                .align(Alignment.BottomCenter)
-                                                .padding(bottom = 8.dp),
-                                            horizontalArrangement = Arrangement.Center,
-                                        ) {
+                                            modifier = Modifier
+                                                .alpha(alpha = if (banner.images.size > 1) 1f else 0f)
+                                                .padding(bottom = 4.dp)
+                                                .background(
+                                                    color = colorScheme.surface.copy(alpha = 0.75f),
+                                                    shape = CircleShape
+                                                )
+                                                .padding(all = 4.dp),
 
-                                            Row(
+                                            horizontalArrangement = Arrangement.Center,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Icon(
                                                 modifier = Modifier
-                                                    .alpha(alpha = if (banner.images.size > 1) 1f else 0f)
-                                                    .background(
-                                                        color = colorScheme.surface.copy(alpha = 0.75f),
-                                                        shape = CircleShape
-                                                    ),
-                                                horizontalArrangement = Arrangement.Center,
-                                                verticalAlignment = Alignment.CenterVertically
-                                            ) {
-                                                IconButton(
-                                                    enabled = currentPage != 0,
-                                                    onClick = {
+                                                    .clip(shape = CircleShape)
+                                                    .clickable(
+                                                        enabled = currentPage != 0
+                                                    ) {
                                                         scope.launch {
                                                             pagerState.animateScrollToPage(
                                                                 page = currentPage.dec()
                                                             )
                                                         }
                                                     }
-                                                ) {
-                                                    Icon(
-                                                        imageVector = Icons.Rounded.ChevronLeft,
-                                                        contentDescription = null
-                                                    )
-                                                }
-                                                Text(
-                                                    text = "${currentPage + 1}/${banner.images.size}",
-                                                    style = typography.bodySmall,
-                                                )
+                                                    .size(size = 24.dp)
+                                                    .alpha(alpha = if (currentPage != 0) 0.75f else 0.25f),
+                                                imageVector = Icons.Rounded.ChevronLeft,
+                                                contentDescription = null
+                                            )
 
-                                                IconButton(
-                                                    enabled = currentPage != banner.images.size - 1,
-                                                    onClick = {
+                                            Text(
+                                                text = "${currentPage + 1}/${banner.images.size}",
+                                                style = typography.labelLarge,
+                                            )
+
+                                            Icon(
+                                                modifier = Modifier
+                                                    .clip(shape = CircleShape)
+                                                    .clickable(
+                                                        enabled = currentPage != banner.images.size - 1
+                                                    ) {
                                                         scope.launch {
                                                             pagerState.animateScrollToPage(
                                                                 page = currentPage.inc()
                                                             )
                                                         }
                                                     }
-                                                ) {
-                                                    Icon(
-                                                        imageVector = Icons.Rounded.ChevronRight,
-                                                        contentDescription = null
-                                                    )
-                                                }
-                                            }
+                                                    .size(size = 24.dp)
+                                                    .alpha(alpha = if (currentPage != banner.images.size - 1) 0.75f else 0.25f),
+                                                imageVector = Icons.Rounded.ChevronRight,
+                                                contentDescription = null
+                                            )
                                         }
                                     }
                                 },
@@ -234,8 +237,6 @@ fun EditorScreen(
                 }
             }
         }
-
-
 
         VerticalScrollbar(
             modifier = Modifier

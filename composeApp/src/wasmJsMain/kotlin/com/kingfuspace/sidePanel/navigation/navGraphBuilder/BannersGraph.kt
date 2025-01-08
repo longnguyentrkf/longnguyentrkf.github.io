@@ -29,28 +29,40 @@ fun NavGraphBuilder.bannersGraph(
                 }
             },
             goToDialogConfirm = {
-                if(bannerIndex != null) {
+                if (bannerIndex != null) {
                     navController.navigate(
                         route = Dialog.DeleteBanner(
                             index = bannerIndex,
                             title = "Delete",
                             text = "Are you sure you want to delete:\n${banners[bannerIndex].name}"
                         )
-                    ){
+                    ) {
                         launchSingleTop = true
                         restoreState = true
                     }
                 }
             },
             goToDialogEditText = {
-                if(bannerIndex != null) {
+                if (bannerIndex != null) {
                     navController.navigate(
                         route = Dialog.SetBannerName(
                             title = banners[bannerIndex].name,
                             bannerIndex = bannerIndex,
                             text = banners[bannerIndex].name
                         )
-                    ){
+                    ) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            },
+            goToDialogMoveBanners = {
+                if(bannerIndex != null) {
+                    navController.navigate(
+                        route = Dialog.MoveBanners(
+                            index = bannerIndex
+                        )
+                    ) {
                         launchSingleTop = true
                         restoreState = true
                     }

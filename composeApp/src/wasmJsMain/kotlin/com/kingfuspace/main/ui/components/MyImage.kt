@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,7 +23,6 @@ import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import com.kingfuspace.main.core.isValidUrl
-import com.kingfuspace.main.ui.theme.Shape
 
 
 
@@ -34,7 +34,7 @@ fun MyImage(
     height: Dp = 500.dp,
 //    width: Dp = 500.dp,
 //    height: Dp = 500.dp,
-    shape: Shape = Shape.medium,
+    shape: Shape = Shapes().medium,
     contentScale: ContentScale = ContentScale.Crop,
     url: String? = null,
     onClick: (() -> Unit)? = null,

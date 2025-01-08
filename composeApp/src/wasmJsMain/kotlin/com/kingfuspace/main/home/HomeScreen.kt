@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +31,6 @@ import com.kingfuspace.main.ui.theme.Typography
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.clok
 import kingfuspace.composeapp.generated.resources.imaginate
-import kingfuspace.composeapp.generated.resources.kingfu_rectangle
 import kingfuspace.composeapp.generated.resources.longnguyen
 import kingfuspace.composeapp.generated.resources.weatherai
 
@@ -166,7 +166,8 @@ fun HomeScreen(
                     )
 
                     ImageDetail(
-                        resource = Res.drawable.kingfu_rectangle,
+//                        resource = Res.drawable.kingfuspace_logo_no_background,
+                        resource = Res.drawable.clok,
                         list = listOf(
                             "Web Developer",
                             "Brand Design",
@@ -174,6 +175,7 @@ fun HomeScreen(
                             "Native Android Engineer",
                             "Mentor"
                         ),
+                        imageContentScale = ContentScale.Fit,
                         isSmallScreen = isSmallScreen
                     )
                 }

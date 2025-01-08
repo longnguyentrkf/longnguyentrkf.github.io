@@ -42,7 +42,7 @@ import com.kingfuspace.main.ui.components.MyIconButton
 import com.kingfuspace.main.ui.theme.ThemeType
 import com.kingfuspace.main.ui.theme.Typography
 import kingfuspace.composeapp.generated.resources.Res
-import kingfuspace.composeapp.generated.resources.kingfu_no_background_stroke_15
+import kingfuspace.composeapp.generated.resources.clok
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 
 
@@ -99,7 +99,6 @@ fun AppScaffold(
                                         end = 8.dp
                                     )
                                     .size(size = 24.dp),
-//                                painter = painterResource(resource = Res.drawable.kingfu_no_background_stroke_15),
                                 painter = painterResource(resource = Res.drawable.kingfuspace_logo_no_background),
                                 contentDescription = null,
                                 tint = colorScheme.inverseSurface

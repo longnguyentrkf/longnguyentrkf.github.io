@@ -3,6 +3,7 @@ package com.kingfuspace.sidePanel.ui.components.menu
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Crop32
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
@@ -31,6 +32,7 @@ fun BannerMenu(
     onBanner: (() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
     onMove: (() -> Unit)? = null,
+    onAdd: (() -> Unit)? = null
 ) {
     var expanded by remember { mutableStateOf(value = false) }
 
@@ -90,6 +92,27 @@ fun BannerMenu(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Rounded.Edit,
+                            contentDescription = null
+                        )
+                    }
+                )
+            }
+
+            if(onAdd != null) {
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = "Add",
+                            style = typography.labelLarge
+                        )
+                    },
+                    onClick = {
+                        onAdd()
+                        expanded = false
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Rounded.Add,
                             contentDescription = null
                         )
                     }

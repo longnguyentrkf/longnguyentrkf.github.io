@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,18 +34,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import coil3.compose.AsyncImage
-import com.kingfuspace.main.editor.state.ImageData
+import com.kingfuspace.main.editor.state.Banner
 
 @Composable
-fun DialogMoveImages(
+fun DialogMoveBanners(
     modifier: Modifier = Modifier,
-    images: List<ImageData>,
+    banners: List<Banner>,
     onDismiss: () -> Unit,
     onSwap: (Int, Int) -> Unit,
     selectedIndex: Int,
@@ -66,24 +62,10 @@ fun DialogMoveImages(
                 modifier = modifier
                     .fillMaxWidth()
                     .background(color = colorScheme.surface)
-                    .padding(bottom = 16.dp),
+                    .padding(all = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
             ) {
-
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = 200.dp)
-                        .background(color = colorScheme.surfaceContainer),
-                    model = images[selectedIndex].url,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-//                                            contentScale = ContentScale.Fit,
-                )
-
-                SingleChoiceSegmentedButtonRow(
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                ) {
+                SingleChoiceSegmentedButtonRow {
                     options.forEachIndexed { index, label ->
                         SegmentedButton(
                             shape = SegmentedButtonDefaults.itemShape(
@@ -103,7 +85,8 @@ fun DialogMoveImages(
                     }
                 }
 
-                Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+
+                Box {
                     LazyRow(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -111,15 +94,16 @@ fun DialogMoveImages(
                         state = lazyRowState,
                         horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
                     ) {
-                        items(count = images.size) { index ->
+                        items(count = banners.size) { index ->
+
                             Column(
                                 modifier = Modifier
                                     .width(width = 150.dp)
-                                    .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
-                                    .alpha(alpha = if (targetIndex == index || selectedIndex == index) 1f else 0.5f)
+                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
                                     .clickable(enabled = index != selectedIndex) {
                                         targetIndex = index
                                     }
+                                    .alpha(alpha = if (index == targetIndex || index == selectedIndex) 1f else 0.5f)
                             ) {
                                 Row(
                                     modifier = Modifier
@@ -129,25 +113,15 @@ fun DialogMoveImages(
                                 ) {
                                     Text(
                                         modifier = Modifier
-                                            .fillMaxWidth()
                                             .padding(all = 8.dp),
-                                        text = images[index].name,
+                                        text = banners[index].name,
                                         style = typography.labelLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-                                        color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+
                                     )
                                 }
-
-                                AsyncImage(
-                                    modifier = Modifier
-                                        .size(size = 150.dp)
-                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
-                                    model = images[index].url,
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-//                                            contentScale = ContentScale.Fit,
-                                )
 
                                 Row(
                                     modifier = Modifier
@@ -167,8 +141,7 @@ fun DialogMoveImages(
                                         style = typography.labelLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-                                        color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
-
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
                                     )
                                 }
                             }
@@ -189,7 +162,7 @@ fun DialogMoveImages(
                 }
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
                     Button(

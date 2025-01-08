@@ -3,6 +3,7 @@ package com.kingfuspace.sidePanel.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,20 +14,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.ImageData
-import com.kingfuspace.main.ui.theme.Typography
-import com.kingfuspace.sidePanel.navigation.SidePanelDestination
+import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +37,8 @@ import com.kingfuspace.sidePanel.navigation.SidePanelDestination
 fun ComponentImage(
     modifier: Modifier = Modifier,
     goBack: () -> Boolean,
-    image: ImageData
+    image: ImageData,
+    goToSetTextName: () -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
@@ -46,10 +50,25 @@ fun ComponentImage(
                     containerColor = Color.Transparent
                 ),
                 title = {
-                    Text(
-                        text = SidePanelDestination.COMPONENT_IMAGE.label,
-                        style = Typography.bodySmall
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            modifier = Modifier.weight(weight = 1f),
+                            text = image.name,
+                            style = typography.bodySmall,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+
+                        BannerMenu(
+                            modifier = Modifier.weight(weight = 0.2f),
+                            onDelete = { },
+                            onEditName = {
+                                goToSetTextName()
+                            },
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(
@@ -77,12 +96,6 @@ fun ComponentImage(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
 //                                            contentScale = ContentScale.Fit,
-            )
-
-            Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
-                text = "Name: ${image.name}",
-                style = MaterialTheme.typography.bodySmall
             )
 
             Text(

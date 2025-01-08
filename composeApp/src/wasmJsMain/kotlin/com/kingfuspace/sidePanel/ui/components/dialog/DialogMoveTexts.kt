@@ -37,7 +37,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -69,7 +68,6 @@ fun DialogMoveTexts(
                     .padding(all = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
             ) {
-
                 SingleChoiceSegmentedButtonRow {
                     options.forEachIndexed { index, label ->
                         SegmentedButton(
@@ -104,25 +102,35 @@ fun DialogMoveTexts(
                             Column(
                                 modifier = Modifier
                                     .width(width = 150.dp)
-                                    .background(color = colorScheme.surfaceContainer)
-                                    .clickable(enabled = index != selectedIndex) { targetIndex = index }
+                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
+                                    .clickable(enabled = index != selectedIndex) {
+                                        targetIndex = index
+                                    }
                                     .alpha(alpha = if (index == targetIndex || index == selectedIndex) 1f else 0.5f)
                             ) {
-                                Text(
+                                Row(
                                     modifier = Modifier
-                                        .height(height = 40.dp)
-                                        .padding(all = 8.dp),
-                                    text = texts[index].name,
-                                    style = typography.labelLarge,
-                                    maxLines = 2,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
+                                        .fillMaxWidth()
+                                        .height(height = 40.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(all = 8.dp),
+                                        text = texts[index].name,
+                                        style = typography.labelLarge,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+                                    )
+                                }
 
                                 Column(
                                     modifier = Modifier
                                         .size(size = 150.dp)
+                                        .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow)
+                                        .padding(all = 4.dp)
                                         .verticalScroll(state = rememberScrollState())
-                                        .background(color = colorScheme.surfaceContainerLow)
                                 ) {
                                     Text(
                                         text = texts[index].text,
@@ -130,20 +138,27 @@ fun DialogMoveTexts(
                                     )
                                 }
 
-                                Text(
+                                Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(all = 4.dp),
-                                    text = when (index) {
-                                        targetIndex -> "target"
-                                        selectedIndex -> "selected"
-                                        else -> ""
-                                    },
-                                    style = typography.bodySmall,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    textAlign = TextAlign.Center
-                                )
+                                        .height(height = 40.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(all = 8.dp),
+                                        text = when (index) {
+                                            targetIndex -> "target"
+                                            selectedIndex -> "selected"
+                                            else -> ""
+                                        },
+                                        style = typography.labelLarge,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+                                    )
+                                }
                             }
                         }
                     }

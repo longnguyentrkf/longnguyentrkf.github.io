@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import com.kingfuspace.main.core.fontScale
-import com.kingfuspace.main.ui.theme.Shape
 import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
@@ -44,7 +44,8 @@ fun DetailImage(
     bodyLineHeight: TextUnit = Typography.bodyMedium.lineHeight * fontScale,
     width: Float = 1024f,
     height: Float = 500f,
-    shape: Shape = Shape.medium,
+//    shape: Shape = Shape.medium,
+    shape: Shape = Shapes().medium,
     buttonList: @Composable() (RowScope.() -> Unit) = {},
     isSmallScreen: Boolean
 ) {

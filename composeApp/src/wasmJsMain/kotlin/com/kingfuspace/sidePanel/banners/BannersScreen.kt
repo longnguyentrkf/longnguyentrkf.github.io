@@ -21,12 +21,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.navigation.SidePanelDestination
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,6 +41,7 @@ fun BannersScreen(
     lazyListState: LazyListState,
     goToDialogConfirm: () -> Unit,
     goToDialogEditText: () -> Unit,
+    goToDialogMoveBanners: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
 
@@ -52,7 +54,9 @@ fun BannersScreen(
                 title = {
                     Text(
                         text = SidePanelDestination.BANNERS.label,
-                        style = Typography.bodySmall
+                        style = Typography.bodySmall,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 },
                 navigationIcon = {
@@ -84,13 +88,18 @@ fun BannersScreen(
                             .fillMaxWidth()
                             .padding(end = 24.dp),
                         text = banners[index].name,
-                        style = Typography.bodySmall
+                        style = Typography.bodySmall,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
 
                     BannerMenu(
                         onClick = { setBannerIndex(index) },
                         onDelete = goToDialogConfirm,
-                        onEditName = goToDialogEditText
+                        onEditName = goToDialogEditText,
+                        onMove = if (banners.size == 1) null else {
+                            { goToDialogMoveBanners() }
+                        }
                     )
                 }
             }

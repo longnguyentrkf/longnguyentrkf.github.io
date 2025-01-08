@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -22,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.kingfuspace.main.core.formatEnumName
 import com.kingfuspace.main.editor.state.BannerType
-import com.kingfuspace.main.ui.theme.Shape
 import com.kingfuspace.main.ui.theme.Typography
 import kotlin.enums.EnumEntries
 
@@ -43,7 +43,7 @@ fun DialogSelect(
             Column(
                 modifier = modifier
                     .background(
-                        shape = Shape.large,
+                        shape = Shapes().large,
                         color = colorScheme.surface
                     )
             ) {

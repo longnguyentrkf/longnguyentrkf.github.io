@@ -3,6 +3,7 @@ package com.kingfuspace.main.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -11,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.style.TextOverflow
-import com.kingfuspace.main.ui.theme.Shape
 import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
@@ -35,7 +35,7 @@ fun MyTextField(
     TextField(
 //        modifier = modifier.background(color = colorScheme.surfaceContainer),
         modifier = modifier,
-        shape = Shape.extraSmall,
+        shape = Shapes().extraSmall,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Transparent,
             unfocusedContainerColor = Transparent,

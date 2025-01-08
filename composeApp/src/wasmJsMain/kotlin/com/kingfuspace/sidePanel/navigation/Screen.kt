@@ -73,5 +73,10 @@ sealed interface Dialog {
         val index: Int
     )
 
+    @Serializable
+    data class MoveBanners(
+        val index: Int
+    )
+
 
 }

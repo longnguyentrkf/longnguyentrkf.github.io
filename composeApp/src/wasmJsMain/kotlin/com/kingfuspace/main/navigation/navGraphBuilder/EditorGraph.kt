@@ -55,7 +55,9 @@ fun NavGraphBuilder.editorGraph(
                 moveImage = editorViewModel::moveImages,
                 setImageName = editorViewModel::setImageName,
                 swapTexts = editorViewModel::swapTexts,
-                moveTexts = editorViewModel::moveTexts
+                moveTexts = editorViewModel::moveTexts,
+                swapBanners = editorViewModel::swapBanners,
+                moveBanners = editorViewModel::moveBanners
             )
 
             VerticalDivider()

@@ -15,9 +15,11 @@ import com.kingfuspace.main.editor.state.BannerType
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.bannerGraph
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.bannersGraph
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.componentImageGraph
+import com.kingfuspace.sidePanel.navigation.navGraphBuilder.componentTextGraph
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.homeGraph
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogConfirm
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogEditText
+import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveBanners
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveImages
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveTexts
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogSelect
@@ -47,7 +49,9 @@ fun SidePanelNavHost(
     moveImage: (Int, Int) -> Unit,
     setImageName: (Int, Int, String) -> Unit,
     swapTexts: (Int, Int) -> Unit,
-    moveTexts: (Int, Int) -> Unit
+    moveTexts: (Int, Int) -> Unit,
+    swapBanners: (Int, Int) -> Unit,
+    moveBanners: (Int, Int) -> Unit
 ) {
 
     NavHost(
@@ -84,6 +88,12 @@ fun SidePanelNavHost(
         )
 
         componentImageGraph(
+            banners = banners,
+            bannerIndex = bannerIndex,
+            navController = navController
+        )
+
+        componentTextGraph(
             banners = banners,
             bannerIndex = bannerIndex,
             navController = navController
@@ -201,6 +211,21 @@ fun SidePanelNavHost(
             }
         }
 
+        dialog<Dialog.MoveBanners> {
+            val data: Dialog.MoveBanners = it.toRoute()
+
+            DialogMoveBanners(
+                selectedIndex = data.index,
+                banners = banners,
+                onDismiss = navController::navigateUp,
+                onSwap = { selectedIndex: Int, targetedIndex: Int ->
+                    swapBanners(selectedIndex, targetedIndex)
+                },
+                onMove = { selectedIndex: Int, targetedIndex: Int ->
+                    moveBanners(selectedIndex, targetedIndex)
+                }
+            )
+        }
 
     }
 }

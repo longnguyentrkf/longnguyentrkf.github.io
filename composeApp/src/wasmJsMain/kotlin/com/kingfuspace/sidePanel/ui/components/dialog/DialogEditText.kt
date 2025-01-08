@@ -1,16 +1,28 @@
 package com.kingfuspace.sidePanel.ui.components.dialog
 
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import com.kingfuspace.main.core.isWithinCharLimit
+import com.kingfuspace.main.ui.components.TextFieldWithErrorState
 import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
@@ -21,29 +33,50 @@ fun DialogEditText(
     onDismiss: () -> Unit,
     onConfirm: (String) -> Unit,
 ) {
-    var editTextValue by remember { mutableStateOf(value = textValue) }
+    var editTextValue by rememberSaveable { mutableStateOf(value = textValue) }
+    var isError by rememberSaveable { mutableStateOf(value = false) }
+    val charLimit = 100
 
-    AlertDialog(
-        modifier = modifier,
-        containerColor = colorScheme.surface,
-        title = { Text(text = title, style = Typography.bodyMedium) },
-        text = {
-            TextField(
-                value = editTextValue,
-                onValueChange = { editTextValue = it },
-                textStyle = Typography.bodySmall
-            )
-        },
+    Dialog(
         onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(
-                enabled = editTextValue.isNotBlank(),
-                onClick = {
-                    onConfirm(editTextValue)
-                    onDismiss()
-                }
+        content = {
+            Column(
+                modifier = modifier
+                    .clip(shape = Shapes().medium)
+                    .verticalScroll(state = rememberScrollState())
+                    .background(color = MaterialTheme.colorScheme.surface)
+                    .padding(all = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(space = 16.dp)
+
             ) {
-                Text(text = "Confirm", style = Typography.bodySmall)
+                Text(text = title, style = Typography.bodyMedium)
+
+                TextFieldWithErrorState(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = editTextValue,
+                    label = "Name",
+                    onValueChange = {
+                        isError = it.isWithinCharLimit(charLimit = charLimit)
+                        editTextValue = it
+                    },
+                    isError = isError,
+                    charLimit = charLimit
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(
+                        enabled = editTextValue.isNotBlank() && !isError,
+                        onClick = {
+                            onConfirm(editTextValue)
+                            onDismiss()
+                        }
+                    ) {
+                        Text(text = "Confirm", style = Typography.bodySmall)
+                    }
+                }
             }
         }
     )

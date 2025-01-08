@@ -49,7 +49,6 @@ class EditorViewModel : ViewModel() {
         state.banners[index] = when (banner) {
             is Banner.Banner1 -> banner.copy(name = newName)
             is Banner.Banner2 -> banner.copy(name = newName)
-
         }
     }
 
@@ -268,6 +267,14 @@ class EditorViewModel : ViewModel() {
 
             is Banner.Banner2 -> {}
         }
+    }
+
+    fun moveBanners(selectedIndex: Int, targetedIndex: Int){
+        state.banners.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
+    }
+
+    fun swapBanners(selectedIndex: Int, targetedIndex: Int){
+        state.banners.swap(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
     }
 
 

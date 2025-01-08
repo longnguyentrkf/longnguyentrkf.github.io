@@ -58,6 +58,7 @@ fun BannerScreen(
     goToSetImageName: (String, Int) -> Unit,
     goToDialogMoveTexts: (Int) -> Unit,
     goToComponentImage: (Int) -> Unit,
+    goToComponentText: (Int) -> Unit,
 ) {
 
     Scaffold(
@@ -153,7 +154,8 @@ fun BannerScreen(
                         goToSetTextName = goToSetTextName,
                         goToSetImageName = goToSetImageName,
                         goToDialogMoveTexts = goToDialogMoveTexts,
-                        goToComponentImage = goToComponentImage
+                        goToComponentImage = goToComponentImage,
+                        goToComponentText = goToComponentText
                     )
                 }
             }

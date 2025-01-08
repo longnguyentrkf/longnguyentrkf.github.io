@@ -1,6 +1,7 @@
 package com.kingfuspace.main.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +23,6 @@ import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import com.kingfuspace.main.ui.theme.Shape
 import com.kingfuspace.main.ui.theme.Typography
 
 
@@ -34,7 +35,7 @@ fun ImageDetail(
     resource: DrawableResource,
     width: Float = 1024f,
     height: Float = 500f,
-    shape: Shape = Shape.medium,
+    shape: Shape = Shapes().medium,
     aspectRatio: Float = width / height,
     list: List<String> = listOf(),
     imageContentScale: ContentScale = Crop,
@@ -56,7 +57,8 @@ fun ImageDetail(
                 modifier = imageModifier,
                 painter = painterResource(resource = resource),
                 contentDescription = null,
-                contentScale = imageContentScale
+                contentScale = imageContentScale,
+
             )
 
             Column(verticalArrangement = Arrangement.spacedBy(space = 32.dp)) {

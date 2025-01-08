@@ -118,6 +118,12 @@ fun NavGraphBuilder.bannerGraph(
                         restoreState = true
                     }
                 },
+                goToComponentText = { index: Int ->
+                    navController.navigate(route = Screen.ComponentText(index = index)) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 bannerIndex = bannerIndex,
                 setIndex = setIndex,
                 setHeight = setHeight,

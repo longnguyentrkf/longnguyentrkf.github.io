@@ -6,33 +6,34 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.sidePanel.components.ComponentImage
+import com.kingfuspace.sidePanel.components.ComponentText
 import com.kingfuspace.sidePanel.navigation.Dialog
 import com.kingfuspace.sidePanel.navigation.Screen
 
-fun NavGraphBuilder.componentImageGraph(
+fun NavGraphBuilder.componentTextGraph(
     navController: NavHostController,
     banners: MutableList<Banner>,
     bannerIndex: Int?
 ) {
-    composable<Screen.ComponentImage> { backStackEntry ->
-        val data: Screen.ComponentImage = backStackEntry.toRoute()
+    composable<Screen.ComponentText> { backStackEntry ->
+        val data: Screen.ComponentText = backStackEntry.toRoute()
 
         if(bannerIndex != null ) {
 
             val banner = banners[bannerIndex]
             if (banner is Banner.Banner1) {
-                ComponentImage(
+                ComponentText(
                     goBack = navController::navigateUp,
-                    image = banner.images[data.index],
+                    text = banner.texts[data.index],
                     goToSetTextName = {
                         navController.navigate(
-                            route = Dialog.SetImageName(
+                            route = Dialog.SetTextName(
                                 bannerIndex = bannerIndex,
                                 componentIndex = data.index,
-                                title = banner.images[data.index].name,
-                                text = banner.images[data.index].name
+                                title = banner.texts[data.index].name,
+                                text = banner.texts[data.index].name
                             )
-                        ){
+                        ) {
                             launchSingleTop = true
                             restoreState = true
                         }
