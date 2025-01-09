@@ -80,7 +80,7 @@ fun BannersScreen(
                             .clickable {
                                 scope.launch {
                                     setBannerIndex(index)
-                                    lazyListState.scrollToItem(index = index)
+                                    lazyListState.animateScrollToItem(index = index)
                                     goToBanner()
                                 }
                             }

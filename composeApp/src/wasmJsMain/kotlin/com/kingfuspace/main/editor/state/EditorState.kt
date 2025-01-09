@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.ui.theme.Typography
 
+
 data class EditorState(
     val banners: MutableList<Banner> = mutableStateListOf(),
     val bannerIndex: Int? = null,

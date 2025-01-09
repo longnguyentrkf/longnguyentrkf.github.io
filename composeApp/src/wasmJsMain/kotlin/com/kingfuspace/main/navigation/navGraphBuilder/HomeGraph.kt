@@ -9,7 +9,7 @@ import com.kingfuspace.main.navigation.Screen
 
 fun NavGraphBuilder.homeGraph(
     vm: HomeViewModel,
-    isSmallScreen: Boolean
+//    isSmallScreen: Boolean
 ) {
     composable<Screen.Home> {
         HomeScreen(
@@ -20,7 +20,7 @@ fun NavGraphBuilder.homeGraph(
             message = vm.state.message,
             setMessage = vm::setMessage,
             header = vm.state.header,
-            isSmallScreen = isSmallScreen
+//            isSmallScreen = isSmallScreen
         )
     }
 }

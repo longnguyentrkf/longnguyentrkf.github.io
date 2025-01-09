@@ -4,6 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.kingfuspace.main.core.theme.ThemeType
+import com.kingfuspace.main.core.Variables.theme
 
 
 private val darkColorScheme = darkColorScheme(
@@ -86,10 +88,7 @@ private val lightColorScheme = lightColorScheme(
 
 
 @Composable
-fun KingFuTheme(
-    content: @Composable () -> Unit,
-    theme: ThemeType
-) {
+fun KingFuTheme(content: @Composable () -> Unit) {
     val colorScheme = when (theme) {
         ThemeType.DARK -> darkColorScheme
         ThemeType.LIGHT -> lightColorScheme

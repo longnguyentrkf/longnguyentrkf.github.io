@@ -14,6 +14,7 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -28,21 +29,21 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
+import com.kingfuspace.main.core.theme.ThemeType
+import com.kingfuspace.main.core.Variables.theme
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import com.kingfuspace.main.core.formatEnumName
-import com.kingfuspace.main.home.viewModel.HomeViewModel
+import com.kingfuspace.main.core.isSmallScreen
+import com.kingfuspace.main.core.theme.setTheme
+import com.kingfuspace.main.core.theme.toggle
 import com.kingfuspace.main.ui.components.MyIconButton
-import com.kingfuspace.main.ui.theme.ThemeType
-import com.kingfuspace.main.ui.theme.Typography
 import kingfuspace.composeapp.generated.resources.Res
-import kingfuspace.composeapp.generated.resources.clok
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 
 
@@ -54,11 +55,6 @@ fun AppScaffold(
     drawerState: DrawerState,
     screens: List<AppDestination>,
     navController: NavHostController,
-    homeViewModel: HomeViewModel,
-    setTheme: (ThemeType) -> Unit,
-    theme: ThemeType,
-    isSmallScreen: Boolean,
-    screenWidth: Dp,
 ) {
     val scope = rememberCoroutineScope()
     val snackBarHostState = remember { SnackbarHostState() }
@@ -78,7 +74,7 @@ fun AppScaffold(
                     ),
                     navigationIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            if (isSmallScreen) {
+                            if (isSmallScreen()) {
                                 MyIconButton(
                                     imageVector = Icons.Rounded.Menu,
                                     onClick = {
@@ -95,7 +91,7 @@ fun AppScaffold(
                             Icon(
                                 modifier = Modifier
                                     .padding(
-                                        start = if (isSmallScreen) 0.dp else 12.dp,
+                                        start = if (isSmallScreen()) 0.dp else 12.dp,
                                         end = 8.dp
                                     )
                                     .size(size = 24.dp),
@@ -106,12 +102,12 @@ fun AppScaffold(
 
                             Text(
                                 text = AppDestination.HOME.label,
-                                style = Typography.bodySmall
+                                style = typography.bodySmall
                             )
                         }
                     },
                     title = {
-                        if (isSmallScreen) return@TopAppBar
+                        if (isSmallScreen()) return@TopAppBar
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -142,7 +138,7 @@ fun AppScaffold(
                                     Text(
                                         modifier = Modifier.padding(horizontal = 8.dp),
                                         text = screen.name.formatEnumName(),
-                                        style = Typography.bodySmall,
+                                        style = typography.bodySmall,
                                         color = color
                                     )
                                 }
@@ -154,7 +150,7 @@ fun AppScaffold(
                     actions = {
                         MyIconButton(
                             imageVector = if (theme == ThemeType.LIGHT) Icons.Rounded.Bedtime else Icons.Rounded.LightMode,
-                            onClick = { setTheme(theme) }
+                            onClick = { setTheme(themeType = theme.toggle()) }
                         )
                     }
                 )
@@ -163,11 +159,8 @@ fun AppScaffold(
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
     ) {
         AppNavHost(
-            modifier = Modifier.padding(paddingValues = it),
-            navController = navController,
-            homeViewModel = homeViewModel,
-            isSmallScreen = isSmallScreen,
-            screenWidth = screenWidth
+            modifier = modifier.padding(paddingValues = it),
+            navController = navController
         )
     }
 }

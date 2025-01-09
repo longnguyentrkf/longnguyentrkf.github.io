@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kingfuspace.main.editor.screen.EditorScreen
@@ -19,20 +17,20 @@ import com.kingfuspace.sidePanel.navigation.SidePanelNavHost
 
 fun NavGraphBuilder.editorGraph(
     editorViewModel: EditorViewModel,
-    navController: NavHostController,
-    isSmallScreen: Boolean,
-    screenWidth: Dp
+//    isSmallScreen: Boolean,
+//    screenWidth: Dp
 ) {
 
     composable<Screen.Editor> {
         val navController2 = rememberNavController()
         val lazyListState = rememberLazyListState()
+        val sidePanelWidth = 300.dp
 
 
         Row {
 
             SidePanelNavHost(
-                modifier = Modifier.width(width = 300.dp),
+                modifier = Modifier.width(width = sidePanelWidth),
                 banners = editorViewModel.state.banners,
                 addBanner = editorViewModel::addBanner,
                 deleteBanner = editorViewModel::deleteBanner,
@@ -73,8 +71,9 @@ fun NavGraphBuilder.editorGraph(
                     }
                 },
                 lazyListState = lazyListState,
-                isSmallScreen = isSmallScreen,
-                screenWidth = screenWidth,
+                sidePanelWidth = sidePanelWidth
+//                isSmallScreen = isSmallScreen,
+//                screenWidth = screenWidth,
             )
         }
     }

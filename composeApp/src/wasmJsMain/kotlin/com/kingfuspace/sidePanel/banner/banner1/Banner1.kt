@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.Banner
+import com.kingfuspace.main.ui.components.MyHorizontalScrollBar
 import com.kingfuspace.main.ui.components.MyTextField
 import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
@@ -155,21 +156,7 @@ fun Banner1(
                 }
             }
 
-            HorizontalScrollbar(
-                modifier = Modifier
-                    .align(alignment = Alignment.BottomStart)
-                    .fillMaxWidth(),
-                adapter = rememberScrollbarAdapter(scrollState = lazyRowState),
-                style = defaultScrollbarStyle().copy(
-                    thickness = 12.dp,
-//                    unhoverColor = colorScheme.outlineVariant,
-//                    hoverColor = colorScheme.outlineVariant,
-                    unhoverColor = colorScheme.surfaceContainer,
-                    hoverColor = colorScheme.surfaceContainer,
-                    minimalHeight = 24.dp,
-                    shape = CircleShape
-                )
-            )
+            MyHorizontalScrollBar(lazyListState = lazyRowState)
         }
 
 
@@ -239,21 +226,7 @@ fun Banner1(
                 }
             }
 
-            HorizontalScrollbar(
-                modifier = Modifier
-                    .align(alignment = Alignment.BottomStart)
-                    .fillMaxWidth(),
-                adapter = rememberScrollbarAdapter(scrollState = lazyRowState),
-                style = defaultScrollbarStyle().copy(
-                    thickness = 12.dp,
-//                    unhoverColor = colorScheme.outlineVariant,
-//                    hoverColor = colorScheme.outlineVariant,
-                    unhoverColor = colorScheme.surfaceContainer,
-                    hoverColor = colorScheme.surfaceContainer,
-                    minimalHeight = 24.dp,
-                    shape = CircleShape
-                )
-            )
+           MyHorizontalScrollBar(lazyListState = lazyRowState)
         }
     }
 }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +21,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.home.components.DetailImage
 import com.kingfuspace.main.home.components.Footer
 import com.kingfuspace.main.home.components.HeaderContent
@@ -44,7 +44,6 @@ fun HomeScreen(
     message: String,
     setMessage: (String) -> Unit,
     header: Header,
-    isSmallScreen: Boolean,
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -72,7 +71,7 @@ fun HomeScreen(
 
             HeaderContent(
                 header = header,
-                isSmallScreen = isSmallScreen
+                isSmallScreen = isSmallScreen()
             )
 
             Column(
@@ -94,7 +93,7 @@ fun HomeScreen(
                         body = "A sleek designed webpage showcasing achievements, experiences, and services.",
                         resource = Res.drawable.longnguyen,
                         imageContentScale = ContentScale.Fit,
-                        isSmallScreen = isSmallScreen
+                        isSmallScreen = isSmallScreen()
                     )
 
                     DetailImage(
@@ -118,7 +117,7 @@ fun HomeScreen(
                                 )
                             }
                         },
-                        isSmallScreen = isSmallScreen
+                        isSmallScreen = isSmallScreen()
                     )
 
                     ImageDetail(
@@ -127,7 +126,7 @@ fun HomeScreen(
                         body = "WeatherAI is a sleek weather app offering accurate 7-day forecasts and hourly updates. " +
                                 "AI-powered weather answers from ChatGPT, and unique wallpapers created by AI.",
                         resource = Res.drawable.weatherai,
-                        isSmallScreen = isSmallScreen
+                        isSmallScreen = isSmallScreen()
                     )
 
                     DetailImage(
@@ -152,7 +151,7 @@ fun HomeScreen(
                                 )
                             }
                         },
-                        isSmallScreen = isSmallScreen
+                        isSmallScreen = isSmallScreen()
                     )
                 }
 
@@ -176,7 +175,7 @@ fun HomeScreen(
                             "Mentor"
                         ),
                         imageContentScale = ContentScale.Fit,
-                        isSmallScreen = isSmallScreen
+                        isSmallScreen = isSmallScreen()
                     )
                 }
 

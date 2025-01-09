@@ -24,26 +24,21 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.kingfuspace.main.core.Variables.theme
+import com.kingfuspace.main.core.Variables.windowInnerWidth
+import com.kingfuspace.main.core.isSmallScreen
 import kotlinx.coroutines.launch
 import com.kingfuspace.main.home.viewModel.HomeViewModel
-import com.kingfuspace.main.ui.theme.ThemeType
 import com.kingfuspace.main.ui.theme.Typography
 import kotlin.reflect.KFunction1
 
 
 @Composable
-fun NavigationDrawer(
-    homeViewModel: HomeViewModel,
-    setTheme: KFunction1<ThemeType, Unit>,
-    theme: ThemeType,
-    isSmallScreen: Boolean,
-    screenWidth: Dp
-) {
+fun NavigationDrawer() {
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
     val drawerWidth by remember { mutableFloatStateOf(value = 700f) }
@@ -75,13 +70,13 @@ fun NavigationDrawer(
 //    }
 
 
-    LaunchedEffect(key1 = isSmallScreen) {
+    LaunchedEffect(key1 = windowInnerWidth) {
         if (drawerState.isOpen) drawerState.close()
     }
 
 
     ModalNavigationDrawer(
-        gesturesEnabled = isSmallScreen,
+        gesturesEnabled = isSmallScreen(),
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
@@ -134,14 +129,9 @@ fun NavigationDrawer(
     ) {
         AppScaffold(
             navController = navController,
-            homeViewModel = homeViewModel,
             screens = screens,
             drawerState = drawerState,
             currentDestination = currentDestination,
-            setTheme = setTheme,
-            theme = theme,
-            isSmallScreen = isSmallScreen,
-            screenWidth = screenWidth
         )
     }
 }

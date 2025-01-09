@@ -13,18 +13,16 @@ import com.kingfuspace.main.home.viewModel.HomeViewModel
 import com.kingfuspace.main.navigation.navGraphBuilder.editorGraph
 import com.kingfuspace.main.navigation.navGraphBuilder.homeGraph
 import com.kingfuspace.main.navigation.navGraphBuilder.shopGraph
-import com.kingfuspace.main.ui.theme.ThemeType
 
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
-    homeViewModel: HomeViewModel,
     navController: NavHostController,
-    isSmallScreen: Boolean,
-    screenWidth: Dp
 ) {
     val editorViewModel = viewModel { EditorViewModel() }
+    val homeViewModel = viewModel { HomeViewModel() }
+
 
     NavHost(
         modifier = modifier,
@@ -34,19 +32,13 @@ fun AppNavHost(
         exitTransition = { ExitTransition.None }
     ) {
         homeGraph(
-            vm = homeViewModel,
-            isSmallScreen = isSmallScreen
+            vm = homeViewModel
         )
 
         editorGraph(
-            editorViewModel = editorViewModel,
-            navController = navController,
-            isSmallScreen = isSmallScreen,
-            screenWidth = screenWidth
+            editorViewModel = editorViewModel
         )
 
-        shopGraph(
-            isSmallScreen = isSmallScreen
-        )
+        shopGraph()
     }
 }

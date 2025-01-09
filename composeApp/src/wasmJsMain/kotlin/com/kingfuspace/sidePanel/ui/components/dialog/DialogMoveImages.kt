@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.ImageData
+import com.kingfuspace.main.ui.components.MyHorizontalScrollBar
 
 @Composable
 fun DialogMoveImages(
@@ -175,17 +176,7 @@ fun DialogMoveImages(
                         }
                     }
 
-                    HorizontalScrollbar(
-                        modifier = Modifier.align(alignment = Alignment.BottomStart),
-                        adapter = rememberScrollbarAdapter(scrollState = lazyRowState),
-                        style = defaultScrollbarStyle().copy(
-                            thickness = 12.dp,
-                            unhoverColor = colorScheme.surfaceContainer,
-                            hoverColor = colorScheme.surfaceContainer,
-                            minimalHeight = 24.dp,
-                            shape = CircleShape
-                        )
-                    )
+                    MyHorizontalScrollBar(lazyListState = lazyRowState)
                 }
 
                 Row(

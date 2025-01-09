@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.home.components.ImageDetail
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
@@ -20,7 +21,7 @@ import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 @Composable
 fun ShopScreen(
     modifier: Modifier = Modifier,
-    isSmallScreen: Boolean
+//    isSmallScreen: Boolean
 ) {
     val scrollState = rememberScrollState()
 
@@ -41,7 +42,7 @@ fun ShopScreen(
                 subTitle = "Price: $100",
                 body = "A sleek designed webpage based on a template.",
                 resource = Res.drawable.kingfuspace_logo_no_background,
-                isSmallScreen = isSmallScreen
+                isSmallScreen = isSmallScreen()
             )
         }
     }

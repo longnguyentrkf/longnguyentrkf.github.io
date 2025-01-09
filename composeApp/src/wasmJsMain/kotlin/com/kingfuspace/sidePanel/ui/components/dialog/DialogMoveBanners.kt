@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -34,10 +35,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.Banner
+import com.kingfuspace.main.ui.components.MyHorizontalScrollBar
 
 @Composable
 fun DialogMoveBanners(
@@ -123,6 +127,12 @@ fun DialogMoveBanners(
                                     )
                                 }
 
+                                Box(
+                                    modifier = Modifier
+                                        .size(size = 150.dp)
+                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
+                                )
+
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -148,17 +158,8 @@ fun DialogMoveBanners(
                         }
                     }
 
-                    HorizontalScrollbar(
-                        modifier = Modifier.align(alignment = Alignment.BottomStart),
-                        adapter = rememberScrollbarAdapter(scrollState = lazyRowState),
-                        style = defaultScrollbarStyle().copy(
-                            thickness = 12.dp,
-                            unhoverColor = colorScheme.surfaceContainer,
-                            hoverColor = colorScheme.surfaceContainer,
-                            minimalHeight = 24.dp,
-                            shape = CircleShape
-                        )
-                    )
+                    MyHorizontalScrollBar(lazyListState = lazyRowState)
+
                 }
 
                 Row(
