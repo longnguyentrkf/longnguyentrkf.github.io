@@ -45,11 +45,11 @@ fun SidePanelNavHost(
     deleteText: (Int, Int) -> Unit,
     addImage: (Int) -> Unit,
     deleteImage: (Int, Int) -> Unit,
-    swapImage: (Int, Int) -> Unit,
-    moveImage: (Int, Int) -> Unit,
+    swapImage: (Int, Int, Int) -> Unit,
+    moveImage: (Int, Int, Int) -> Unit,
     setImageName: (Int, Int, String) -> Unit,
-    swapTexts: (Int, Int) -> Unit,
-    moveTexts: (Int, Int) -> Unit,
+    swapTexts: (Int, Int, Int) -> Unit,
+    moveTexts: (Int, Int, Int) -> Unit,
     swapBanners: (Int, Int) -> Unit,
     moveBanners: (Int, Int) -> Unit
 ) {
@@ -82,6 +82,7 @@ fun SidePanelNavHost(
             setImage = setImage,
             addText = addText,
             setTextValue = setTextValue,
+//            setText = setTextName,
             addImage = addImage,
             removeText = deleteText,
             deleteImage = deleteImage,
@@ -90,7 +91,8 @@ fun SidePanelNavHost(
         componentImageGraph(
             banners = banners,
             bannerIndex = bannerIndex,
-            navController = navController
+            navController = navController,
+            setImage = setImage
         )
 
         componentTextGraph(
@@ -178,12 +180,13 @@ fun SidePanelNavHost(
                         selectedIndex = data.index,
                         images = banner.images,
                         onDismiss = navController::navigateUp,
-                        onSwap = { selectedIndex: Int, targetedIndex: Int ->
-                            swapImage(selectedIndex, targetedIndex)
+                        onSwap = { bannerIndex: Int, selectedIndex: Int, targetedIndex: Int ->
+                            swapImage(bannerIndex, selectedIndex, targetedIndex)
                         },
-                        onMove = { selectedIndex: Int, targetedIndex: Int ->
-                            moveImage(selectedIndex, targetedIndex)
-                        }
+                        onMove = { bannerIndex: Int, selectedIndex: Int, targetedIndex: Int ->
+                            moveImage(bannerIndex, selectedIndex, targetedIndex)
+                        },
+                        bannerIndex = bannerIndex
                     )
                 }
             }
@@ -200,12 +203,13 @@ fun SidePanelNavHost(
                         selectedIndex = data.index,
                         texts = banner.texts,
                         onDismiss = navController::navigateUp,
-                        onSwap = { selectedIndex: Int, targetedIndex: Int ->
-                            swapTexts(selectedIndex, targetedIndex)
+                        onSwap = { bannerIndex: Int, selectedIndex: Int, targetedIndex: Int ->
+                            swapTexts(bannerIndex, selectedIndex, targetedIndex)
                         },
-                        onMove = { selectedIndex: Int, targetedIndex: Int ->
-                            moveTexts(selectedIndex, targetedIndex)
-                        }
+                        onMove = { bannerIndex: Int, selectedIndex: Int, targetedIndex: Int ->
+                            moveTexts(bannerIndex, selectedIndex, targetedIndex)
+                        },
+                        bannerIndex = bannerIndex
                     )
                 }
             }

@@ -1,9 +1,7 @@
 package com.kingfuspace.sidePanel.ui.components.dialog
 
-import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,13 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -35,11 +30,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.MyHorizontalScrollBar
 
@@ -103,7 +96,7 @@ fun DialogMoveBanners(
                             Column(
                                 modifier = Modifier
                                     .width(width = 150.dp)
-                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
+//                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
                                     .clickable(enabled = index != selectedIndex) {
                                         targetIndex = index
                                     }
@@ -112,8 +105,11 @@ fun DialogMoveBanners(
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(height = 40.dp),
-                                    verticalAlignment = Alignment.CenterVertically
+//                                        .height(height = 40.dp),
+                                        .height(height = 150.dp)
+                                        .background(color = colorScheme.surfaceContainerLow),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.Center
                                 ) {
                                     Text(
                                         modifier = Modifier
@@ -122,21 +118,22 @@ fun DialogMoveBanners(
                                         style = typography.labelLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+//                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
 
                                     )
                                 }
 
-                                Box(
-                                    modifier = Modifier
-                                        .size(size = 150.dp)
-                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
-                                )
+//                                Box(
+//                                    modifier = Modifier
+//                                        .size(size = 150.dp)
+//                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
+//                                )
 
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(height = 40.dp),
+                                        .height(height = 40.dp)
+                                        .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.Center
                                 ) {

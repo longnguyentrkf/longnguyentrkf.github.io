@@ -12,7 +12,8 @@ import com.kingfuspace.sidePanel.navigation.Screen
 fun NavGraphBuilder.componentImageGraph(
     navController: NavHostController,
     banners: MutableList<Banner>,
-    bannerIndex: Int?
+    bannerIndex: Int?,
+    setImage: (Int, Int, String) -> Unit
 ) {
     composable<Screen.ComponentImage> { backStackEntry ->
         val data: Screen.ComponentImage = backStackEntry.toRoute()
@@ -36,7 +37,10 @@ fun NavGraphBuilder.componentImageGraph(
                             launchSingleTop = true
                             restoreState = true
                         }
-                    }
+                    },
+                    index = data.index,
+                    bannerIndex = bannerIndex,
+                    setImage = setImage
                 )
             }
         }

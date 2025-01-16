@@ -12,10 +12,10 @@ import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -25,11 +25,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.ImageData
+import com.kingfuspace.main.ui.components.MyTextField
+import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
+import kotlin.math.roundToInt
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +42,10 @@ fun ComponentImage(
     modifier: Modifier = Modifier,
     goBack: () -> Boolean,
     image: ImageData,
-    goToSetTextName: () -> Unit
+    goToSetTextName: () -> Unit,
+    index: Int,
+    bannerIndex: Int,
+    setImage: (Int, Int, String) -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
@@ -64,9 +71,7 @@ fun ComponentImage(
                         BannerMenu(
                             modifier = Modifier.weight(weight = 0.2f),
                             onDelete = { },
-                            onEditName = {
-                                goToSetTextName()
-                            },
+                            onEditName = { goToSetTextName() },
                         )
                     }
                 },
@@ -87,28 +92,51 @@ fun ComponentImage(
             modifier = modifier.padding(paddingValues = paddingValues),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(height = 200.dp)
-                    .background(color = colorScheme.surfaceContainerHigh),
-                model = image.url,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
+            Column {
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(height = 200.dp)
+                        .background(color = colorScheme.surfaceContainerHigh),
+                    model = image.url,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
 //                                            contentScale = ContentScale.Fit,
-            )
+                )
 
-            Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
-                text = "Url: ${image.url}",
-                style = MaterialTheme.typography.bodySmall
-            )
+                MyTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = colorScheme.surfaceContainer),
+                    value = image.url,
+                    onValueChange = { setImage(bannerIndex, index, it) },
+                    label = "image url",
+                    isSingleLine = true
+                )
+            }
 
-            Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
-                text = "Scale: ${(image.scale*100).toInt()}%",
-                style = MaterialTheme.typography.bodySmall
-            )
+            Row(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    modifier = Modifier.weight(weight = 1f),
+                    text = "Scale: ${(600f / 10).roundToInt()}%",
+                    style = Typography.bodySmall,
+                    textAlign = TextAlign.Start
+                )
+
+                Slider(
+                    modifier = Modifier
+                        .weight(weight = 1f)
+                        .height(height = 8.dp),
+                    value = 600f,
+                    onValueChange = { },
+                    valueRange = 100f..1100f,
+                    steps = 9
+                )
+            }
         }
     }
 }

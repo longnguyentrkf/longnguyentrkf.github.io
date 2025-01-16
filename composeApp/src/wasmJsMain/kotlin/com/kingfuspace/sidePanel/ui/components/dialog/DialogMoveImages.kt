@@ -1,9 +1,7 @@
 package com.kingfuspace.sidePanel.ui.components.dialog
 
-import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,9 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -36,7 +32,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -49,9 +44,10 @@ fun DialogMoveImages(
     modifier: Modifier = Modifier,
     images: List<ImageData>,
     onDismiss: () -> Unit,
-    onSwap: (Int, Int) -> Unit,
+    onSwap: (Int, Int, Int) -> Unit,
     selectedIndex: Int,
-    onMove: (Int, Int) -> Unit
+    onMove: (Int, Int, Int) -> Unit,
+    bannerIndex: Int
 ) {
 
     var optionsIndex by remember { mutableStateOf(value = 1) }
@@ -192,17 +188,17 @@ fun DialogMoveImages(
                             when (optionsIndex) {
                                 0 -> {
                                     onMove(
+                                        bannerIndex,
                                         selectedIndex,
                                         if (selectedIndex < targetIndex) targetIndex - 1 else targetIndex
                                     )
                                 }
 
-                                1 -> {
-                                    onSwap(selectedIndex, targetIndex)
-                                }
+                                1 -> { onSwap(bannerIndex, selectedIndex, targetIndex) }
 
                                 2 -> {
                                     onMove(
+                                        bannerIndex,
                                         selectedIndex,
                                         if (selectedIndex < targetIndex) targetIndex else targetIndex + 1
                                     )

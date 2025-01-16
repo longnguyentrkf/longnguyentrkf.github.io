@@ -14,11 +14,10 @@ import com.kingfuspace.main.editor.state.EditorState
 import com.kingfuspace.main.editor.state.ImageData
 import com.kingfuspace.main.editor.state.TextData
 
-class EditorViewModel : ViewModel() {
+open class EditorViewModel : ViewModel() {
 
     var state by mutableStateOf(value = EditorState())
         private set
-
 
     fun setCounter(int: Int) {
         state = state.copy(bannerCounter = int)
@@ -35,25 +34,24 @@ class EditorViewModel : ViewModel() {
         )
     }
 
-    fun deleteBanner(index: Int) {
-        state.banners.removeAt(index)
+    fun deleteBanner(index: Int) = state.banners.removeAt(index)
+
+    fun setBannerName(index: Int, name: String) {
+        val banner = state.banners[index]
+
+        state.banners[index] = when (banner) {
+            is Banner.Banner1 -> banner.copy(name = name)
+            is Banner.Banner2 -> banner.copy(name = name)
+        }
     }
+
 
     fun setIndex(index: Int?) {
         state = state.copy(bannerIndex = index)
     }
 
-    fun setName(index: Int, newName: String) {
-        val banner = state.banners[index]
-
-        state.banners[index] = when (banner) {
-            is Banner.Banner1 -> banner.copy(name = newName)
-            is Banner.Banner2 -> banner.copy(name = newName)
-        }
-    }
 
     fun setType(index: Int, type: BannerType) {
-
         val currentBanner = state.banners[index]
 
         state.banners[index] = when (type) {
@@ -100,24 +98,23 @@ class EditorViewModel : ViewModel() {
 
         state.banners[bannerIndex] = when (banner) {
             is Banner.Banner1 -> banner.copy(
-                images = banner.images.apply {
-                    this[index] = this[index].copy(url = url)
-                }
+                images = banner.images.apply { this[index] = this[index].copy(url = url) }
             )
 
             is Banner.Banner2 -> banner
         }
     }
 
-    fun setImageName(bannerIndex: Int, componentIndex: Int, name: String){
+    fun setImageName(bannerIndex: Int, componentIndex: Int, name: String) {
         val banner = state.banners[bannerIndex]
 
-        state.banners[bannerIndex] = when(banner){
+        state.banners[bannerIndex] = when (banner) {
             is Banner.Banner1 -> banner.copy(
                 images = banner.images.apply {
                     this[componentIndex] = this[componentIndex].copy(name = name)
                 }
             )
+
             is Banner.Banner2 -> banner
         }
     }
@@ -127,11 +124,7 @@ class EditorViewModel : ViewModel() {
 
         state.banners[bannerIndex] = when (banner) {
             is Banner.Banner1 -> banner.copy(
-                images = banner.images.apply {
-                    if (index in indices) {
-                        removeAt(index)
-                    }
-                }
+                images = banner.images.apply { removeAt(index) }
             )
 
             is Banner.Banner2 -> banner
@@ -143,9 +136,7 @@ class EditorViewModel : ViewModel() {
 
         state.banners[index] = when (banner) {
             is Banner.Banner1 -> banner.copy(
-                images = banner.images.apply {
-                    add(element = ImageData())
-                }
+                images = banner.images.apply { add(element = ImageData()) }
             )
 
             is Banner.Banner2 -> banner
@@ -153,28 +144,24 @@ class EditorViewModel : ViewModel() {
     }
 
 
-    fun setTextValue(bannerIndex: Int, index: Int, newText: String) {
+    fun setTextValue(bannerIndex: Int, index: Int, text: String) {
         val banner = state.banners[bannerIndex]
 
         state.banners[bannerIndex] = when (banner) {
             is Banner.Banner1 -> banner.copy(
-                texts = banner.texts.apply {
-                    this[index] = this[index].copy(text = newText)
-                }
+                texts = banner.texts.apply { this[index] = this[index].copy(text = text) }
             )
 
             is Banner.Banner2 -> banner
         }
     }
 
-    fun setTextName(bannerIndex: Int, textIndex: Int, newName: String) {
+    fun setTextName(bannerIndex: Int, textIndex: Int, name: String) {
         val banner = state.banners[bannerIndex]
 
         state.banners[bannerIndex] = when (banner) {
             is Banner.Banner1 -> banner.copy(
-                texts = banner.texts.apply {
-                    this[textIndex] = this[textIndex].copy(name = newName)
-                }
+                texts = banner.texts.apply { this[textIndex] = this[textIndex].copy(name = name) }
             )
 
             is Banner.Banner2 -> banner
@@ -185,14 +172,7 @@ class EditorViewModel : ViewModel() {
         val banner = state.banners[bannerIndex]
 
         state.banners[bannerIndex] = when (banner) {
-            is Banner.Banner1 -> banner.copy(
-                texts = banner.texts.apply {
-                    if (index in indices) {
-                        removeAt(index)
-                    }
-                }
-            )
-
+            is Banner.Banner1 -> banner.copy(texts = banner.texts.apply { removeAt(index) })
             is Banner.Banner2 -> banner
         }
     }
@@ -201,18 +181,12 @@ class EditorViewModel : ViewModel() {
         val banner = state.banners[index]
 
         state.banners[index] = when (banner) {
-            is Banner.Banner1 -> banner.copy(
-                texts = banner.texts.apply {
-                    add(element = TextData())
-                }
-            )
-
+            is Banner.Banner1 -> banner.copy(texts = banner.texts.apply { add(element = TextData()) })
             is Banner.Banner2 -> banner
         }
     }
 
-    fun swapImages(selectedIndex: Int, targetedIndex: Int) {
-        val bannerIndex = state.bannerIndex ?: return
+    fun swapImages(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
 
         val banner = state.banners[bannerIndex]
 
@@ -226,23 +200,19 @@ class EditorViewModel : ViewModel() {
     }
 
 
-    fun moveImages(selectedIndex: Int, targetIndex: Int) {
-        val bannerIndex = state.bannerIndex ?: return
-
+    fun moveImages(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
         val banner = state.banners[bannerIndex]
 
         when (banner) {
             is Banner.Banner1 -> {
-                banner.images.move(selectedIndex = selectedIndex, targetedIndex = targetIndex)
+                banner.images.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
 
             is Banner.Banner2 -> {}
         }
     }
 
-    fun swapTexts(selectedIndex: Int, targetedIndex: Int) {
-        val bannerIndex = state.bannerIndex ?: return
-
+    fun swapTexts(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
         val banner = state.banners[bannerIndex]
 
         when (banner) {
@@ -255,28 +225,29 @@ class EditorViewModel : ViewModel() {
     }
 
 
-    fun moveTexts(selectedIndex: Int, targetIndex: Int) {
-        val bannerIndex = state.bannerIndex ?: return
-
+    fun moveTexts(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
         val banner = state.banners[bannerIndex]
 
         when (banner) {
             is Banner.Banner1 -> {
-                banner.texts.move(selectedIndex = selectedIndex, targetedIndex = targetIndex)
+                banner.texts.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
 
             is Banner.Banner2 -> {}
         }
     }
 
-    fun moveBanners(selectedIndex: Int, targetedIndex: Int){
+    fun moveBanners(selectedIndex: Int, targetedIndex: Int) {
         state.banners.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
     }
 
-    fun swapBanners(selectedIndex: Int, targetedIndex: Int){
+    fun swapBanners(selectedIndex: Int, targetedIndex: Int) {
         state.banners.swap(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
     }
 
+    fun setImageScale(bannerIndex: Int, float: Float) {
+
+    }
 
 
 }

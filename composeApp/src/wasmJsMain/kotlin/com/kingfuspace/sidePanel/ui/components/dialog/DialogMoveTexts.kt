@@ -1,9 +1,7 @@
 package com.kingfuspace.sidePanel.ui.components.dialog
 
-import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,9 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -48,13 +44,14 @@ fun DialogMoveTexts(
     modifier: Modifier = Modifier,
     texts: List<TextData>,
     onDismiss: () -> Unit,
-    onSwap: (Int, Int) -> Unit,
+    onSwap: (Int, Int, Int) -> Unit,
     selectedIndex: Int,
-    onMove: (Int, Int) -> Unit
+    onMove: (Int, Int, Int) -> Unit,
+    bannerIndex: Int
 ) {
 
     var optionsIndex by remember { mutableStateOf(value = 1) }
-    val options = listOf("Top", "Swap", "Bottom")
+    val options = listOf("Left", "Swap", "Right")
 
     val lazyRowState = rememberLazyListState()
     var targetIndex by remember { mutableStateOf(value = if (selectedIndex == 0) 1 else 0) }
@@ -180,17 +177,19 @@ fun DialogMoveTexts(
                             when (optionsIndex) {
                                 0 -> {
                                     onMove(
+                                        bannerIndex,
                                         selectedIndex,
                                         if (selectedIndex < targetIndex) targetIndex - 1 else targetIndex
                                     )
                                 }
 
                                 1 -> {
-                                    onSwap(selectedIndex, targetIndex)
+                                    onSwap(bannerIndex, selectedIndex, targetIndex)
                                 }
 
                                 2 -> {
                                     onMove(
+                                        bannerIndex,
                                         selectedIndex,
                                         if (selectedIndex < targetIndex) targetIndex else targetIndex + 1
                                     )

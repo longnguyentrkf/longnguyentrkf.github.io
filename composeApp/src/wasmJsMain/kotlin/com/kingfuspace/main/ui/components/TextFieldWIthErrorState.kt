@@ -20,17 +20,7 @@ fun TextFieldWithErrorState(
     onValueChange: (String) -> Unit,
     isError: Boolean,
     isSingleLine: Boolean = true
-
 ) {
-//    var text by rememberSaveable { mutableStateOf(value = value) }
-//    var isError by rememberSaveable { mutableStateOf(value = isError) }
-
-//    fun validate(input: String) {
-//        isError = input.length > charLimit
-//    }
-
-//    LaunchedEffect(key1 = value) { validate(input = value) }
-//    LaunchedEffect(key1 = value) { value.checkStringLength(charLimit = charLimit) }
 
     TextField(
         modifier = modifier,

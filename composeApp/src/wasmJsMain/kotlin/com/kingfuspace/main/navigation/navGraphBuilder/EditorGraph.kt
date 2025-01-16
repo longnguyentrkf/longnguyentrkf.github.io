@@ -36,7 +36,7 @@ fun NavGraphBuilder.editorGraph(
                 deleteBanner = editorViewModel::deleteBanner,
                 setIndex = editorViewModel::setIndex,
                 bannerIndex = editorViewModel.state.bannerIndex,
-                setName = editorViewModel::setName,
+                setName = editorViewModel::setBannerName,
                 setType = editorViewModel::setType,
                 navController = navController2,
                 lazyListState = lazyListState,

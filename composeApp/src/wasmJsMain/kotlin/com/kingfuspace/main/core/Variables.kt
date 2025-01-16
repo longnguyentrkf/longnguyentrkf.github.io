@@ -8,11 +8,13 @@ import com.kingfuspace.main.core.theme.ThemeType
 import kotlinx.browser.window
 
 const val SMALL_WINDOW = 600
+const val MAIL_TO = "mailto:"
+const val SUBJECT = "?subject="
+const val BODY = "&body="
 
 object Variables {
     var windowInnerWidth by mutableStateOf(value = window.innerWidth)
     val windowWidth = window.screen.width
     var theme by mutableStateOf(value = ThemeType.LIGHT)
-    val fontSizeMultiplier = (windowInnerWidth.dp / windowWidth.dp)
-        .coerceIn(minimumValue = 0.5f, maximumValue = 1f)
+    var fontSizeMultiplier by mutableStateOf(value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(minimumValue = 0.5f, maximumValue = 1f))
 }

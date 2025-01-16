@@ -10,10 +10,15 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.sendMail
+import com.kingfuspace.main.core.BODY
+import com.kingfuspace.main.core.MAIL_TO
+import com.kingfuspace.main.core.SUBJECT
+import com.kingfuspace.main.core.customUrlEncode
 import com.kingfuspace.main.ui.components.MyTextField
 import com.kingfuspace.main.ui.theme.Typography
+import kotlinx.browser.window
 
 
 @Composable
@@ -29,6 +34,7 @@ fun Footer(
     body: String,
     toEmail: String
 ) {
+    val uriHandler = LocalUriHandler.current
 
     Column(
         modifier = modifier,
@@ -74,12 +80,15 @@ fun Footer(
 
         OutlinedButton(
             onClick = {
-                sendMail(
-                    to = toEmail,
-                    firstName = firstName,
-                    lastName = lastName,
-                    message = message
-                )
+                val subject = "Subject"
+                val mailBody = "$firstName $lastName\n\n$message"
+                val emailUri = buildString {
+                    append(MAIL_TO+toEmail)
+                    append(SUBJECT+subject.customUrlEncode())
+                    append(BODY + mailBody.customUrlEncode())
+                }
+
+                uriHandler.openUri(uri = emailUri)
             }
         ) {
             Text(

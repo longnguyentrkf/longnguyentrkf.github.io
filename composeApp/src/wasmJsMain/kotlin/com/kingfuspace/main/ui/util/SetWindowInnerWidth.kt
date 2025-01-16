@@ -5,4 +5,7 @@ import androidx.compose.runtime.Composable
 import com.kingfuspace.main.core.Variables.windowInnerWidth
 
 @Composable
-fun SetWindowInnerWidth() = BoxWithConstraints { windowInnerWidth = maxWidth.value.toInt() }
+fun SetWindowInnerWidth() = BoxWithConstraints {
+    windowInnerWidth = maxWidth.value.toInt()
+
+}

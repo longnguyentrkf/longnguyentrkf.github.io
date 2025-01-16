@@ -31,7 +31,7 @@ sealed class Banner(
         val images: MutableList<ImageData> = mutableStateListOf(),
         val texts: MutableList<TextData> = mutableStateListOf(),
         val buttons: MutableList<ButtonData> = mutableStateListOf(),
-        val isReverse: Boolean = false
+        val isReverse: Boolean = false,
     ) : Banner(id, name, bannerType)
 
     data class Banner2(
@@ -64,6 +64,8 @@ data class ButtonData(
     val text: String = "",
     val url: String = "",
 )
+
+
 
 
 

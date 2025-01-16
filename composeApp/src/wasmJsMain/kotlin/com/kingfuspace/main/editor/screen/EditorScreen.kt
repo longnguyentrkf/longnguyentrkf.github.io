@@ -29,6 +29,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,14 +38,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.core.Variables.fontSizeMultiplier
+import com.kingfuspace.main.core.Variables.windowInnerWidth
 import com.kingfuspace.main.core.Variables.windowWidth
 import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.editor.state.Banner
@@ -65,6 +65,7 @@ fun EditorScreen(
 ) {
     val scope = rememberCoroutineScope()
 
+
     Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier
@@ -76,6 +77,7 @@ fun EditorScreen(
             items(count = banners.size) { index ->
                 val isSelected = bannerIndex == index
                 val banner = banners[index]
+                val bannerHeight = if(isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height*3 else banner.height
 
                 Box(
                     modifier = Modifier
@@ -89,8 +91,8 @@ fun EditorScreen(
                             color = if (isSelected) colorScheme.inverseSurface else Transparent
                         )
                         .fillMaxWidth()
-                        .aspectRatio(ratio = windowWidth.dp / banner.height)
-                        .height(height = banner.height)
+                        .aspectRatio(ratio = windowWidth.dp / bannerHeight)
+                        .height(height = bannerHeight)
                         .background(color = colorScheme.surface)
                 ) {
                     if (bannerIndex == index) {
@@ -121,7 +123,7 @@ fun EditorScreen(
                             left = {
                                 Box(contentAlignment = Alignment.BottomCenter) {
                                     HorizontalPager(
-                                        modifier = Modifier.height(height = banner.height),
+                                        modifier = Modifier.height(height = bannerHeight),
                                         state = pagerState
                                     ) { index ->
                                         AsyncImage(
@@ -193,18 +195,15 @@ fun EditorScreen(
                                 Column(
                                     modifier = Modifier.verticalScroll(state = rememberScrollState())
                                 ) {
+
                                     banner.texts.forEachIndexed { _, text ->
                                         Text(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .clickable { },
+                                            modifier = Modifier.padding(all = 24.dp),
                                             text = text.text,
-                                            style = typography.displayLarge.copy(
-                                                fontSize = typography.displayLarge.fontSize * fontSizeMultiplier,
-                                                lineHeight = typography.displayLarge.lineHeight * fontSizeMultiplier
+                                            style = typography.bodyLarge.copy(
+                                                fontSize = typography.bodyLarge.fontSize * fontSizeMultiplier,
+                                                lineHeight = typography.bodyLarge.lineHeight * fontSizeMultiplier
                                             ),
-                                            fontWeight = FontWeight.Bold,
-                                            textAlign = TextAlign.Center
                                         )
                                     }
                                 }
