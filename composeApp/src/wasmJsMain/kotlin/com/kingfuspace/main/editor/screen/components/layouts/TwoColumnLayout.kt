@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kingfuspace.main.core.isSmallScreen
 
 @Composable
 fun TwoColumnLayout(
@@ -18,7 +19,7 @@ fun TwoColumnLayout(
     leftWeight: Float = 1f,
     rightWeight: Float = 1f,
     isReverseLayout: Boolean = false,
-    isSmallScreen: Boolean
+    isSmallScreen: Boolean = isSmallScreen()
 ) {
     if (isSmallScreen) {
         Column(modifier = modifier) {
