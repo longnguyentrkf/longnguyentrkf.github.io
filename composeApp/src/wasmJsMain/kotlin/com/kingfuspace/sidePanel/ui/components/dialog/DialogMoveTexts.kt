@@ -76,7 +76,7 @@ fun DialogMoveTexts(
                             ),
                             onClick = { optionsIndex = index },
                             selected = index == optionsIndex,
-                            label = { Text(text = label) },
+                            label = { Text(text = label, style = typography.labelSmall) },
                             icon = { },
                             colors = SegmentedButtonDefaults.colors(
                                 activeContainerColor = colorScheme.inverseSurface,
@@ -116,7 +116,8 @@ fun DialogMoveTexts(
                                         modifier = Modifier
                                             .padding(all = 8.dp),
                                         text = texts[index].name,
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -132,7 +133,8 @@ fun DialogMoveTexts(
                                 ) {
                                     Text(
                                         text = texts[index].text,
-                                        style = typography.bodySmall,
+//                                        style = typography.bodySmall
+                                        style = typography.labelMedium
                                     )
                                 }
 
@@ -151,7 +153,8 @@ fun DialogMoveTexts(
                                             selectedIndex -> "selected"
                                             else -> ""
                                         },
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -200,7 +203,8 @@ fun DialogMoveTexts(
                     ) {
                         Text(
                             text = "Confirm",
-                            style = typography.bodySmall
+//                            style = typography.bodySmall
+                            style = typography.labelMedium
                         )
                     }
                 }

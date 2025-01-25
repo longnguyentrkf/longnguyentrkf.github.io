@@ -1,7 +1,6 @@
 package com.kingfuspace.main.editor.viewModel
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
@@ -9,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.kingfuspace.main.core.move
 import com.kingfuspace.main.core.swap
 import com.kingfuspace.main.editor.state.Banner
-import com.kingfuspace.main.editor.state.BannerType
+import com.kingfuspace.main.editor.state.LayoutType
 import com.kingfuspace.main.editor.state.EditorState
 import com.kingfuspace.main.editor.state.ImageData
 import com.kingfuspace.main.editor.state.TextData
@@ -19,7 +18,7 @@ open class EditorViewModel : ViewModel() {
     var state by mutableStateOf(value = EditorState())
         private set
 
-    fun setCounter(int: Int) {
+    private fun setCounter(int: Int) {
         state = state.copy(bannerCounter = int)
     }
 
@@ -29,7 +28,7 @@ open class EditorViewModel : ViewModel() {
             Banner.Banner1(
                 id = state.bannerCounter,
                 name = "Banner ${state.bannerCounter}",
-                bannerType = null
+                layoutType = null
             )
         )
     }
@@ -45,32 +44,24 @@ open class EditorViewModel : ViewModel() {
         }
     }
 
-
     fun setIndex(index: Int?) {
         state = state.copy(bannerIndex = index)
     }
 
-
-    fun setType(index: Int, type: BannerType) {
-        val currentBanner = state.banners[index]
-
+    fun setType(index: Int, type: LayoutType) {
         state.banners[index] = when (type) {
-            BannerType.TYPE_1 -> Banner.Banner1(
-                id = currentBanner.id,
-                name = currentBanner.name,
-                height = currentBanner.height,
-                bannerType = type,
-                images = mutableStateListOf(ImageData()),
-                texts = mutableStateListOf(TextData()),
-                buttons = mutableStateListOf()
+            LayoutType.LAYOUT_1 -> Banner.Banner1(
+                id = state.banners[index].id,
+                name = state.banners[index].name,
+                height = state.banners[index].height,
+                layoutType = type
             )
 
-            BannerType.TYPE_2 -> Banner.Banner2(
-                id = currentBanner.id,
-                name = currentBanner.name,
-                height = currentBanner.height,
-                bannerType = type,
-                textsBody = mutableStateListOf()
+            LayoutType.LAYOUT_2 -> Banner.Banner2(
+                id = state.banners[index].id,
+                name = state.banners[index].name,
+                height = state.banners[index].height,
+                layoutType = type
             )
         }
     }
@@ -188,9 +179,7 @@ open class EditorViewModel : ViewModel() {
 
     fun swapImages(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
 
-        val banner = state.banners[bannerIndex]
-
-        when (banner) {
+        when (val banner = state.banners[bannerIndex]) {
             is Banner.Banner1 -> {
                 banner.images.swap(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
@@ -201,9 +190,7 @@ open class EditorViewModel : ViewModel() {
 
 
     fun moveImages(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
-        val banner = state.banners[bannerIndex]
-
-        when (banner) {
+        when (val banner = state.banners[bannerIndex]) {
             is Banner.Banner1 -> {
                 banner.images.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
@@ -213,9 +200,7 @@ open class EditorViewModel : ViewModel() {
     }
 
     fun swapTexts(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
-        val banner = state.banners[bannerIndex]
-
-        when (banner) {
+        when (val banner = state.banners[bannerIndex]) {
             is Banner.Banner1 -> {
                 banner.texts.swap(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
@@ -226,9 +211,7 @@ open class EditorViewModel : ViewModel() {
 
 
     fun moveTexts(bannerIndex: Int, selectedIndex: Int, targetedIndex: Int) {
-        val banner = state.banners[bannerIndex]
-
-        when (banner) {
+        when (val banner = state.banners[bannerIndex]) {
             is Banner.Banner1 -> {
                 banner.texts.move(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
             }
@@ -245,9 +228,10 @@ open class EditorViewModel : ViewModel() {
         state.banners.swap(selectedIndex = selectedIndex, targetedIndex = targetedIndex)
     }
 
-    fun setImageScale(bannerIndex: Int, float: Float) {
 
-    }
 
+//     fun setImageScale(bannerIndex: Int, float: Float) {
+//
+//    }
 
 }

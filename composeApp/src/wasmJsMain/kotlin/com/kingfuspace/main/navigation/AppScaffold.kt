@@ -102,7 +102,7 @@ fun AppScaffold(
 
                             Text(
                                 text = AppDestination.HOME.label,
-                                style = typography.bodySmall
+                                style = typography.labelMedium
                             )
                         }
                     },
@@ -138,7 +138,7 @@ fun AppScaffold(
                                     Text(
                                         modifier = Modifier.padding(horizontal = 8.dp),
                                         text = screen.name.formatEnumName(),
-                                        style = typography.bodySmall,
+                                        style = typography.labelMedium,
                                         color = color
                                     )
                                 }
@@ -160,7 +160,8 @@ fun AppScaffold(
     ) {
         AppNavHost(
             modifier = modifier.padding(paddingValues = it),
-            navController = navController
+            navController = navController,
+            paddingValues = it
         )
     }
 }

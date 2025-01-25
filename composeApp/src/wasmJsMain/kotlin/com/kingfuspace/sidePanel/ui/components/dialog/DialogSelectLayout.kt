@@ -22,20 +22,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.kingfuspace.main.core.formatEnumName
-import com.kingfuspace.main.editor.state.BannerType
+import com.kingfuspace.main.editor.state.LayoutType
 import com.kingfuspace.main.ui.theme.Typography
 import kotlin.enums.EnumEntries
 
 @Composable
-fun DialogSelect(
+fun DialogSelectLayout(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
-    onConfirm: (BannerType) -> Unit,
-    options: EnumEntries<BannerType>,
-    defaultOption: BannerType? = null
+    onConfirm: (LayoutType) -> Unit,
+    options: EnumEntries<LayoutType>,
+    defaultOption: LayoutType? = null
 ) {
 
-    var selected: BannerType? by remember { mutableStateOf(value = defaultOption) }
+    var selected: LayoutType? by remember { mutableStateOf(value = defaultOption) }
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -52,8 +52,9 @@ fun DialogSelect(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(all = 24.dp),
-                    text = "Choose a banner",
-                    style = Typography.bodyLarge
+//                    text = "Choose a banner",
+                    text = "Choose a layout",
+                    style = Typography.bodySmall
                 )
 
                 options.forEachIndexed { _, item ->
@@ -71,7 +72,7 @@ fun DialogSelect(
 
                         Text(
                             text = item.name.formatEnumName(),
-                            style = Typography.bodySmall
+                            style = Typography.labelMedium
                         )
                     }
                 }
@@ -89,7 +90,7 @@ fun DialogSelect(
                             onDismiss()
                         }
                     ) {
-                        Text(text = "Confirm", style = Typography.bodySmall)
+                        Text(text = "Confirm", style = Typography.labelMedium)
                     }
                 }
             }

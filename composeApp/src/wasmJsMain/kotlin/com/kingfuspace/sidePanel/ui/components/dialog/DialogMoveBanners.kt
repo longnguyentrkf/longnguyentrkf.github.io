@@ -72,7 +72,7 @@ fun DialogMoveBanners(
                             ),
                             onClick = { optionsIndex = index },
                             selected = index == optionsIndex,
-                            label = { Text(text = label) },
+                            label = { Text(text = label, style = typography.labelSmall) },
                             icon = { },
                             colors = SegmentedButtonDefaults.colors(
                                 activeContainerColor = colorScheme.inverseSurface,
@@ -115,19 +115,13 @@ fun DialogMoveBanners(
                                         modifier = Modifier
                                             .padding(all = 8.dp),
                                         text = banners[index].name,
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-//                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
 
                                     )
                                 }
-
-//                                Box(
-//                                    modifier = Modifier
-//                                        .size(size = 150.dp)
-//                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
-//                                )
 
                                 Row(
                                     modifier = Modifier
@@ -145,7 +139,8 @@ fun DialogMoveBanners(
                                             selectedIndex -> "selected"
                                             else -> ""
                                         },
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -173,7 +168,7 @@ fun DialogMoveBanners(
                                 0 -> {
                                     onMove(
                                         selectedIndex,
-                                        if (selectedIndex < targetIndex) targetIndex - 1 else targetIndex
+                                        if (selectedIndex < targetIndex) (targetIndex - 1).coerceAtLeast(minimumValue = 0) else targetIndex
                                     )
                                 }
 
@@ -193,7 +188,8 @@ fun DialogMoveBanners(
                     ) {
                         Text(
                             text = "Confirm",
-                            style = typography.bodySmall
+//                            style = typography.bodySmall
+                            style = typography.labelMedium
                         )
                     }
                 }

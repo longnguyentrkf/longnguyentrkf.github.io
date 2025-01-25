@@ -1,60 +1,122 @@
 package com.kingfuspace.main.home.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.home.viewModel.Header
-import com.kingfuspace.main.ui.components.MyImage
-import com.kingfuspace.main.ui.components.TwoColumnLayout
-import com.kingfuspace.main.ui.theme.Typography
+import com.kingfuspace.main.core.Variables.fontSizeMultiplier
+import com.kingfuspace.main.core.Variables.windowHeight
+import com.kingfuspace.main.core.isSmallScreen
+import kingfuspace.composeapp.generated.resources.Res
+import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
+import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
-fun HeaderContent(
+fun Header(
     modifier: Modifier = Modifier,
-//    title1: String,
-//    title2: String,
-//    drawableResource: DrawableResource,
-    header: Header,
-    isSmallScreen: Boolean
+    paddingValues: PaddingValues
 ) {
-    TwoColumnLayout(
-        modifier = modifier,
-        isSmallScreen = isSmallScreen,
-//        width = Variables.maxWidth,
-        left = {
-            MyImage(
-                height = 1.dp,
-                width = 1.dp,
-                drawableResource = header.image,
-                scale = 0.5f,
-                contentScale = ContentScale.Fit,
-                isIcon = true
-            )
-        },
-        right = {
-            Column(verticalArrangement = Arrangement.spacedBy(space = 12.dp)) {
-                if (header.title1 != null) {
-                    Text(
-                        text = header.title1,
-                        style = Typography.bodyLarge
-                    )
-                }
+    val introduction = "Introducing Kingfuspace"
+    val description = "Create your platform with cutting-edge technology"
+    val painter = painterResource(resource = Res.drawable.kingfuspace_logo_no_background)
 
+    if (isSmallScreen()) {
+        Column(modifier = modifier) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .padding(all = 24.dp),
+                    painter = painter,
+                    contentDescription = null
+                )
+            }
 
-                if(header.title2 != null) {
-                    Text(
-                        text = header.title2,
-                        style = Typography.titleMedium,
-                        fontWeight = FontWeight.Bold
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 24.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = introduction,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = MaterialTheme.typography.bodyLarge.fontSize * fontSizeMultiplier,
+                        lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * fontSizeMultiplier
                     )
-                }
+                )
+
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.displaySmall.copy(
+                        fontSize = MaterialTheme.typography.displaySmall.fontSize * fontSizeMultiplier,
+                        lineHeight = MaterialTheme.typography.displaySmall.lineHeight * fontSizeMultiplier
+                    ),
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
-    )
+    } else {
+        Row(
+            modifier = modifier.height(height = (windowHeight.dp - paddingValues.calculateTopPadding() * 2) * fontSizeMultiplier)
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(weight = 1f)
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .scale(scale = 0.5f),
+                    painter = painter,
+                    contentDescription = null
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .weight(weight = 1f)
+                    .fillMaxSize()
+                    .padding(all = 24.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = introduction,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = MaterialTheme.typography.bodyLarge.fontSize * fontSizeMultiplier,
+                        lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * fontSizeMultiplier
+                    )
+                )
+
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.displaySmall.copy(
+                        fontSize = MaterialTheme.typography.displaySmall.fontSize * fontSizeMultiplier,
+                        lineHeight = MaterialTheme.typography.displaySmall.lineHeight * fontSizeMultiplier
+                    ),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
+
 }

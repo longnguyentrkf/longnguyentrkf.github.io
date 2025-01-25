@@ -63,7 +63,7 @@ fun ComponentImage(
                         Text(
                             modifier = Modifier.weight(weight = 1f),
                             text = image.name,
-                            style = typography.bodySmall,
+                            style = typography.labelMedium,
                             maxLines = 2,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -123,7 +123,7 @@ fun ComponentImage(
                 Text(
                     modifier = Modifier.weight(weight = 1f),
                     text = "Scale: ${(600f / 10).roundToInt()}%",
-                    style = Typography.bodySmall,
+                    style = Typography.labelMedium,
                     textAlign = TextAlign.Start
                 )
 

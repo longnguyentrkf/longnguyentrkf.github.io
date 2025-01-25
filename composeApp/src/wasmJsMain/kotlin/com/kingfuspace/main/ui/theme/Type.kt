@@ -18,65 +18,79 @@ import androidx.compose.ui.unit.sp
 val Typography = Typography(
 
     labelSmall = TextStyle(
-        fontSize = 4.sp,
-        lineHeight = 6.sp, // Reduced for tighter labels
+        fontSize = 12.sp, // Starting size (like previous labelLarge)
+        lineHeight = 16.sp, // Proportionate line height
+        letterSpacing = 0.2.sp
     ),
 
     labelMedium = TextStyle(
-        fontSize = 8.sp,
-        lineHeight = 12.sp, // Adjusted for compactness
+        fontSize = 16.sp, // Larger than labelSmall
+        lineHeight = 24.sp,
+        letterSpacing = 0.25.sp
     ),
 
     labelLarge = TextStyle(
-        fontSize = 12.sp,
-        lineHeight = 16.sp, // Proportionate line height
+        fontSize = 20.sp, // Larger than labelMedium
+        lineHeight = 28.sp,
+        letterSpacing = 0.3.sp
     ),
 
     bodySmall = TextStyle(
-        fontSize = 16.sp,
-        lineHeight = 24.sp, // 1.5x for readability
+        fontSize = 24.sp, // Larger than labelLarge
+        lineHeight = 32.sp,
+        letterSpacing = 0.35.sp
     ),
 
     bodyMedium = TextStyle(
-        fontSize = 24.sp,
-        lineHeight = 36.sp, // 1.5x for comfortable reading
+        fontSize = 32.sp, // Progressively larger
+        lineHeight = 40.sp,
+        letterSpacing = 0.4.sp
     ),
 
     bodyLarge = TextStyle(
-        fontSize = 32.sp,
-        lineHeight = 44.sp // Slightly tighter for large body text
+        fontSize = 40.sp, // Larger body text
+        lineHeight = 52.sp,
+        letterSpacing = 0.45.sp
     ),
 
     titleSmall = TextStyle(
-        fontSize = 40.sp,
-        lineHeight = 52.sp // Tighter for emphasis
+        fontSize = 48.sp, // Larger emphasis
+        lineHeight = 60.sp,
+        letterSpacing = 0.4.sp
     ),
 
     titleMedium = TextStyle(
-        fontSize = 48.sp,
-        lineHeight = 60.sp // Balanced line height for titles
+        fontSize = 56.sp, // Even larger
+        lineHeight = 68.sp,
+        letterSpacing = 0.35.sp
     ),
 
     titleLarge = TextStyle(
-        fontSize = 56.sp,
-        lineHeight = 68.sp // Tighter for display titles
+        fontSize = 64.sp, // Significant size increase
+        lineHeight = 80.sp,
+        letterSpacing = 0.3.sp
     ),
 
     displaySmall = TextStyle(
-        fontSize = 64.sp,
-        lineHeight = 80.sp // Proportionate for large text
+        fontSize = 72.sp, // Display level
+        lineHeight = 90.sp,
+        letterSpacing = 0.25.sp
     ),
 
     displayMedium = TextStyle(
-        fontSize = 72.sp,
-        lineHeight = 90.sp // Slightly tighter for better visual impact
+        fontSize = 80.sp, // Bigger display size
+        lineHeight = 100.sp,
+        letterSpacing = 0.2.sp
     ),
 
     displayLarge = TextStyle(
-        fontSize = 80.sp,
-        lineHeight = 96.sp // Optimized for readability and aesthetics
+        fontSize = 96.sp, // Largest size
+        lineHeight = 112.sp,
+        letterSpacing = 0.15.sp
     )
 )
+
+
 
 @Composable
 fun TypographyPreview() {

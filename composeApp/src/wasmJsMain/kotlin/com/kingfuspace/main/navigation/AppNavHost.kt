@@ -2,9 +2,9 @@ package com.kingfuspace.main.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -19,6 +19,7 @@ import com.kingfuspace.main.navigation.navGraphBuilder.shopGraph
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
+    paddingValues: PaddingValues,
 ) {
     val editorViewModel = viewModel { EditorViewModel() }
     val homeViewModel = viewModel { HomeViewModel() }
@@ -27,12 +28,13 @@ fun AppNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Editor,
+        startDestination = Screen.Home,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
         homeGraph(
-            vm = homeViewModel
+            vm = homeViewModel,
+            paddingValues = paddingValues
         )
 
         editorGraph(

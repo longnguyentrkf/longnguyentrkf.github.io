@@ -5,3 +5,4 @@ fun <T> MutableList<T>.swap(selectedIndex: Int, targetedIndex: Int) {
     this[selectedIndex] = this[targetedIndex]
     this[targetedIndex] = temp
 }
+

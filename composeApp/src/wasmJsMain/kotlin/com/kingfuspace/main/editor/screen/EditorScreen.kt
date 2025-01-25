@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +30,6 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,16 +43,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
-import com.kingfuspace.main.core.Variables.fontSizeMultiplier
-import com.kingfuspace.main.core.Variables.windowInnerWidth
 import com.kingfuspace.main.core.Variables.windowWidth
 import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.MyVerticalScrollBar
-import com.kingfuspace.main.ui.components.TwoColumnLayout
+import com.kingfuspace.main.editor.screen.components.layouts.TwoColumnLayout
 import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun EditorScreen(
     modifier: Modifier = Modifier,
@@ -65,7 +64,6 @@ fun EditorScreen(
 ) {
     val scope = rememberCoroutineScope()
 
-
     Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier
@@ -74,10 +72,11 @@ fun EditorScreen(
                 .background(color = colorScheme.surfaceContainer),
             state = lazyListState
         ) {
-            items(count = banners.size) { index ->
+            items(count = banners.size, key = { banners[it].id }) { index ->
                 val isSelected = bannerIndex == index
                 val banner = banners[index]
-                val bannerHeight = if(isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height*3 else banner.height
+                val bannerHeight =
+                    if (isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height * 3 else banner.height
 
                 Box(
                     modifier = Modifier
@@ -105,7 +104,7 @@ fun EditorScreen(
                             Text(
                                 modifier = Modifier.widthIn(max = 200.dp),
                                 text = banner.name,
-                                style = typography.bodySmall,
+                                style = typography.labelMedium,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 color = colorScheme.surface
@@ -168,7 +167,7 @@ fun EditorScreen(
 
                                         Text(
                                             text = "${currentPage + 1}/${banner.images.size}",
-                                            style = typography.labelLarge,
+                                            style = typography.labelMedium,
                                         )
 
                                         Icon(
@@ -195,15 +194,17 @@ fun EditorScreen(
                                 Column(
                                     modifier = Modifier.verticalScroll(state = rememberScrollState())
                                 ) {
-
-                                    banner.texts.forEachIndexed { _, text ->
+//
+                                    banner.texts.forEachIndexed { index, text ->
                                         Text(
-                                            modifier = Modifier.padding(all = 24.dp),
+                                            modifier = Modifier
+                                                .clickable(enabled = text.isClickable) { }
+                                                .padding(all = 24.dp),
                                             text = text.text,
-                                            style = typography.bodyLarge.copy(
-                                                fontSize = typography.bodyLarge.fontSize * fontSizeMultiplier,
-                                                lineHeight = typography.bodyLarge.lineHeight * fontSizeMultiplier
-                                            ),
+                                            style = banner.texts[index].style.copy(
+                                                fontSize = banner.texts[index].style.fontSize,
+                                                lineHeight = banner.texts[index].style.lineHeight
+                                            )
                                         )
                                     }
                                 }

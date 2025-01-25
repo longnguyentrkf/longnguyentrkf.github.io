@@ -90,7 +90,7 @@ fun DialogMoveImages(
                             ),
                             onClick = { optionsIndex = index },
                             selected = index == optionsIndex,
-                            label = { Text(text = label) },
+                            label = { Text(text = label, style = typography.labelSmall) },
                             icon = { },
                             colors = SegmentedButtonDefaults.colors(
                                 activeContainerColor = colorScheme.inverseSurface,
@@ -129,7 +129,8 @@ fun DialogMoveImages(
                                             .fillMaxWidth()
                                             .padding(all = 8.dp),
                                         text = images[index].name,
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -161,7 +162,8 @@ fun DialogMoveImages(
                                             selectedIndex -> "selected"
                                             else -> ""
                                         },
-                                        style = typography.labelLarge,
+//                                        style = typography.labelLarge,
+                                        style = typography.labelSmall,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -209,7 +211,8 @@ fun DialogMoveImages(
                     ) {
                         Text(
                             text = "Confirm",
-                            style = typography.bodySmall
+//                            style = typography.bodySmall
+                            style = typography.labelMedium
                         )
                     }
                 }

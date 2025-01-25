@@ -56,12 +56,13 @@ fun BannerMenu(
             onDismissRequest = { expanded = false }
         ) {
 
-            if(onModify != null) {
+            if (onModify != null) {
                 DropdownMenuItem(
                     text = {
                         Text(
                             text = "Modify",
-                            style = typography.labelLarge
+//                            style = typography.labelLarge
+                            style = typography.labelSmall
                         )
                     },
                     onClick = {
@@ -77,12 +78,13 @@ fun BannerMenu(
                 )
             }
 
-            if(onEditName != null) {
+            if (onEditName != null) {
                 DropdownMenuItem(
                     text = {
                         Text(
                             text = "Edit name",
-                            style = typography.labelLarge
+//                            style = typography.labelLarge
+                            style = typography.labelSmall
                         )
                     },
                     onClick = {
@@ -98,12 +100,13 @@ fun BannerMenu(
                 )
             }
 
-            if(onAdd != null) {
+            if (onAdd != null) {
                 DropdownMenuItem(
                     text = {
                         Text(
                             text = "Add",
-                            style = typography.labelLarge
+//                            style = typography.labelLarge
+                            style = typography.labelSmall
                         )
                     },
                     onClick = {
@@ -124,7 +127,8 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Move",
-                            style = typography.labelLarge
+//                            style = typography.labelLarge
+                            style = typography.labelSmall
                         )
                     },
                     onClick = {
@@ -145,7 +149,9 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Change Banner Type",
-                            style = typography.labelLarge
+//                            style = typography.labelLarge,
+                            style = typography.labelSmall
+
                         )
                     },
                     onClick = {
@@ -166,7 +172,8 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Delete",
-                            style = typography.labelLarge,
+//                            style = typography.labelLarge,
+                            style = typography.labelSmall,
                             color = colorScheme.error
                         )
                     },

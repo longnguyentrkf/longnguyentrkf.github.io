@@ -11,7 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.dialog
 import androidx.navigation.toRoute
 import com.kingfuspace.main.editor.state.Banner
-import com.kingfuspace.main.editor.state.BannerType
+import com.kingfuspace.main.editor.state.ComponentType
+import com.kingfuspace.main.editor.state.LayoutType
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.bannerGraph
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.bannersGraph
 import com.kingfuspace.sidePanel.navigation.navGraphBuilder.componentImageGraph
@@ -22,7 +23,8 @@ import com.kingfuspace.sidePanel.ui.components.dialog.DialogEditText
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveBanners
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveImages
 import com.kingfuspace.sidePanel.ui.components.dialog.DialogMoveTexts
-import com.kingfuspace.sidePanel.ui.components.dialog.DialogSelect
+import com.kingfuspace.sidePanel.ui.components.dialog.DialogSelectComponent
+import com.kingfuspace.sidePanel.ui.components.dialog.DialogSelectLayout
 
 @Composable
 fun SidePanelNavHost(
@@ -33,7 +35,7 @@ fun SidePanelNavHost(
     setIndex: (Int?) -> Unit,
     bannerIndex: Int?,
     setName: (Int, String) -> Unit,
-    setType: (Int, BannerType) -> Unit,
+    setType: (Int, LayoutType) -> Unit,
     navController: NavHostController,
     lazyListState: LazyListState,
     setHeight: (Int, Dp) -> Unit,
@@ -82,7 +84,6 @@ fun SidePanelNavHost(
             setImage = setImage,
             addText = addText,
             setTextValue = setTextValue,
-//            setText = setTextName,
             addImage = addImage,
             removeText = deleteText,
             deleteImage = deleteImage,
@@ -154,16 +155,32 @@ fun SidePanelNavHost(
             )
         }
 
-        dialog<Dialog.SetBannerType> {
-            val data: Dialog.SetBannerType = it.toRoute()
+        dialog<Dialog.SetLayoutType> {
+            val data: Dialog.SetLayoutType = it.toRoute()
 
             if (bannerIndex != null) {
-                DialogSelect(
+                DialogSelectLayout(
                     onDismiss = navController::navigateUp,
-                    options = BannerType.entries,
-                    defaultOption = banners[data.index].bannerType,
+                    options = LayoutType.entries,
+                    defaultOption = banners[data.index].layoutType,
                     onConfirm = { type ->
                         setType(data.index, type)
+                    }
+                )
+            }
+        }
+
+        dialog<Dialog.SetComponentType> {
+            val data: Dialog.SetComponentType = it.toRoute()
+
+            if (bannerIndex != null) {
+                DialogSelectComponent(
+                    onDismiss = navController::navigateUp,
+                    options = ComponentType.entries,
+//                    defaultOption = banners[data.index].layoutType,
+                    defaultOption = null,
+                    onConfirm = { type ->
+//                        setType(data.index, type)
                     }
                 )
             }

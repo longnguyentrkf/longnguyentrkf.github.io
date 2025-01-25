@@ -110,7 +110,7 @@ fun NavigationDrawer() {
                                 selectedContainerColor = Transparent,
                                 unselectedTextColor = colorScheme.outline.copy(alpha = 0.5f)
                             ),
-                            label = { Text(text = screen.label, style = Typography.bodySmall) },
+                            label = { Text(text = screen.label, style = Typography.labelMedium) },
                             selected = selected,
                             onClick = {
                                 scope.launch {

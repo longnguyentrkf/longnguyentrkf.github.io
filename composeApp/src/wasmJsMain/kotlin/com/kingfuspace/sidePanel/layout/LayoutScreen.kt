@@ -1,4 +1,4 @@
-package com.kingfuspace.sidePanel.banner
+package com.kingfuspace.sidePanel.layout
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,14 +29,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.theme.Typography
-import com.kingfuspace.sidePanel.banner.banner1.Banner1
+import com.kingfuspace.sidePanel.layout.layout1.Layout1
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlin.math.roundToInt
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BannerScreen(
+fun LayoutScreen(
     modifier: Modifier = Modifier,
     banner: Banner,
     goBack: () -> Boolean,
@@ -59,6 +59,7 @@ fun BannerScreen(
     goToDialogMoveTexts: (Int) -> Unit,
     goToComponentImage: (Int) -> Unit,
     goToComponentText: (Int) -> Unit,
+    goToSelectComponent: () -> Unit,
 ) {
 
     Scaffold(
@@ -70,7 +71,7 @@ fun BannerScreen(
                 title = {
                     Text(
                         text = banner.name,
-                        style = Typography.bodySmall,
+                        style = Typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -105,59 +106,81 @@ fun BannerScreen(
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (banner.bannerType == null) {
-                Text(
-                    modifier = Modifier
-                        .clickable { goToDialogSelect() }
-                        .padding(all = 16.dp)
-                        .fillMaxWidth(),
-                    text = "Select a banner type",
-                    style = Typography.bodySmall
-                )
-            } else {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+
+
+//            if (banner.layoutType == null) {
+
+            when {
+                banner.layoutType == null -> {
                     Text(
-                        modifier = Modifier.weight(weight = 1f),
-                        text = "Height: ${(banner.height.value / 10).roundToInt()}%",
-                        style = Typography.bodySmall,
-                        textAlign = TextAlign.Start
-                    )
-
-                    Slider(
                         modifier = Modifier
-                            .weight(weight = 1f)
-                            .height(height = 8.dp),
-                        value = banner.height.value,
-                        onValueChange = { setHeight(bannerIndex, it.dp) },
-                        valueRange = 100f..1100f,
-                        steps = 9
+                            .clickable { goToDialogSelect() }
+                            .padding(all = 16.dp)
+                            .fillMaxWidth(),
+                        text = "Select a layout",
+                        style = Typography.labelMedium
+                    )
+                }
+//            }
+                banner.components == null ->{
+                    Text(
+                        modifier = Modifier
+                            .clickable { goToSelectComponent() }
+                            .padding(all = 16.dp)
+                            .fillMaxWidth(),
+                        text = "Select component",
+                        style = Typography.labelMedium
                     )
                 }
 
 
-                if (banner is Banner.Banner1) {
-                    Banner1(
-                        banner = banner,
-                        bannerIndex = bannerIndex,
-                        setIsReverse = setIsReverse,
-                        setImage = setImage,
-                        setText = setTextValue,
-                        addText = addText,
-                        addImage = addImage,
-                        deleteText = deleteText,
-                        deleteImage = deleteImage,
-                        goToDialogMoveImages = goToDialogMoveImages,
-                        goToSetTextName = goToSetTextName,
-                        goToSetImageName = goToSetImageName,
-                        goToDialogMoveTexts = goToDialogMoveTexts,
-                        goToComponentImage = goToComponentImage,
-                        goToComponentText = goToComponentText
-                    )
-                }
+//            else {
+                   else -> {
+                       Row(
+                           modifier = Modifier.padding(horizontal = 16.dp),
+                           verticalAlignment = Alignment.CenterVertically,
+                           horizontalArrangement = Arrangement.SpaceBetween
+                       ) {
+                           Text(
+                               modifier = Modifier.weight(weight = 1f),
+                               text = "Height: ${(banner.height.value / 10).roundToInt()}%",
+                               style = Typography.labelMedium,
+                               textAlign = TextAlign.Start
+                           )
+
+                           Slider(
+                               modifier = Modifier
+                                   .weight(weight = 1f)
+                                   .height(height = 8.dp),
+                               value = banner.height.value,
+                               onValueChange = { setHeight(bannerIndex, it.dp) },
+                               valueRange = 100f..1100f,
+                               steps = 9
+                           )
+                       }
+
+
+                       if (banner is Banner.Banner1) {
+                           Layout1(
+                               banner = banner,
+                               bannerIndex = bannerIndex,
+                               setIsReverse = setIsReverse,
+                               setImage = setImage,
+                               setText = setTextValue,
+                               addText = addText,
+                               addImage = addImage,
+                               deleteText = deleteText,
+                               deleteImage = deleteImage,
+                               goToDialogMoveImages = goToDialogMoveImages,
+                               goToSetTextName = goToSetTextName,
+                               goToSetImageName = goToSetImageName,
+                               goToDialogMoveTexts = goToDialogMoveTexts,
+                               goToComponentImage = goToComponentImage,
+                               goToComponentText = goToComponentText
+                           )
+                       }
+                   }
+//            }
             }
         }
     }

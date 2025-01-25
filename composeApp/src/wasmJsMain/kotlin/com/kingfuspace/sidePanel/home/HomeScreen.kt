@@ -34,7 +34,7 @@ fun HomeScreen(
                 title = {
                     Text(
                         text = SidePanelDestination.HOME.label,
-                        style = Typography.bodySmall
+                        style = Typography.labelMedium
                     )
                 },
                 navigationIcon = {
@@ -54,7 +54,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(all = 16.dp),
                 text = SidePanelDestination.BANNERS.label,
-                style = Typography.bodySmall
+                style = Typography.labelMedium
             )
         }
     }

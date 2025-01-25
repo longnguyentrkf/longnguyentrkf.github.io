@@ -1,8 +1,6 @@
-package com.kingfuspace.sidePanel.banner.banner1
+package com.kingfuspace.sidePanel.layout.layout1
 
-import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.background
-import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,8 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Switch
@@ -36,7 +32,7 @@ import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlinx.coroutines.launch
 
 @Composable
-fun Banner1(
+fun Layout1(
     modifier: Modifier = Modifier,
     banner: Banner.Banner1,
     bannerIndex: Int,
@@ -70,7 +66,7 @@ fun Banner1(
         ) {
             Text(
                 text = "Reverse Layout:",
-                style = Typography.bodySmall
+                style = Typography.labelMedium
             )
 
             Switch(
@@ -101,7 +97,7 @@ fun Banner1(
                             Text(
                                 modifier = Modifier.weight(weight = 1f),
                                 text = banner.images[index].name,
-                                style = typography.labelLarge,
+                                style = typography.labelSmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
 
@@ -184,7 +180,7 @@ fun Banner1(
                             Text(
                                 modifier = Modifier.weight(weight = 1f),
                                 text = banner.texts[index].name,
-                                style = typography.labelLarge,
+                                style = typography.labelSmall,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )

@@ -13,6 +13,12 @@ sealed interface Screen {
     object Banner: Screen
 
     @Serializable
+    data class Component(
+        val bannerIndex: Int,
+        val componentIndex: Int
+    ): Screen
+
+    @Serializable
     data class ComponentImage(
         val index: Int
     ): Screen
@@ -55,10 +61,17 @@ sealed interface Dialog {
         val text: String
     )
 
+    @Serializable
+    data class SetLayoutType(
+        val index: Int,
+        val title: String,
+        val text: String
+    )
 
     @Serializable
-    data class SetBannerType(
-        val index: Int,
+    data class SetComponentType(
+        val bannerIndex: Int,
+        val componentIndex: Int,
         val title: String,
         val text: String
     )

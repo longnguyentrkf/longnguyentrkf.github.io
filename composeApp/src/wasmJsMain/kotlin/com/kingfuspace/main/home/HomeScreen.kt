@@ -3,6 +3,7 @@ package com.kingfuspace.main.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,9 +25,8 @@ import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.home.components.DetailImage
 import com.kingfuspace.main.home.components.Footer
-import com.kingfuspace.main.home.components.HeaderContent
+import com.kingfuspace.main.home.components.Header
 import com.kingfuspace.main.home.components.ImageDetail
-import com.kingfuspace.main.home.viewModel.Header
 import com.kingfuspace.main.ui.theme.Typography
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.clok
@@ -43,7 +43,7 @@ fun HomeScreen(
     setLastName: (String) -> Unit,
     message: String,
     setMessage: (String) -> Unit,
-    header: Header,
+    paddingValues: PaddingValues,
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -69,10 +69,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(space = 128.dp)
         ) {
 
-            HeaderContent(
-                header = header,
-                isSmallScreen = isSmallScreen()
-            )
+            Header(paddingValues = paddingValues)
 
             Column(
                 modifier = Modifier.widthIn(max = 1200.dp),

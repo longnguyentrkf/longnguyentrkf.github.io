@@ -48,7 +48,7 @@ fun ComponentText(
                         Text(
                             modifier = Modifier.weight(weight = 1f),
                             text = text.name,
-                            style = typography.bodySmall,
+                            style = typography.labelMedium,
                             maxLines = 2,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -78,15 +78,21 @@ fun ComponentText(
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
+                modifier = Modifier.padding(horizontal = 16.dp),
                 text = "Text: ${text.text}",
-                style = typography.bodySmall
+                style = typography.labelMedium
             )
 
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
+                modifier = Modifier.padding(horizontal = 16.dp),
                 text = "Font size: ${text.style.fontSize.value.toInt()}",
-                style = typography.bodySmall
+                style = typography.labelMedium
+            )
+
+            Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = "Clickable: ${text.isClickable}",
+                style = typography.labelMedium
             )
         }
     }

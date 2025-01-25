@@ -15,6 +15,7 @@ const val BODY = "&body="
 object Variables {
     var windowInnerWidth by mutableStateOf(value = window.innerWidth)
     val windowWidth = window.screen.width
+    val windowHeight = window.screen.height
     var theme by mutableStateOf(value = ThemeType.LIGHT)
-    var fontSizeMultiplier by mutableStateOf(value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(minimumValue = 0.5f, maximumValue = 1f))
+    var fontSizeMultiplier by mutableStateOf(value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(minimumValue = 0.75f, maximumValue = 1f))
 }

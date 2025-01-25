@@ -50,7 +50,8 @@ fun MyTextField(
             disabledLeadingIconColor = Transparent,
             disabledTrailingIconColor = Transparent
         ),
-        textStyle = Typography.bodySmall,
+//        textStyle = Typography.bodySmall,
+        textStyle = Typography.labelMedium,
         label = if (label != null) {
             {
                 Row(
@@ -61,7 +62,8 @@ fun MyTextField(
                     Text(
                         modifier = Modifier.weight(weight = 1f),
                         text = label,
-                        style = Typography.labelLarge,
+//                        style = Typography.labelLarge,
+                        style = Typography.labelSmall,
                         maxLines = labelMaxLines,
                         overflow = TextOverflow.Ellipsis
                     )

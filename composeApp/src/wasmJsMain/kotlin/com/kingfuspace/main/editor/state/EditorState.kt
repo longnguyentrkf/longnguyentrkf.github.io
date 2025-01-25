@@ -16,7 +16,8 @@ data class EditorState(
 sealed class Banner(
     open val id: Int,
     open val name: String,
-    open val bannerType: BannerType?,
+    open val layoutType: LayoutType?,
+    open val components: MutableList<ComponentType>?,
     open val height: Dp = DEFAULT_HEIGHT,
 ) {
     private companion object {
@@ -26,26 +27,31 @@ sealed class Banner(
     data class Banner1(
         override val id: Int,
         override val name: String,
-        override val bannerType: BannerType? = BannerType.TYPE_1,
+        override val layoutType: LayoutType? = LayoutType.LAYOUT_1,
         override val height: Dp = DEFAULT_HEIGHT,
-        val images: MutableList<ImageData> = mutableStateListOf(),
-        val texts: MutableList<TextData> = mutableStateListOf(),
-        val buttons: MutableList<ButtonData> = mutableStateListOf(),
+        val images: MutableList<ImageData> = mutableStateListOf(ImageData()),
+        val texts: MutableList<TextData> = mutableStateListOf(TextData()),
+//        val buttons: MutableList<ButtonData> = mutableStateListOf(),
         val isReverse: Boolean = false,
-    ) : Banner(id, name, bannerType)
+    ) : Banner(id = id, name = name, layoutType = layoutType, components = null)
 
     data class Banner2(
         override val id: Int,
         override val name: String,
-        override val bannerType: BannerType? = BannerType.TYPE_2,
+        override val layoutType: LayoutType? = LayoutType.LAYOUT_2,
         override val height: Dp = DEFAULT_HEIGHT,
         val textsBody: MutableList<TextData> = mutableStateListOf()
-    ) : Banner(id, name, bannerType)
+    ) : Banner(id = id, name = name, layoutType = layoutType, components = null)
 }
 
-enum class BannerType {
-    TYPE_1,
-    TYPE_2
+enum class LayoutType {
+    LAYOUT_1,
+    LAYOUT_2
+}
+
+enum class ComponentType {
+    IMAGE,
+    TEXT
 }
 
 data class ImageData(
@@ -57,13 +63,44 @@ data class ImageData(
 data class TextData(
     val name: String = "Text",
     val text: String = "",
-    val style: TextStyle = Typography.bodySmall,
+    val style: TextStyle = Typography.labelLarge,
+    val isClickable: Boolean = true,
+    val weight: Float = 1f
 )
 
-data class ButtonData(
-    val text: String = "",
-    val url: String = "",
-)
+sealed class Component(
+    open val id: Long,
+    open val name: String,
+    open val type: ComponentType? = null
+){
+
+    data class ImageComponent(
+        override val id: Long,
+        override val name: String,
+        override val type: ComponentType = ComponentType.IMAGE,
+        val url: String = "",
+        val scale: Float = 1f,
+    ): Component(id = id, name = "Image")
+
+
+    data class TextComponent(
+        override val id: Long,
+        override val name: String,
+        override val type: ComponentType = ComponentType.TEXT,
+        val text: String = "",
+        val style: TextStyle = Typography.labelLarge,
+        val isClickable: Boolean = true,
+        val weight: Float = 1f
+    ): Component(id = id, name  = "Text")
+
+}
+
+
+
+//data class ButtonData(
+//    val text: String = "",
+//    val url: String = "",
+//)
 
 
 

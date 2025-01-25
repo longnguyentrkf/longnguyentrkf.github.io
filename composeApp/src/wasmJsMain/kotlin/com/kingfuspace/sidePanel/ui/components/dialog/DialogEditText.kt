@@ -49,7 +49,8 @@ fun DialogEditText(
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
 
             ) {
-                Text(text = title, style = Typography.bodyMedium)
+//                Text(text = title, style = Typography.bodyMedium)
+                Text(text = title, style = Typography.labelLarge)
 
                 TextFieldWithErrorState(
                     modifier = Modifier.fillMaxWidth(),
@@ -74,7 +75,8 @@ fun DialogEditText(
                             onDismiss()
                         }
                     ) {
-                        Text(text = "Confirm", style = Typography.bodySmall)
+//                        Text(text = "Confirm", style = Typography.bodySmall)
+                        Text(text = "Confirm", style = Typography.labelMedium)
                     }
                 }
             }

@@ -54,7 +54,7 @@ fun BannersScreen(
                 title = {
                     Text(
                         text = SidePanelDestination.BANNERS.label,
-                        style = Typography.bodySmall,
+                        style = Typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -88,7 +88,7 @@ fun BannersScreen(
                             .fillMaxWidth()
                             .padding(end = 24.dp),
                         text = banners[index].name,
-                        style = Typography.bodySmall,
+                        style = Typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

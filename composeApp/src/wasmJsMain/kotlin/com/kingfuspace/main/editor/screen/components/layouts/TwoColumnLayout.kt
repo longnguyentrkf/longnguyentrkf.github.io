@@ -1,4 +1,4 @@
-package com.kingfuspace.main.ui.components
+package com.kingfuspace.main.editor.screen.components.layouts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import kotlinx.browser.window
 
 @Composable
 fun TwoColumnLayout(

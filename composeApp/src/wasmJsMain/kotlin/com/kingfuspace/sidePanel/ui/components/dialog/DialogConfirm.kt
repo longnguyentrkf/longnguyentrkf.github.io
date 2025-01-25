@@ -22,7 +22,7 @@ fun DialogConfirm(
         modifier = modifier,
         containerColor = colorScheme.surface,
         title = { Text(text = title, color = titleColor) },
-        text = { Text(text = text, style = Typography.bodySmall) },
+        text = { Text(text = text, style = Typography.labelMedium) },
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
@@ -31,7 +31,7 @@ fun DialogConfirm(
                     onDismiss()
                 }
             ) {
-                Text(text = "Confirm", style = Typography.bodySmall)
+                Text(text = "Confirm", style = Typography.labelMedium)
             }
         }
     )
