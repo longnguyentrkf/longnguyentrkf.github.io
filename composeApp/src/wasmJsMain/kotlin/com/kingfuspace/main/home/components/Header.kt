@@ -3,14 +3,11 @@ package com.kingfuspace.main.home.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.fontSizeMultiplier
 import com.kingfuspace.main.core.Variables.windowHeight
 import com.kingfuspace.main.core.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
@@ -30,8 +26,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Header(
-    modifier: Modifier = Modifier,
-    paddingValues: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     val introduction = "Introducing Kingfuspace"
     val description = "Create your platform with cutting-edge technology"
@@ -45,8 +40,7 @@ fun Header(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    modifier = Modifier
-                        .padding(all = 24.dp),
+                    modifier = Modifier.padding(all = 24.dp),
                     painter = painter,
                     contentDescription = null
                 )
@@ -71,7 +65,7 @@ fun Header(
             }
         }
     } else {
-        Row(modifier = modifier.height(height = (windowHeight.dp - paddingValues.calculateTopPadding()*2)* fontSizeMultiplier)) {
+        Row(modifier = modifier.height(height = (windowHeight.dp * 0.8f))) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -96,18 +90,12 @@ fun Header(
             ) {
                 Text(
                     text = introduction,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontSize = MaterialTheme.typography.bodyLarge.fontSize * fontSizeMultiplier,
-                        lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * fontSizeMultiplier
-                    )
+                    style = MaterialTheme.typography.bodyMedium
                 )
 
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.displaySmall.copy(
-                        fontSize = MaterialTheme.typography.displaySmall.fontSize * fontSizeMultiplier,
-                        lineHeight = MaterialTheme.typography.displaySmall.lineHeight * fontSizeMultiplier
-                    ),
+                    style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold
                 )
             }

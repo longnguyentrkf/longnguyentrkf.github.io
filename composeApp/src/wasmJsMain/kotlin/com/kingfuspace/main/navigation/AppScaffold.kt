@@ -1,15 +1,14 @@
 package com.kingfuspace.main.navigation
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Bedtime
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -20,7 +19,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,17 +32,17 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import com.kingfuspace.main.core.theme.ThemeType
 import com.kingfuspace.main.core.Variables.theme
-import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import com.kingfuspace.main.core.formatEnumName
 import com.kingfuspace.main.core.isSmallScreen
+import com.kingfuspace.main.core.theme.ThemeType
 import com.kingfuspace.main.core.theme.setTheme
 import com.kingfuspace.main.core.theme.toggle
 import com.kingfuspace.main.ui.components.MyIconButton
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,11 +66,12 @@ fun AppScaffold(
                             it.hasRoute(route = Screen.Shop::class)
                 } == true) {
 
-                TopAppBar(
+                CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = Transparent
                     ),
                     navigationIcon = {
+
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             if (isSmallScreen()) {
                                 MyIconButton(
@@ -107,13 +106,9 @@ fun AppScaffold(
                         }
                     },
                     title = {
-                        if (isSmallScreen()) return@TopAppBar
+                        if (isSmallScreen()) return@CenterAlignedTopAppBar
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        Row {
                             screens.forEach { screen ->
                                 val isSelected = currentDestination.hierarchy.any {
                                     it.hasRoute(route = screen.screen::class)
@@ -160,8 +155,7 @@ fun AppScaffold(
     ) {
         AppNavHost(
             modifier = modifier.padding(paddingValues = it),
-            navController = navController,
-            paddingValues = it
+            navController = navController
         )
     }
 }

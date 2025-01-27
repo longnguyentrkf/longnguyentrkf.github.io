@@ -42,8 +42,7 @@ fun HomeScreen(
     lastName: String,
     setLastName: (String) -> Unit,
     message: String,
-    setMessage: (String) -> Unit,
-    paddingValues: PaddingValues,
+    setMessage: (String) -> Unit
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -63,13 +62,13 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+//                .padding(horizontal = 16.dp)
                 .verticalScroll(state = scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(space = 128.dp)
         ) {
 
-            Header(paddingValues = paddingValues)
+            Header()
 
             Column(
                 modifier = Modifier.widthIn(max = 1200.dp),

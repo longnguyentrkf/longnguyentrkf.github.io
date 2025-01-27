@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.core.theme.ThemeType
 import kotlinx.browser.window
+import kotlin.math.log10
 
 const val SMALL_WINDOW = 600
 const val MAIL_TO = "mailto:"
