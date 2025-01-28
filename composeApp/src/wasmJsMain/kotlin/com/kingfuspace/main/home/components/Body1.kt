@@ -1,0 +1,126 @@
+package com.kingfuspace.main.home.components
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.kingfuspace.main.core.Variables.windowHeight
+import com.kingfuspace.main.core.isSmallScreen
+import kingfuspace.composeapp.generated.resources.Res
+import kingfuspace.composeapp.generated.resources.longnguyen
+import org.jetbrains.compose.resources.painterResource
+
+
+@Composable
+fun Body1(
+    modifier: Modifier = Modifier
+) {
+    val title = "Portfolio"
+    val subTitle = "Web Page"
+    val body = "A minimalistic designed web page detailing achievements, experiences, and services."
+
+
+    if (isSmallScreen()) {
+        Column(modifier = modifier.padding(vertical = 16.dp)) {
+            Box(
+                modifier = Modifier.fillMaxWidth().heightIn(max = 250.dp).padding(horizontal = 16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    modifier = Modifier.clip(shape = RoundedCornerShape(percent = 2)),
+                    painter = painterResource(Res.drawable.longnguyen),
+                    contentDescription = null
+                )
+            }
+
+            Spacer(modifier = Modifier.height(height = 16.dp))
+
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+//                    .padding(all = 24.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Text(
+                    text = subTitle,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+
+                Spacer(modifier = Modifier.height(height = 16.dp))
+
+                Text(
+                    text = body,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+        }
+    } else {
+        Row(modifier = modifier.height(height = 300.dp).padding(horizontal = 16.dp)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(weight = 1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    modifier = Modifier.clip(shape = RoundedCornerShape(percent = 2)),
+                    painter = painterResource(resource = Res.drawable.longnguyen),
+                    contentDescription = null
+                )
+            }
+
+            Spacer(modifier = Modifier.width(width = 16.dp))
+
+
+            Column(
+                modifier = Modifier
+                    .weight(weight = 1f)
+                    .fillMaxSize()
+                    .padding(all = 24.dp),
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Text(
+                    text = subTitle,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+
+                Spacer(modifier = Modifier.height(height = 16.dp))
+
+                Text(
+                    text = body,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+        }
+    }
+}
