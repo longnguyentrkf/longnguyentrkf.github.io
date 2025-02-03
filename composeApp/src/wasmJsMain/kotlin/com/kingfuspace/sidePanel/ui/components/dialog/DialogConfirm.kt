@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,7 +36,10 @@ fun DialogConfirm(
                     onDismiss()
                 }
             ) {
-                Text(text = "Confirm", style = Typography().labelMedium)
+                Text(
+                    text = "Confirm",
+                    style = MaterialTheme.typography.bodyLarge
+                )
             }
         }
     )

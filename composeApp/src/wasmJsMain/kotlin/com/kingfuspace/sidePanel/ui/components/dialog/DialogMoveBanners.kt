@@ -196,8 +196,7 @@ fun DialogMoveBanners(
                     ) {
                         Text(
                             text = "Confirm",
-//                            style = typography.bodySmall
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = typography.bodyLarge,
                         )
                     }
                 }
