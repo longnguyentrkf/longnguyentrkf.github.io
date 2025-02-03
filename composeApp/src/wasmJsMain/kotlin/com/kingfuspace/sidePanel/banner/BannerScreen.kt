@@ -1,4 +1,4 @@
-package com.kingfuspace.sidePanel.layout
+package com.kingfuspace.sidePanel.banner
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,10 +14,12 @@ import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,15 +30,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.editor.state.Banner
-import com.kingfuspace.main.ui.theme.Typography
-import com.kingfuspace.sidePanel.layout.layout1.Layout1
+import com.kingfuspace.sidePanel.banner.layout1.Layout1
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlin.math.roundToInt
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LayoutScreen(
+fun BannerScreen(
     modifier: Modifier = Modifier,
     banner: Banner,
     goBack: () -> Boolean,
@@ -71,7 +72,7 @@ fun LayoutScreen(
                 title = {
                     Text(
                         text = banner.name,
-                        style = Typography.labelMedium,
+                        style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -118,7 +119,7 @@ fun LayoutScreen(
                             .padding(all = 16.dp)
                             .fillMaxWidth(),
                         text = "Select a layout",
-                        style = Typography.labelMedium
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                 }
 //            }
@@ -129,7 +130,7 @@ fun LayoutScreen(
                             .padding(all = 16.dp)
                             .fillMaxWidth(),
                         text = "Select component",
-                        style = Typography.labelMedium
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                 }
 
@@ -144,7 +145,7 @@ fun LayoutScreen(
                            Text(
                                modifier = Modifier.weight(weight = 1f),
                                text = "Height: ${(banner.height.value / 10).roundToInt()}%",
-                               style = Typography.labelMedium,
+                               style = MaterialTheme.typography.bodyLarge,
                                textAlign = TextAlign.Start
                            )
 

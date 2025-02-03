@@ -13,6 +13,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -61,8 +62,7 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Modify",
-//                            style = typography.labelLarge
-                            style = typography.labelSmall
+                            style = typography.bodyLarge,
                         )
                     },
                     onClick = {
@@ -83,8 +83,7 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Edit name",
-//                            style = typography.labelLarge
-                            style = typography.labelSmall
+                            style = typography.bodyLarge,
                         )
                     },
                     onClick = {
@@ -105,8 +104,7 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Add",
-//                            style = typography.labelLarge
-                            style = typography.labelSmall
+                            style = typography.bodyLarge,
                         )
                     },
                     onClick = {
@@ -127,8 +125,7 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Move",
-//                            style = typography.labelLarge
-                            style = typography.labelSmall
+                            style = typography.bodyLarge,
                         )
                     },
                     onClick = {
@@ -148,10 +145,8 @@ fun BannerMenu(
                 DropdownMenuItem(
                     text = {
                         Text(
-                            text = "Change Banner Type",
-//                            style = typography.labelLarge,
-                            style = typography.labelSmall
-
+                            text = "Change banner layout",
+                            style = typography.bodyLarge
                         )
                     },
                     onClick = {
@@ -172,8 +167,7 @@ fun BannerMenu(
                     text = {
                         Text(
                             text = "Delete",
-//                            style = typography.labelLarge,
-                            style = typography.labelSmall,
+                            style = typography.bodyLarge,
                             color = colorScheme.error
                         )
                     },

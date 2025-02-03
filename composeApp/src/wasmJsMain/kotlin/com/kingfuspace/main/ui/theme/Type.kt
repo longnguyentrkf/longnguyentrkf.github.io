@@ -15,79 +15,79 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-val Typography = Typography(
-
-    labelSmall = TextStyle(
-        fontSize = 12.sp, // Starting size (like previous labelLarge)
-        lineHeight = 16.sp, // Proportionate line height
-        letterSpacing = 0.2.sp
-    ),
-
-    labelMedium = TextStyle(
-        fontSize = 16.sp, // Larger than labelSmall
-        lineHeight = 24.sp,
-        letterSpacing = 0.25.sp
-    ),
-
-    labelLarge = TextStyle(
-        fontSize = 20.sp, // Larger than labelMedium
-        lineHeight = 28.sp,
-        letterSpacing = 0.3.sp
-    ),
-
-    bodySmall = TextStyle(
-        fontSize = 24.sp, // Larger than labelLarge
-        lineHeight = 32.sp,
-        letterSpacing = 0.35.sp
-    ),
-
-    bodyMedium = TextStyle(
-        fontSize = 32.sp, // Progressively larger
-        lineHeight = 40.sp,
-        letterSpacing = 0.4.sp
-    ),
-
-    bodyLarge = TextStyle(
-        fontSize = 40.sp, // Larger body text
-        lineHeight = 52.sp,
-        letterSpacing = 0.45.sp
-    ),
-
-    titleSmall = TextStyle(
-        fontSize = 48.sp, // Larger emphasis
-        lineHeight = 60.sp,
-        letterSpacing = 0.4.sp
-    ),
-
-    titleMedium = TextStyle(
-        fontSize = 56.sp, // Even larger
-        lineHeight = 68.sp,
-        letterSpacing = 0.35.sp
-    ),
-
-    titleLarge = TextStyle(
-        fontSize = 64.sp, // Significant size increase
-        lineHeight = 80.sp,
-        letterSpacing = 0.3.sp
-    ),
-
-    displaySmall = TextStyle(
-        fontSize = 72.sp, // Display level
-        lineHeight = 90.sp,
-        letterSpacing = 0.25.sp
-    ),
-
-    displayMedium = TextStyle(
-        fontSize = 80.sp, // Bigger display size
-        lineHeight = 100.sp,
-        letterSpacing = 0.2.sp
-    ),
-
-    displayLarge = TextStyle(
-        fontSize = 96.sp, // Largest size
-        lineHeight = 112.sp,
-        letterSpacing = 0.15.sp
-    )
+val typography = Typography(
+//
+//    labelSmall = TextStyle(
+//        fontSize = 12.sp, // Starting size (like previous labelLarge)
+//        lineHeight = 16.sp, // Proportionate line height
+//        letterSpacing = 0.2.sp
+//    ),
+//
+//    labelMedium = TextStyle(
+//        fontSize = 16.sp, // Larger than labelSmall
+//        lineHeight = 24.sp,
+//        letterSpacing = 0.25.sp
+//    ),
+//
+//    labelLarge = TextStyle(
+//        fontSize = 20.sp, // Larger than labelMedium
+//        lineHeight = 28.sp,
+//        letterSpacing = 0.3.sp
+//    ),
+//
+//    bodySmall = TextStyle(
+//        fontSize = 24.sp, // Larger than labelLarge
+//        lineHeight = 32.sp,
+//        letterSpacing = 0.35.sp
+//    ),
+//
+//    bodyMedium = TextStyle(
+//        fontSize = 32.sp, // Progressively larger
+//        lineHeight = 40.sp,
+//        letterSpacing = 0.4.sp
+//    ),
+//
+//    bodyLarge = TextStyle(
+//        fontSize = 40.sp, // Larger body text
+//        lineHeight = 52.sp,
+//        letterSpacing = 0.45.sp
+//    ),
+//
+//    titleSmall = TextStyle(
+//        fontSize = 48.sp, // Larger emphasis
+//        lineHeight = 60.sp,
+//        letterSpacing = 0.4.sp
+//    ),
+//
+//    titleMedium = TextStyle(
+//        fontSize = 56.sp, // Even larger
+//        lineHeight = 68.sp,
+//        letterSpacing = 0.35.sp
+//    ),
+//
+//    titleLarge = TextStyle(
+//        fontSize = 64.sp, // Significant size increase
+//        lineHeight = 80.sp,
+//        letterSpacing = 0.3.sp
+//    ),
+//
+//    displaySmall = TextStyle(
+//        fontSize = 72.sp, // Display level
+//        lineHeight = 90.sp,
+//        letterSpacing = 0.25.sp
+//    ),
+//
+//    displayMedium = TextStyle(
+//        fontSize = 80.sp, // Bigger display size
+//        lineHeight = 100.sp,
+//        letterSpacing = 0.2.sp
+//    ),
+//
+//    displayLarge = TextStyle(
+//        fontSize = 96.sp, // Largest size
+//        lineHeight = 112.sp,
+//        letterSpacing = 0.15.sp
+//    )
 )
 
 

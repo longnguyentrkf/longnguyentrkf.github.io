@@ -24,23 +24,20 @@ fun TextFieldWithErrorState(
 
     TextField(
         modifier = modifier,
-//        textStyle = typography.bodySmall,
-        textStyle = typography.labelMedium,
+        textStyle = typography.bodyLarge,
         value = value,
         onValueChange = onValueChange,
         isError = isError,
         singleLine = isSingleLine,
         label = if (label != null) {
-//            { Text(text = label, style = typography.labelLarge) }
-            { Text(text = label, style = typography.labelSmall) }
+            { Text(text = label, style = typography.bodyMedium) }
         } else null,
         supportingText = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (isError) {
                     Text(
                         text = errorMessage,
-//                        style = typography.bodySmall
-                        style = typography.labelMedium
+                        style = typography.bodyMedium
                     )
                 }
 
@@ -48,8 +45,7 @@ fun TextFieldWithErrorState(
 
                 Text(
                     text = "Limit: ${value.length}/$charLimit",
-//                    style = typography.bodySmall
-                    style = typography.labelMedium
+                    style = typography.bodyMedium
                 )
             }
         }

@@ -3,6 +3,7 @@ package com.kingfuspace.main.home.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.windowHeight
-import com.kingfuspace.main.core.isSmallScreen
+import com.kingfuspace.main.core.Variables.isSmallScreen
+import com.kingfuspace.main.core.Variables.windowInnerHeight
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 import org.jetbrains.compose.resources.painterResource
@@ -26,14 +27,15 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Header(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues
 ) {
     val introduction = "Introducing Kingfuspace"
     val description = "Create your platform with cutting-edge technology"
     val painter = painterResource(resource = Res.drawable.kingfuspace_logo_no_background)
 
 
-    if (isSmallScreen()) {
+    if (isSmallScreen) {
         Column(modifier = modifier) {
             Box(
                 modifier = Modifier.fillMaxWidth(),
@@ -54,18 +56,24 @@ fun Header(
             ) {
                 Text(
                     text = introduction,
-                    style = MaterialTheme.typography.bodySmall
+                    style = MaterialTheme.typography.headlineMedium
                 )
 
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.displayMedium,
                     fontWeight = FontWeight.Bold
                 )
             }
         }
     } else {
-        Row(modifier = modifier.height(height = (windowHeight.dp * 0.8f))) {
+        Row(
+            modifier = modifier.height(
+                height = (windowInnerHeight.dp - paddingValues.calculateTopPadding()).coerceAtLeast(
+                    minimumValue = 0.dp
+                )
+            )
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -85,17 +93,17 @@ fun Header(
                 modifier = Modifier
                     .weight(weight = 1f)
                     .fillMaxSize()
-                    .padding(all = 24.dp),
+                    .padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = introduction,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.headlineMedium
                 )
 
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.displayMedium,
                     fontWeight = FontWeight.Bold
                 )
             }

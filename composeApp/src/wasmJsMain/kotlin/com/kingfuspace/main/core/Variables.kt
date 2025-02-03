@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.core.theme.ThemeType
 import kotlinx.browser.window
-import kotlin.math.log10
 
 const val SMALL_WINDOW = 600
 const val MAIL_TO = "mailto:"
@@ -15,8 +14,15 @@ const val BODY = "&body="
 
 object Variables {
     var windowInnerWidth by mutableStateOf(value = window.innerWidth)
+    var windowInnerHeight by mutableStateOf(value = window.innerHeight)
     val windowWidth = window.screen.width
     val windowHeight = window.screen.height
     var theme by mutableStateOf(value = ThemeType.LIGHT)
-    var fontSizeMultiplier by mutableStateOf(value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(minimumValue = 0.75f, maximumValue = 1f))
+    var fontSizeMultiplier by mutableStateOf(
+        value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(
+            minimumValue = 0.75f,
+            maximumValue = 1f
+        )
+    )
+    var isSmallScreen by mutableStateOf(value = windowInnerWidth < SMALL_WINDOW)
 }

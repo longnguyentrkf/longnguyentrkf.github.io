@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.SegmentedButton
@@ -72,7 +73,12 @@ fun DialogMoveBanners(
                             ),
                             onClick = { optionsIndex = index },
                             selected = index == optionsIndex,
-                            label = { Text(text = label, style = typography.labelSmall) },
+                            label = {
+                                Text(
+                                    text = label,
+                                    style = typography.bodyLarge,
+                                )
+                            },
                             icon = { },
                             colors = SegmentedButtonDefaults.colors(
                                 activeContainerColor = colorScheme.inverseSurface,
@@ -120,7 +126,7 @@ fun DialogMoveBanners(
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
 
-                                    )
+                                        )
                                 }
 
                                 Row(
@@ -140,7 +146,7 @@ fun DialogMoveBanners(
                                             else -> ""
                                         },
 //                                        style = typography.labelLarge,
-                                        style = typography.labelSmall,
+                                        style = MaterialTheme.typography.bodyLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
@@ -168,7 +174,9 @@ fun DialogMoveBanners(
                                 0 -> {
                                     onMove(
                                         selectedIndex,
-                                        if (selectedIndex < targetIndex) (targetIndex - 1).coerceAtLeast(minimumValue = 0) else targetIndex
+                                        if (selectedIndex < targetIndex) (targetIndex - 1).coerceAtLeast(
+                                            minimumValue = 0
+                                        ) else targetIndex
                                     )
                                 }
 
@@ -189,7 +197,7 @@ fun DialogMoveBanners(
                         Text(
                             text = "Confirm",
 //                            style = typography.bodySmall
-                            style = typography.labelMedium
+                            style = MaterialTheme.typography.bodyLarge,
                         )
                     }
                 }

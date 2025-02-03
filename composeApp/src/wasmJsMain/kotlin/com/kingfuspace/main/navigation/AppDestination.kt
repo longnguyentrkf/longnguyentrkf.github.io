@@ -19,7 +19,7 @@ enum class AppDestination(
     HOME(
         iconFilled = Icons.Filled.Home,
         iconOutlined = Icons.Outlined.Home,
-        label = "Kingfuspace",
+        label = "Home",
         screen = Screen.Home
     ),
     EDITOR(

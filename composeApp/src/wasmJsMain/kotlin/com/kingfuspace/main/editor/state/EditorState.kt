@@ -1,10 +1,12 @@
 package com.kingfuspace.main.editor.state
 
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.ui.theme.Typography
+import androidx.compose.material3.Typography
+
 
 
 data class EditorState(
@@ -44,14 +46,14 @@ sealed class Banner(
     ) : Banner(id = id, name = name, layoutType = layoutType, components = null)
 }
 
-enum class LayoutType {
-    LAYOUT_1,
-    LAYOUT_2
+enum class LayoutType(val label: String) {
+    LAYOUT_1(label = "Layout 1"),
+    LAYOUT_2(label = "Layout 2")
 }
 
-enum class ComponentType {
-    IMAGE,
-    TEXT
+enum class ComponentType(val label: String) {
+    IMAGE(label = "Image"),
+    TEXT(label = "Text")
 }
 
 data class ImageData(
@@ -63,7 +65,7 @@ data class ImageData(
 data class TextData(
     val name: String = "Text",
     val text: String = "",
-    val style: TextStyle = Typography.labelLarge,
+    val style: TextStyle = Typography().bodyLarge,
     val isClickable: Boolean = true,
     val weight: Float = 1f
 )
@@ -80,6 +82,7 @@ sealed class Component(
         override val type: ComponentType = ComponentType.IMAGE,
         val url: String = "",
         val scale: Float = 1f,
+        val label: String = "Image"
     ): Component(id = id, name = "Image")
 
 
@@ -88,9 +91,10 @@ sealed class Component(
         override val name: String,
         override val type: ComponentType = ComponentType.TEXT,
         val text: String = "",
-        val style: TextStyle = Typography.labelLarge,
+        val style: TextStyle = Typography().labelLarge,
         val isClickable: Boolean = true,
-        val weight: Float = 1f
+        val weight: Float = 1f,
+        val label: String = "Text"
     ): Component(id = id, name  = "Text")
 
 }

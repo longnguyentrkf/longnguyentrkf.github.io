@@ -21,9 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.kingfuspace.main.core.isWithinCharLimit
 import com.kingfuspace.main.ui.components.TextFieldWithErrorState
-import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
 fun DialogEditText(
@@ -49,15 +47,17 @@ fun DialogEditText(
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
 
             ) {
-//                Text(text = title, style = Typography.bodyMedium)
-                Text(text = title, style = Typography.labelLarge)
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.headlineLarge,
+                )
 
                 TextFieldWithErrorState(
                     modifier = Modifier.fillMaxWidth(),
                     value = editTextValue,
                     label = "Name",
                     onValueChange = {
-                        isError = it.isWithinCharLimit(charLimit = charLimit)
+                        isError = it.length > charLimit
                         editTextValue = it
                     },
                     isError = isError,
@@ -75,8 +75,10 @@ fun DialogEditText(
                             onDismiss()
                         }
                     ) {
-//                        Text(text = "Confirm", style = Typography.bodySmall)
-                        Text(text = "Confirm", style = Typography.labelMedium)
+                        Text(
+                            text = "Confirm",
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
                     }
                 }
             }

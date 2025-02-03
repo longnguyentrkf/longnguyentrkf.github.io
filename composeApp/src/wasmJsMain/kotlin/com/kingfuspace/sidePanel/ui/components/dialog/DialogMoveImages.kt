@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.SegmentedButton
@@ -90,7 +91,12 @@ fun DialogMoveImages(
                             ),
                             onClick = { optionsIndex = index },
                             selected = index == optionsIndex,
-                            label = { Text(text = label, style = typography.labelSmall) },
+                            label = {
+                                Text(
+                                    text = label,
+                                    style = typography.bodyLarge,
+                                )
+                            },
                             icon = { },
                             colors = SegmentedButtonDefaults.colors(
                                 activeContainerColor = colorScheme.inverseSurface,
@@ -112,7 +118,7 @@ fun DialogMoveImages(
                             Column(
                                 modifier = Modifier
                                     .width(width = 150.dp)
-                                    .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
+                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
                                     .alpha(alpha = if (targetIndex == index || selectedIndex == index) 1f else 0.5f)
                                     .clickable(enabled = index != selectedIndex) {
                                         targetIndex = index
@@ -129,18 +135,17 @@ fun DialogMoveImages(
                                             .fillMaxWidth()
                                             .padding(all = 8.dp),
                                         text = images[index].name,
-//                                        style = typography.labelLarge,
-                                        style = typography.labelSmall,
+                                        style = typography.bodyLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-                                        color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
                                     )
                                 }
 
                                 AsyncImage(
                                     modifier = Modifier
                                         .size(size = 150.dp)
-                                        .background(color = if(targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
+                                        .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerLow),
                                     model = images[index].url,
                                     contentDescription = null,
                                     contentScale = ContentScale.Crop,
@@ -162,11 +167,10 @@ fun DialogMoveImages(
                                             selectedIndex -> "selected"
                                             else -> ""
                                         },
-//                                        style = typography.labelLarge,
-                                        style = typography.labelSmall,
+                                        style = typography.bodyLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
-                                        color = if(targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
+                                        color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
 
                                     )
                                 }
@@ -196,7 +200,9 @@ fun DialogMoveImages(
                                     )
                                 }
 
-                                1 -> { onSwap(bannerIndex, selectedIndex, targetIndex) }
+                                1 -> {
+                                    onSwap(bannerIndex, selectedIndex, targetIndex)
+                                }
 
                                 2 -> {
                                     onMove(
@@ -211,13 +217,10 @@ fun DialogMoveImages(
                     ) {
                         Text(
                             text = "Confirm",
-//                            style = typography.bodySmall
-                            style = typography.labelMedium
+                            style = typography.bodyLarge,
                         )
                     }
                 }
-
-
             }
         }
     )

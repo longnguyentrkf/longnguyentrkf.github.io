@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 

@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.Typography
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -31,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.ImageData
 import com.kingfuspace.main.ui.components.MyTextField
-import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlin.math.roundToInt
 
@@ -123,7 +123,7 @@ fun ComponentImage(
                 Text(
                     modifier = Modifier.weight(weight = 1f),
                     text = "Scale: ${(600f / 10).roundToInt()}%",
-                    style = Typography.labelMedium,
+                    style = Typography().labelMedium,
                     textAlign = TextAlign.Start
                 )
 

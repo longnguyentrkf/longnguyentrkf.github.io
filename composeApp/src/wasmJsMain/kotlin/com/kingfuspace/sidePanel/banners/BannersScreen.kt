@@ -12,9 +12,11 @@ import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -24,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.editor.state.Banner
-import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.navigation.SidePanelDestination
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ fun BannersScreen(
                 title = {
                     Text(
                         text = SidePanelDestination.BANNERS.label,
-                        style = Typography.labelMedium,
+                        style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -88,7 +89,7 @@ fun BannersScreen(
                             .fillMaxWidth()
                             .padding(end = 24.dp),
                         text = banners[index].name,
-                        style = Typography.labelMedium,
+                        style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

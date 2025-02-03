@@ -8,15 +8,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.T
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.navigation.SidePanelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +36,7 @@ fun HomeScreen(
                 title = {
                     Text(
                         text = SidePanelDestination.HOME.label,
-                        style = Typography.labelMedium
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 },
                 navigationIcon = {
@@ -54,7 +56,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(all = 16.dp),
                 text = SidePanelDestination.BANNERS.label,
-                style = Typography.labelMedium
+                style = MaterialTheme.typography.bodyLarge
             )
         }
     }

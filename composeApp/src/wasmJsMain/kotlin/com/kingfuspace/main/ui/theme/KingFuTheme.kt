@@ -96,7 +96,8 @@ fun KingFuTheme(content: @Composable () -> Unit) {
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        typography = typography,
+        content = content,
+        shapes = Shape
     )
 }

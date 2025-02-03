@@ -1,4 +1,4 @@
-package com.kingfuspace.sidePanel.layout.layout1
+package com.kingfuspace.sidePanel.banner.layout1
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -27,7 +28,6 @@ import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.MyHorizontalScrollBar
 import com.kingfuspace.main.ui.components.MyTextField
-import com.kingfuspace.main.ui.theme.Typography
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
 import kotlinx.coroutines.launch
 
@@ -66,7 +66,7 @@ fun Layout1(
         ) {
             Text(
                 text = "Reverse Layout:",
-                style = Typography.labelMedium
+                style = Typography().labelMedium
             )
 
             Switch(

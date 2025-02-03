@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Shapes
@@ -21,10 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.kingfuspace.main.core.formatEnumName
 import com.kingfuspace.main.editor.state.ComponentType
-import com.kingfuspace.main.editor.state.LayoutType
-import com.kingfuspace.main.ui.theme.Typography
 import kotlin.enums.EnumEntries
 
 @Composable
@@ -44,7 +42,7 @@ fun DialogSelectComponent(
             Column(
                 modifier = modifier
                     .background(
-                        shape = Shapes().large,
+                        shape = MaterialTheme.shapes.large,
                         color = colorScheme.surface
                     )
             ) {
@@ -53,9 +51,8 @@ fun DialogSelectComponent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(all = 24.dp),
-//                    text = "Choose a banner",
                     text = "Choose a component",
-                    style = Typography.bodySmall
+                    style = MaterialTheme.typography.headlineLarge,
                 )
 
                 options.forEachIndexed { _, item ->
@@ -72,8 +69,8 @@ fun DialogSelectComponent(
                         )
 
                         Text(
-                            text = item.name.formatEnumName(),
-                            style = Typography.labelMedium
+                            text = item.label,
+                            style = MaterialTheme.typography.bodyLarge,
                         )
                     }
                 }
@@ -91,7 +88,10 @@ fun DialogSelectComponent(
                             onDismiss()
                         }
                     ) {
-                        Text(text = "Confirm", style = Typography.labelMedium)
+                        Text(
+                            text = "Confirm",
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
                     }
                 }
             }

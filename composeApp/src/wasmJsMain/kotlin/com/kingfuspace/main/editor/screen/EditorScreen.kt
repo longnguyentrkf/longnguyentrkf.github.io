@@ -43,8 +43,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
+import com.kingfuspace.main.core.SMALL_WINDOW
+import com.kingfuspace.main.core.Variables.isSmallScreen
+import com.kingfuspace.main.core.Variables.windowInnerWidth
 import com.kingfuspace.main.core.Variables.windowWidth
-import com.kingfuspace.main.core.isSmallScreen
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.MyVerticalScrollBar
 import com.kingfuspace.main.editor.screen.components.layouts.TwoColumnLayout
@@ -75,8 +77,8 @@ fun EditorScreen(
             items(count = banners.size, key = { banners[it].id }) { index ->
                 val isSelected = bannerIndex == index
                 val banner = banners[index]
-                val bannerHeight =
-                    if (isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height * 3 else banner.height
+//                val bannerHeight = if (isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height * 3 else banner.height
+                val bannerHeight = if ( windowInnerWidth < SMALL_WINDOW + sidePanelWidth.value.toInt()) banner.height * 3 else banner.height
 
                 Box(
                     modifier = Modifier
@@ -209,7 +211,8 @@ fun EditorScreen(
                                     }
                                 }
                             },
-                            isSmallScreen = isSmallScreen(addedWidth = sidePanelWidth.value.toInt())
+//                            isSmallScreen = isSmallScreen(addedWidth = sidePanelWidth.value.toInt())
+//                            isSmallScreen = windowInnerWidth < SMALL_WINDOW + sidePanelWidth.value.toInt()
                         )
                     }
                 }

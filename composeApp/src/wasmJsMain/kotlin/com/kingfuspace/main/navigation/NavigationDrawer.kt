@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -28,13 +31,11 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.kingfuspace.main.core.Variables.theme
+import com.kingfuspace.main.core.ObserveAsEvents
+import com.kingfuspace.main.core.SnackbarController
+import com.kingfuspace.main.core.Variables.isSmallScreen
 import com.kingfuspace.main.core.Variables.windowInnerWidth
-import com.kingfuspace.main.core.isSmallScreen
 import kotlinx.coroutines.launch
-import com.kingfuspace.main.home.viewModel.HomeViewModel
-import com.kingfuspace.main.ui.theme.Typography
-import kotlin.reflect.KFunction1
 
 
 @Composable
@@ -49,34 +50,13 @@ fun NavigationDrawer() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
 
-//    ObserveAsEvents(
-//        flow = SnackbarController.events,
-//        key1 = snackBarHostState
-//    ) { event ->
-//        scope.launch {
-//            snackBarHostState.currentSnackbarData?.dismiss()
-//
-//            val result = snackBarHostState.showSnackbar(
-//                message = event.message,
-//                actionLabel = event.action?.name,
-//                duration = event.duration,
-//                withDismissAction = event.withDismissAction
-//            )
-//
-//            if(result == SnackbarResult.ActionPerformed){
-//                event.action?.action?.invoke()
-//            }
-//        }
-//    }
-
-
     LaunchedEffect(key1 = windowInnerWidth) {
         if (drawerState.isOpen) drawerState.close()
     }
 
 
     ModalNavigationDrawer(
-        gesturesEnabled = isSmallScreen(),
+        gesturesEnabled = isSmallScreen,
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
@@ -110,7 +90,7 @@ fun NavigationDrawer() {
                                 selectedContainerColor = Transparent,
                                 unselectedTextColor = colorScheme.outline.copy(alpha = 0.5f)
                             ),
-                            label = { Text(text = screen.label, style = Typography.labelMedium) },
+                            label = { Text(text = screen.label, style = typography.bodyLarge) },
                             selected = selected,
                             onClick = {
                                 scope.launch {
@@ -132,6 +112,7 @@ fun NavigationDrawer() {
             screens = screens,
             drawerState = drawerState,
             currentDestination = currentDestination,
+//            snackbarHostState = snackBarHostState
         )
     }
 }

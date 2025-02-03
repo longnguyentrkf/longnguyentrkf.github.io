@@ -1,6 +1,7 @@
 package com.kingfuspace.main.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,10 +19,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.isSmallScreen
-import com.kingfuspace.main.home.components.Body1
-import com.kingfuspace.main.home.components.Body2
-import com.kingfuspace.main.home.components.Body3
+import com.kingfuspace.main.core.Variables.isSmallScreen
+import com.kingfuspace.main.home.components.Clok
+import com.kingfuspace.main.home.components.Portfolio
+import com.kingfuspace.main.home.components.Imaginate
+import com.kingfuspace.main.home.components.Weatherai
 import com.kingfuspace.main.home.components.Header
 
 
@@ -32,7 +34,8 @@ fun HomeScreen(
     lastName: String,
     setLastName: (String) -> Unit,
     message: String,
-    setMessage: (String) -> Unit
+    setMessage: (String) -> Unit,
+    paddingValues: PaddingValues
 ) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
@@ -49,22 +52,25 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Header()
+        Header(paddingValues = paddingValues)
 
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = if (isSmallScreen()) 64.dp else 0.dp),
+                .padding(top = if (isSmallScreen) 64.dp else 0.dp)
+                .padding(all = 16.dp),
             text = "Latest Work",
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.displaySmall
         )
 
-        Body1(modifier = Modifier.widthIn(max = 1200.dp))
+        Portfolio(modifier = Modifier.widthIn(max = 1200.dp))
 
-        Body2(modifier = Modifier.widthIn(max = 1200.dp))
+        Imaginate(modifier = Modifier.widthIn(max = 1200.dp))
 
-        Body3(modifier = Modifier.widthIn(max = 1200.dp))
+        Weatherai(modifier = Modifier.widthIn(max = 1200.dp))
+
+        Clok(modifier = Modifier.widthIn(max = 1200.dp))
 
         Spacer(modifier = Modifier.height(height = 640.dp))
 

@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.kingfuspace.main.editor.state.Banner
-import com.kingfuspace.sidePanel.layout.LayoutScreen
+import com.kingfuspace.sidePanel.banner.BannerScreen
 import com.kingfuspace.sidePanel.navigation.Dialog
 import com.kingfuspace.sidePanel.navigation.Screen
 
@@ -27,7 +27,7 @@ fun NavGraphBuilder.bannerGraph(
     composable<Screen.Banner> {
         if (bannerIndex != null && bannerIndex <= banners.size - 1) {
             val name = banners[bannerIndex].name
-            LayoutScreen(
+            BannerScreen(
                 banner = banners[bannerIndex],
                 goBack = navController::navigateUp,
                 goToDialogConfirm = {

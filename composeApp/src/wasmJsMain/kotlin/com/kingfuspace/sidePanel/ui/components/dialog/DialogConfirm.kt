@@ -1,13 +1,14 @@
 package com.kingfuspace.sidePanel.ui.components.dialog
 
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
 fun DialogConfirm(
@@ -22,7 +23,12 @@ fun DialogConfirm(
         modifier = modifier,
         containerColor = colorScheme.surface,
         title = { Text(text = title, color = titleColor) },
-        text = { Text(text = text, style = Typography.labelMedium) },
+        text = {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        },
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
@@ -31,7 +37,7 @@ fun DialogConfirm(
                     onDismiss()
                 }
             ) {
-                Text(text = "Confirm", style = Typography.labelMedium)
+                Text(text = "Confirm", style = Typography().labelMedium)
             }
         }
     )

@@ -7,12 +7,12 @@ import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.style.TextOverflow
-import com.kingfuspace.main.ui.theme.Typography
 
 @Composable
 fun MyTextField(
@@ -51,7 +51,7 @@ fun MyTextField(
             disabledTrailingIconColor = Transparent
         ),
 //        textStyle = Typography.bodySmall,
-        textStyle = Typography.labelMedium,
+        textStyle = Typography().labelMedium,
         label = if (label != null) {
             {
                 Row(
@@ -63,7 +63,7 @@ fun MyTextField(
                         modifier = Modifier.weight(weight = 1f),
                         text = label,
 //                        style = Typography.labelLarge,
-                        style = Typography.labelSmall,
+                        style = Typography().labelSmall,
                         maxLines = labelMaxLines,
                         overflow = TextOverflow.Ellipsis
                     )
