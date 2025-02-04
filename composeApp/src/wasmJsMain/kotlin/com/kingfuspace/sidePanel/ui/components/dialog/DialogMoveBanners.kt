@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.SegmentedButton
@@ -111,7 +110,6 @@ fun DialogMoveBanners(
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-//                                        .height(height = 40.dp),
                                         .height(height = 150.dp)
                                         .background(color = colorScheme.surfaceContainerLow),
                                     verticalAlignment = Alignment.CenterVertically,
@@ -121,12 +119,10 @@ fun DialogMoveBanners(
                                         modifier = Modifier
                                             .padding(all = 8.dp),
                                         text = banners[index].name,
-//                                        style = typography.labelLarge,
-                                        style = typography.labelSmall,
+                                        style = typography.bodyLarge,
                                         maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-
-                                        )
+                                        overflow = TextOverflow.Ellipsis
+                                    )
                                 }
 
                                 Row(
@@ -145,8 +141,7 @@ fun DialogMoveBanners(
                                             selectedIndex -> "selected"
                                             else -> ""
                                         },
-//                                        style = typography.labelLarge,
-                                        style = MaterialTheme.typography.bodyLarge,
+                                        style = typography.bodyLarge,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = if (targetIndex == index || selectedIndex == index) colorScheme.surface else colorScheme.inverseSurface
