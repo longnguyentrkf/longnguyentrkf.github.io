@@ -57,7 +57,7 @@ fun NavGraphBuilder.bannersGraph(
                 }
             },
             goToDialogMoveBanners = {
-                if(bannerIndex != null) {
+                if (bannerIndex != null) {
                     navController.navigate(
                         route = Dialog.MoveBanners(
                             index = bannerIndex

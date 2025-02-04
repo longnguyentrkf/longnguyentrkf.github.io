@@ -38,7 +38,7 @@ fun BannersScreen(
     goToBanner: () -> Unit,
     addBanner: () -> Unit,
     setBannerIndex: (Int?) -> Unit,
-    goBack: () -> Boolean,
+    goBack: () -> Unit,
     lazyListState: LazyListState,
     goToDialogConfirm: () -> Unit,
     goToDialogEditText: () -> Unit,

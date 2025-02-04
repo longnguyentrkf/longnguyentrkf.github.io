@@ -1,5 +1,6 @@
 package com.kingfuspace.main.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -64,15 +65,20 @@ fun HomeScreen(
             style = MaterialTheme.typography.displaySmall
         )
 
-        Portfolio(modifier = Modifier.widthIn(max = 1200.dp))
+        Column(
+            verticalArrangement = Arrangement.spacedBy(space = 16.dp)
+        ) {
+            Portfolio(modifier = Modifier.widthIn(max = 1200.dp))
 
-        Imaginate(modifier = Modifier.widthIn(max = 1200.dp))
+            Imaginate(modifier = Modifier.widthIn(max = 1200.dp))
 
-        Weatherai(modifier = Modifier.widthIn(max = 1200.dp))
+            Weatherai(modifier = Modifier.widthIn(max = 1200.dp))
 
-        Clok(modifier = Modifier.widthIn(max = 1200.dp))
+            Clok(modifier = Modifier.widthIn(max = 1200.dp))
+        }
 
         Spacer(modifier = Modifier.height(height = 640.dp))
+
 
     }
 

@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.core.Variables.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
@@ -64,12 +66,15 @@ fun Imaginate(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold
                 )
 
                 Text(
                     text = subTitle,
                     style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.outline,
+                    fontStyle = FontStyle.Italic
                 )
 
                 Spacer(modifier = Modifier.height(height = 16.dp))
@@ -95,12 +100,15 @@ fun Imaginate(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold
                 )
 
                 Text(
                     text = subTitle,
                     style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.outline,
+                    fontStyle = FontStyle.Italic
                 )
 
                 Spacer(modifier = Modifier.height(height = 16.dp))

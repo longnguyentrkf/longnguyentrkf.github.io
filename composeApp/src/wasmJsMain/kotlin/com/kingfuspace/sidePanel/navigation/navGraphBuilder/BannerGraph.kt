@@ -27,6 +27,7 @@ fun NavGraphBuilder.bannerGraph(
     composable<Screen.Banner> {
         if (bannerIndex != null && bannerIndex <= banners.size - 1) {
             val name = banners[bannerIndex].name
+
             BannerScreen(
                 banner = banners[bannerIndex],
                 goBack = navController::navigateUp,
@@ -75,7 +76,7 @@ fun NavGraphBuilder.bannerGraph(
                             componentIndex = componentIndex,
                             text = title
                         )
-                    ){
+                    ) {
                         launchSingleTop = true
                         restoreState = true
                     }
@@ -112,28 +113,30 @@ fun NavGraphBuilder.bannerGraph(
                         restoreState = true
                     }
                 },
-                goToComponentImage = { index: Int ->
-                    navController.navigate(route = Screen.ComponentImage(index = index)) {
+                goToComponentImage = { index1: Int ->
+                    navController.navigate(route = Screen.ComponentImage(index = index1)) {
                         launchSingleTop = true
                         restoreState = true
                     }
                 },
-                goToComponentText = { index: Int ->
-                    navController.navigate(route = Screen.ComponentText(index = index)) {
+                goToComponentText = { index1: Int ->
+                    navController.navigate(route = Screen.ComponentText(index = index1)) {
                         launchSingleTop = true
                         restoreState = true
                     }
                 },
                 goToSelectComponent = {
-                  navController.navigate(route = Dialog.SetComponentType(
-                      bannerIndex = 0,
-                      componentIndex = 0,
-                      text = "text",
-                      title = "title"
-                  )){
-                      launchSingleTop = true
-                      restoreState = true
-                  }
+                    navController.navigate(
+                        route = Dialog.SetComponentType(
+                            bannerIndex = 0,
+                            componentIndex = 0,
+                            text = "text",
+                            title = "title"
+                        )
+                    ) {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
                 bannerIndex = bannerIndex,
                 setIndex = setIndex,
@@ -147,7 +150,8 @@ fun NavGraphBuilder.bannerGraph(
                 deleteImage = deleteImage
             )
         } else {
-            navController.navigate(route = Screen.Banners){
+            navController.navigate(route = Screen.Banners) {
+                popUpTo(route = Screen.Banner) { inclusive = true }
                 launchSingleTop = true
                 restoreState = true
             }
