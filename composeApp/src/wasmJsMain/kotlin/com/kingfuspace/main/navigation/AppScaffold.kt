@@ -57,14 +57,10 @@ fun AppScaffold(
     currentDestination: NavDestination?,
     drawerState: DrawerState,
     screens: List<AppDestination>,
-    navController: NavHostController,
-//    snackbarHostState: SnackbarHostState,
+    navController: NavHostController
 ) {
     val scope = rememberCoroutineScope()
-//    val snackBarHostState = remember { SnackbarHostState() }
-
     val snackbarHostState = remember { SnackbarHostState() }
-
 
     ObserveAsEvents(
         flow = SnackbarController.events,
@@ -85,8 +81,6 @@ fun AppScaffold(
             }
         }
     }
-
-
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
@@ -187,7 +181,6 @@ fun AppScaffold(
                 )
             }
         },
-//        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
     ) {
         AppNavHost(
             modifier = modifier.padding(paddingValues = it),

@@ -1,17 +1,14 @@
 [versions]
 androidx-lifecycle = "2.8.0"
-compose = "1.7.0"
+compose = "1.7.3"
 
 junit = "4.13.2"
-#kotlin = "2.0.20"
-kotlin = "2.0.21"
-#navigation = "2.7.0-alpha07"
+kotlin = "2.1.10"
 navigation = "2.8.0-alpha10"
 
 kotlinx-serialization = "1.7.1"
 annotation-jvm = "1.9.0"
 annotations = "15.0"
-#navigationCompose = "2.8.0-alpha08"
 
 
 
@@ -27,7 +24,6 @@ material3 = { module = "org.jetbrains.compose.material3:material3", name = "mati
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 androidx-annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotation-jvm" }
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
-#navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 
 

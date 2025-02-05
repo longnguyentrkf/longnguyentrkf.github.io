@@ -33,17 +33,7 @@ enum class AppDestination(
         iconOutlined = Icons.Outlined.Storefront,
         label = "Shop",
         screen = Screen.Shop
-    ),
-
-//    HOME2(
-//        label = "Home",
-//        screen = Screen.Home2
-//    ),
-//    BANNERS(
-//        label = "Banners",
-//        screen = Screen.Banners
-//    ),
-
+    )
 }
 
 

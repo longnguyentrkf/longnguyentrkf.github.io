@@ -1,5 +1,6 @@
 package com.kingfuspace.main.home
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,15 +17,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.isSmallScreen
 import com.kingfuspace.main.home.components.Clok
-import com.kingfuspace.main.home.components.Portfolio
-import com.kingfuspace.main.home.components.Imaginate
-import com.kingfuspace.main.home.components.Weatherai
+import com.kingfuspace.main.home.components.Footer
 import com.kingfuspace.main.home.components.Header
+import com.kingfuspace.main.home.components.Imaginate
+import com.kingfuspace.main.home.components.Portfolio
+import com.kingfuspace.main.home.components.Weatherai
 
 
 @Composable
@@ -36,10 +35,9 @@ fun HomeScreen(
     setLastName: (String) -> Unit,
     message: String,
     setMessage: (String) -> Unit,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    scrollState: ScrollState
 ) {
-    val scrollState = rememberScrollState()
-    val uriHandler = LocalUriHandler.current
     val focusManager = LocalFocusManager.current
 
     LaunchedEffect(key1 = scrollState.isScrollInProgress) {
@@ -51,80 +49,46 @@ fun HomeScreen(
             .fillMaxWidth()
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(space = 64.dp)
     ) {
 
         Header(paddingValues = paddingValues)
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = if (isSmallScreen) 64.dp else 0.dp)
-                .padding(all = 16.dp),
-            text = "Latest Work",
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.displaySmall
-        )
-
         Column(
+            modifier = Modifier.widthIn(max = 1200.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
-            Portfolio(modifier = Modifier.widthIn(max = 1200.dp))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
+                text = "Latest Work",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.displaySmall
+            )
 
-            Imaginate(modifier = Modifier.widthIn(max = 1200.dp))
+            Portfolio(modifier = Modifier)
 
-            Weatherai(modifier = Modifier.widthIn(max = 1200.dp))
+            Imaginate(modifier = Modifier)
 
-            Clok(modifier = Modifier.widthIn(max = 1200.dp))
+            Weatherai(modifier = Modifier)
+
+            Clok(modifier = Modifier)
         }
+
+        Footer(
+            modifier = Modifier.widthIn(max = 1200.dp),
+            firstName = firstName,
+            setFirstName = setFirstName,
+            lastName = lastName,
+            setLastName = setLastName,
+            message = message,
+            setMessage = setMessage,
+        )
 
         Spacer(modifier = Modifier.height(height = 640.dp))
 
-
     }
-
-//                Column(verticalArrangement = Arrangement.spacedBy(space = 32.dp)) {
-//                    Text(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        text = "What I do",
-//                        fontSize = labelFontSize,
-//                        lineHeight = labelLineHeight,
-//                        textAlign = TextAlign.Center
-//                    )
-//
-//                    ImageDetail(
-////                        resource = Res.drawable.kingfuspace_logo_no_background,
-//                        resource = Res.drawable.clok,
-//                        list = listOf(
-//                            "Web Developer",
-//                            "Brand Design",
-//                            "Logo Design",
-//                            "Native Android Engineer",
-//                            "Mentor"
-//                        ),
-//                        imageContentScale = ContentScale.Fit,
-//                        isSmallScreen = isSmallScreen()
-//                    )
-//                }
-//
-//                Column {
-//                    Footer(
-//                        title = "Let's Create Something Amazing Together",
-//                        body = "Ready to bring your ideas to life through the power of software engineer and " +
-//                                "graphic design? I'd love to hear from you! Whether you have a specific project in " +
-//                                "mind or simply want to learn more about my services, don't hesitate to reach out.",
-//                        firstName = firstName,
-//                        setFirstName = setFirstName,
-//                        lastName = lastName,
-//                        setLastName = setLastName,
-//                        message = message,
-//                        setMessage = setMessage,
-//                        toEmail = "longnguyentrkf@gmail.com"
-//                    )
-//                }
-//
-//            }
-//        }
-//    }
 }
 
 

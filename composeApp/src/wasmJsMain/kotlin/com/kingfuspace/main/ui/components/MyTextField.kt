@@ -3,6 +3,7 @@ package com.kingfuspace.main.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -18,7 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 fun MyTextField(
     modifier: Modifier = Modifier,
     label: String? = null,
-    labelIconOnClick: @Composable (() -> Unit)? = null,
+//    labelIconOnClick: @Composable (() -> Unit)? = null,
     value: String,
     onValueChange: (String) -> Unit,
     maxLines: Int = Int.MAX_VALUE,
@@ -27,15 +28,14 @@ fun MyTextField(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
-    labelMaxLines: Int = Int.MAX_VALUE,
+//    labelMaxLines: Int = Int.MAX_VALUE,
     readOnly: Boolean = false,
     placeholder: @Composable (() -> Unit)? = null
 ) {
 
     TextField(
-//        modifier = modifier.background(color = colorScheme.surfaceContainer),
         modifier = modifier,
-        shape = Shapes().extraSmall,
+        shape = MaterialTheme.shapes.small,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Transparent,
             unfocusedContainerColor = Transparent,
@@ -50,28 +50,26 @@ fun MyTextField(
             disabledLeadingIconColor = Transparent,
             disabledTrailingIconColor = Transparent
         ),
-//        textStyle = Typography.bodySmall,
-        textStyle = Typography().labelMedium,
+        textStyle = MaterialTheme.typography.bodyLarge,
         label = if (label != null) {
             {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+//                Row(
+//                    modifier = Modifier.fillMaxWidth(),
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.SpaceBetween
+//                ) {
                     Text(
-                        modifier = Modifier.weight(weight = 1f),
+//                        modifier = Modifier.weight(weight = 1f),
                         text = label,
-//                        style = Typography.labelLarge,
-                        style = Typography().labelSmall,
-                        maxLines = labelMaxLines,
-                        overflow = TextOverflow.Ellipsis
+//                        style = MaterialTheme.typography.bodySmall,
+//                        maxLines = labelMaxLines,
+//                        overflow = TextOverflow.Ellipsis
                     )
 
-                    if (labelIconOnClick != null) {
-                        labelIconOnClick()
-                    }
-                }
+//                    if (labelIconOnClick != null) {
+//                        labelIconOnClick()
+//                    }
+//                }
             }
         } else null,
         value = value,

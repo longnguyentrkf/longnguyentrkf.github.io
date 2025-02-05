@@ -19,7 +19,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.Typography
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -109,8 +108,6 @@ fun BannerScreen(
         ) {
 
 
-//            if (banner.layoutType == null) {
-
             when {
                 banner.layoutType == null -> {
                     Text(
@@ -122,8 +119,8 @@ fun BannerScreen(
                         style = MaterialTheme.typography.bodyLarge,
                     )
                 }
-//            }
-                banner.components == null ->{
+
+                banner.components == null -> {
                     Text(
                         modifier = Modifier
                             .clickable { goToSelectComponent() }
@@ -135,53 +132,51 @@ fun BannerScreen(
                 }
 
 
-//            else {
-                   else -> {
-                       Row(
-                           modifier = Modifier.padding(horizontal = 16.dp),
-                           verticalAlignment = Alignment.CenterVertically,
-                           horizontalArrangement = Arrangement.SpaceBetween
-                       ) {
-                           Text(
-                               modifier = Modifier.weight(weight = 1f),
-                               text = "Height: ${(banner.height.value / 10).roundToInt()}%",
-                               style = MaterialTheme.typography.bodyLarge,
-                               textAlign = TextAlign.Start
-                           )
+                else -> {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            modifier = Modifier.weight(weight = 1f),
+                            text = "Height: ${(banner.height.value / 10).roundToInt()}%",
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Start
+                        )
 
-                           Slider(
-                               modifier = Modifier
-                                   .weight(weight = 1f)
-                                   .height(height = 8.dp),
-                               value = banner.height.value,
-                               onValueChange = { setHeight(bannerIndex, it.dp) },
-                               valueRange = 100f..1100f,
-                               steps = 9
-                           )
-                       }
+                        Slider(
+                            modifier = Modifier
+                                .weight(weight = 1f)
+                                .height(height = 8.dp),
+                            value = banner.height.value,
+                            onValueChange = { setHeight(bannerIndex, it.dp) },
+                            valueRange = 100f..1100f,
+                            steps = 9
+                        )
+                    }
 
 
-                       if (banner is Banner.Banner1) {
-                           Layout1(
-                               banner = banner,
-                               bannerIndex = bannerIndex,
-                               setIsReverse = setIsReverse,
-                               setImage = setImage,
-                               setText = setTextValue,
-                               addText = addText,
-                               addImage = addImage,
-                               deleteText = deleteText,
-                               deleteImage = deleteImage,
-                               goToDialogMoveImages = goToDialogMoveImages,
-                               goToSetTextName = goToSetTextName,
-                               goToSetImageName = goToSetImageName,
-                               goToDialogMoveTexts = goToDialogMoveTexts,
-                               goToComponentImage = goToComponentImage,
-                               goToComponentText = goToComponentText
-                           )
-                       }
-                   }
-//            }
+                    if (banner is Banner.Banner1) {
+                        Layout1(
+                            banner = banner,
+                            bannerIndex = bannerIndex,
+                            setIsReverse = setIsReverse,
+                            setImage = setImage,
+                            setText = setTextValue,
+                            addText = addText,
+                            addImage = addImage,
+                            deleteText = deleteText,
+                            deleteImage = deleteImage,
+                            goToDialogMoveImages = goToDialogMoveImages,
+                            goToSetTextName = goToSetTextName,
+                            goToSetImageName = goToSetImageName,
+                            goToDialogMoveTexts = goToDialogMoveTexts,
+                            goToComponentImage = goToComponentImage,
+                            goToComponentText = goToComponentText
+                        )
+                    }
+                }
             }
         }
     }

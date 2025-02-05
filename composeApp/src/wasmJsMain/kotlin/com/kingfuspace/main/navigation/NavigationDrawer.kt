@@ -14,8 +14,6 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -31,8 +29,6 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.kingfuspace.main.core.ObserveAsEvents
-import com.kingfuspace.main.core.SnackbarController
 import com.kingfuspace.main.core.Variables.isSmallScreen
 import com.kingfuspace.main.core.Variables.windowInnerWidth
 import kotlinx.coroutines.launch
@@ -112,7 +108,6 @@ fun NavigationDrawer() {
             screens = screens,
             drawerState = drawerState,
             currentDestination = currentDestination,
-//            snackbarHostState = snackBarHostState
         )
     }
 }

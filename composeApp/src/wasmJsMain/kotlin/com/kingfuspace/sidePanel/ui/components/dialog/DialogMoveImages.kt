@@ -94,7 +94,7 @@ fun DialogMoveImages(
                             label = {
                                 Text(
                                     text = label,
-                                    style = typography.bodyLarge,
+                                    style = typography.bodySmall,
                                 )
                             },
                             icon = { },

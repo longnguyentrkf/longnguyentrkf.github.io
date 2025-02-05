@@ -1,5 +1,6 @@
 package com.kingfuspace.main.navigation.navGraphBuilder
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -10,7 +11,8 @@ import com.kingfuspace.main.navigation.Screen
 
 fun NavGraphBuilder.homeGraph(
     vm: HomeViewModel,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    scrollState: ScrollState
 ) {
     composable<Screen.Home> {
         HomeScreen(
@@ -20,7 +22,8 @@ fun NavGraphBuilder.homeGraph(
             setLastName = vm::setLastName,
             message = vm.state.message,
             setMessage = vm::setMessage,
-            paddingValues = paddingValues
+            paddingValues = paddingValues,
+            scrollState = scrollState
         )
     }
 }

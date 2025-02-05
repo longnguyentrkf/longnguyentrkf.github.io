@@ -3,6 +3,7 @@ package com.kingfuspace.main.navigation
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,6 +24,7 @@ fun AppNavHost(
 ) {
     val editorViewModel = viewModel { EditorViewModel() }
     val homeViewModel = viewModel { HomeViewModel() }
+    val mainHomeScreenScrollState = rememberScrollState()
 
 
     NavHost(
@@ -34,7 +36,8 @@ fun AppNavHost(
     ) {
         homeGraph(
             vm = homeViewModel,
-            paddingValues = paddingValues
+            paddingValues = paddingValues,
+            scrollState = mainHomeScreenScrollState
         )
 
         editorGraph(

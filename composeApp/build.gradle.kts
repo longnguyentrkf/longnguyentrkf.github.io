@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.konan.target.HostManager.Companion.host
 
 
 plugins {
@@ -9,12 +10,16 @@ plugins {
 
 }
 
+
+
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         binaries.executable()
     }
+
+
 
     sourceSets {
         commonMain.dependencies {
