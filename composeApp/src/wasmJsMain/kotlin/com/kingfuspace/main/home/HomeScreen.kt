@@ -86,7 +86,7 @@ fun HomeScreen(
             setMessage = setMessage,
         )
 
-        Spacer(modifier = Modifier.height(height = 640.dp))
+        Spacer(modifier = Modifier.height(height = 200.dp))
 
     }
 }

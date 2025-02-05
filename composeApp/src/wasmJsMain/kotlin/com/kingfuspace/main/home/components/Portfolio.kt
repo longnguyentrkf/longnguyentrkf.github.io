@@ -1,6 +1,7 @@
 package com.kingfuspace.main.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,19 +13,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImagePainter.State.Empty.painter
 import com.kingfuspace.main.core.Variables.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.longnguyen
+import kotlinx.browser.window
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -35,6 +40,8 @@ fun Portfolio(
     val title = "Portfolio"
     val subTitle = "Web Page"
     val body = "A minimalistic designed web page detailing achievements, experiences, and services."
+    val uriHandler = LocalUriHandler.current
+    val url = "https://kingfuspace.com/longnguyen/"
 
 
     if (isSmallScreen) {
@@ -81,22 +88,38 @@ fun Portfolio(
                     text = body,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+
+                Spacer(modifier = Modifier.height(height = 16.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    ElevatedButton(
+                        shape = CircleShape,
+                        onClick = { uriHandler.openUri(uri = url) }
+                    ) {
+                        Text(
+                            text = "View",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
             }
         }
     } else {
         Row(
-            modifier = modifier
-                .height(height = 300.dp)
-                .padding(horizontal = 16.dp)
+            modifier = modifier.padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(weight = 1f),
+                modifier = Modifier.weight(weight = 1f),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    modifier = Modifier.clip(shape = MaterialTheme.shapes.small),
+                    modifier = Modifier
+                        .heightIn(max = 300.dp)
+                        .clip(shape = MaterialTheme.shapes.small),
                     painter = painterResource(resource = Res.drawable.longnguyen),
                     contentDescription = null
                 )
@@ -131,6 +154,23 @@ fun Portfolio(
                     text = body,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+
+                Spacer(modifier = Modifier.height(height = 16.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    ElevatedButton(
+                        shape = CircleShape,
+                        onClick = { uriHandler.openUri(uri = url) }
+                    ) {
+                        Text(
+                            text = "View",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
             }
         }
     }

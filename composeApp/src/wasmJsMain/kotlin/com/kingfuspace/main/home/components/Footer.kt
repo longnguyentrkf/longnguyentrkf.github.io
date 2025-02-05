@@ -5,20 +5,31 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontVariation.weight
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.main.core.BODY
 import com.kingfuspace.main.core.MAIL_TO
 import com.kingfuspace.main.core.SUBJECT
+import com.kingfuspace.main.ui.theme.Shape
 
 
 @Composable
@@ -37,6 +48,7 @@ fun Footer(
             "graphic design? I'd love to hear from you! Whether you have a specific project in " +
             "mind or simply want to learn more about my services, don't hesitate to reach out."
     val toEmail = "longnguyentrkf@gmail.com"
+
 
     Column(
         modifier = modifier.padding(horizontal = 16.dp),
@@ -77,6 +89,7 @@ fun Footer(
         }
 
         OutlinedTextField(
+
             modifier = Modifier.fillMaxWidth(),
             shape = CircleShape,
             value = message,
@@ -89,7 +102,8 @@ fun Footer(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
-            OutlinedButton(
+            ElevatedButton(
+                shape = CircleShape,
                 onClick = {
                     val subject = "Subject"
                     val mailBody = "$firstName $lastName%0A%0A$message"
