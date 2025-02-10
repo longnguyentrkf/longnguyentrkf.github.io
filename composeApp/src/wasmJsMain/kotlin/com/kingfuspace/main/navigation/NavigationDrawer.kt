@@ -29,8 +29,8 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.kingfuspace.main.core.Variables.isSmallScreen
-import com.kingfuspace.main.core.Variables.windowInnerWidth
+import com.kingfuspace.core.Variables.isSmallScreen
+import com.kingfuspace.core.Variables.windowInnerWidth
 import kotlinx.coroutines.launch
 
 

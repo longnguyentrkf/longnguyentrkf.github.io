@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.konan.target.HostManager.Companion.host
 
 
 plugins {
@@ -7,9 +6,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
-
 }
-
 
 
 kotlin {
@@ -22,6 +19,7 @@ kotlin {
 
 
     sourceSets {
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -47,13 +45,10 @@ kotlin {
 
             // Serializable
             implementation(libs.kotlinx.serialization.json)
-
-
-
         }
-
     }
 }
+
 
 
 

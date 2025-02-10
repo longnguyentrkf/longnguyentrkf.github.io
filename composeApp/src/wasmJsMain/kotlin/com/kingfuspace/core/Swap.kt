@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 fun <T> MutableList<T>.swap(selectedIndex: Int, targetedIndex: Int) {
     val temp = this[selectedIndex]

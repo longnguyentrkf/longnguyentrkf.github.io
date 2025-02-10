@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 fun String?.isValidUrl(): Boolean {
     val urlRegex = "^(http|https)://[a-zA-Z0-9-._~:/?#\\[\\]@!$&'()*+,;=%]+\$".toRegex()

@@ -1,9 +1,12 @@
 package com.kingfuspace.main
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.window.ComposeViewport
-import com.kingfuspace.main.core.Variables.theme
-import com.kingfuspace.main.core.theme.ThemeType
+import com.kingfuspace.core.Variables.theme
+import com.kingfuspace.core.theme.ThemeType
 import com.kingfuspace.main.navigation.NavigationDrawer
 import com.kingfuspace.main.ui.theme.KingFuTheme
 import com.kingfuspace.main.ui.util.SetFontSizeMultiplier
@@ -28,9 +31,9 @@ fun updateBodyBackground(theme: ThemeType) {
 }
 
 
-
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
+
     ComposeViewport(document.body!!) {
         updateBodyBackground(theme = theme)
         SetWindowInnerWidth()

@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.ViewModel
-import com.kingfuspace.main.core.move
-import com.kingfuspace.main.core.swap
+import com.kingfuspace.core.move
+import com.kingfuspace.core.swap
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.editor.state.LayoutType
 import com.kingfuspace.main.editor.state.EditorState

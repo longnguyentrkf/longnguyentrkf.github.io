@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import com.kingfuspace.main.core.isValidUrl
+import com.kingfuspace.core.isValidUrl
 
 
 

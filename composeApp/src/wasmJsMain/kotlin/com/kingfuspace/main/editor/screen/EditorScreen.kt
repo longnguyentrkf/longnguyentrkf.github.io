@@ -43,10 +43,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
-import com.kingfuspace.main.core.SMALL_WINDOW
-import com.kingfuspace.main.core.Variables.isSmallScreen
-import com.kingfuspace.main.core.Variables.windowInnerWidth
-import com.kingfuspace.main.core.Variables.windowWidth
+import com.kingfuspace.core.SMALL_WINDOW
+import com.kingfuspace.core.Variables.isSmallScreen
+import com.kingfuspace.core.Variables.windowInnerWidth
+import com.kingfuspace.core.Variables.windowWidth
 import com.kingfuspace.main.editor.state.Banner
 import com.kingfuspace.main.ui.components.MyVerticalScrollBar
 import com.kingfuspace.main.editor.screen.components.layouts.TwoColumnLayout

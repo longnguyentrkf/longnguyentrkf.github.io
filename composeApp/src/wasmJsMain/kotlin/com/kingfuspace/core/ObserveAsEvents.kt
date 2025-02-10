@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

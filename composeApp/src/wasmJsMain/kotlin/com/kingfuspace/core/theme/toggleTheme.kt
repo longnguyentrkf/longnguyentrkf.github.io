@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core.theme
+package com.kingfuspace.core.theme
 
 
 fun ThemeType.toggle() = if (this == ThemeType.DARK) ThemeType.LIGHT else ThemeType.DARK

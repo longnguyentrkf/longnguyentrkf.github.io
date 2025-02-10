@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 
  fun <T> MutableList<T>.move(selectedIndex: Int, targetedIndex: Int) {

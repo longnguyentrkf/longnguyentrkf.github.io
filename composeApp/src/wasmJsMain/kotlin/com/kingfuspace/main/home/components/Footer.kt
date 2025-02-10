@@ -17,19 +17,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.font.FontVariation.weight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.BODY
-import com.kingfuspace.main.core.MAIL_TO
-import com.kingfuspace.main.core.SUBJECT
-import com.kingfuspace.main.ui.theme.Shape
+import com.kingfuspace.core.BODY
+import com.kingfuspace.core.MAIL_TO
+import com.kingfuspace.core.SUBJECT
 
 
 @Composable
@@ -51,7 +45,7 @@ fun Footer(
 
 
     Column(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(space = 24.dp)
     ) {
         Text(

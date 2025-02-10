@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.isSmallScreen
+import com.kingfuspace.core.Variables.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.clok
 import org.jetbrains.compose.resources.painterResource
@@ -45,14 +45,8 @@ fun Clok(
 
 
     if (isSmallScreen) {
-        Column(modifier = modifier.padding(vertical = 16.dp)) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 250.dp)
-                    .padding(horizontal = 16.dp),
-                contentAlignment = Alignment.Center
-            ) {
+        Column(modifier = modifier) {
+            Box(modifier = Modifier.heightIn(max = 250.dp)) {
                 Image(
                     modifier = Modifier.clip(shape = MaterialTheme.shapes.small),
                     painter = painterResource(Res.drawable.clok),
@@ -63,13 +57,7 @@ fun Clok(
 
             Spacer(modifier = Modifier.height(height = 16.dp))
 
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.Center,
-            ) {
+            Column {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineLarge,
@@ -110,18 +98,10 @@ fun Clok(
         }
     } else {
         Row(
-            modifier = modifier.padding(horizontal = 16.dp),
+            modifier = modifier,
             verticalAlignment = Alignment.CenterVertically
-
         ) {
-            Column(
-                modifier = Modifier
-                    .weight(weight = 1f)
-                    .fillMaxWidth()
-                    .padding(all = 24.dp)
-                ,
-                verticalArrangement = Arrangement.Center,
-            ) {
+            Column(modifier = Modifier.weight(weight = 1f)) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineLarge,
@@ -162,10 +142,7 @@ fun Clok(
 
             Spacer(modifier = Modifier.width(width = 16.dp))
 
-            Box(
-                modifier = Modifier.weight(weight = 1f),
-                contentAlignment = Alignment.Center
-            ) {
+            Box(modifier = Modifier.weight(weight = 1f)) {
                 Image(
                     modifier = Modifier
                         .heightIn(max = 300.dp)

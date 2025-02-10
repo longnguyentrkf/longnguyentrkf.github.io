@@ -101,10 +101,7 @@ fun DialogMoveBanners(
                             Column(
                                 modifier = Modifier
                                     .width(width = 150.dp)
-//                                    .background(color = if (targetIndex == index || selectedIndex == index) colorScheme.inverseSurface else colorScheme.surfaceContainer)
-                                    .clickable(enabled = index != selectedIndex) {
-                                        targetIndex = index
-                                    }
+                                    .clickable(enabled = index != selectedIndex) { targetIndex = index }
                                     .alpha(alpha = if (index == targetIndex || index == selectedIndex) 1f else 0.5f)
                             ) {
                                 Row(

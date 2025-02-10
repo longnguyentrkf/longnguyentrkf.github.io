@@ -55,29 +55,31 @@ fun HomeScreen(
         Header(paddingValues = paddingValues)
 
         Column(
-            modifier = Modifier.widthIn(max = 1200.dp),
+            modifier = Modifier
+                .widthIn(max = 1200.dp)
+                .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 16.dp),
+                modifier = Modifier.fillMaxWidth(),
                 text = "Latest Work",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.displaySmall
             )
 
-            Portfolio(modifier = Modifier)
+            Portfolio()
 
-            Imaginate(modifier = Modifier)
+            Imaginate()
 
-            Weatherai(modifier = Modifier)
+            Weatherai()
 
-            Clok(modifier = Modifier)
+            Clok()
         }
 
         Footer(
-            modifier = Modifier.widthIn(max = 1200.dp),
+            modifier = Modifier
+                .widthIn(max = 1200.dp)
+                .padding(horizontal = 16.dp),
             firstName = firstName,
             setFirstName = setFirstName,
             lastName = lastName,

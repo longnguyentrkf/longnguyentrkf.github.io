@@ -33,6 +33,7 @@ import coil3.compose.AsyncImage
 import com.kingfuspace.main.editor.state.ImageData
 import com.kingfuspace.main.ui.components.MyTextField
 import com.kingfuspace.sidePanel.ui.components.menu.BannerMenu
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.roundToInt
 
 
@@ -140,3 +141,4 @@ fun ComponentImage(
         }
     }
 }
+

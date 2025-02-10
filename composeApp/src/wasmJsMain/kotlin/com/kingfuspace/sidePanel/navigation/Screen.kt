@@ -2,6 +2,7 @@ package com.kingfuspace.sidePanel.navigation
 
 import kotlinx.serialization.Serializable
 
+
 sealed interface Screen {
     @Serializable
     object Home: Screen

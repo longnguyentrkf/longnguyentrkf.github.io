@@ -1,10 +1,10 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.theme.ThemeType
+import com.kingfuspace.core.theme.ThemeType
 import kotlinx.browser.window
 
 const val SMALL_WINDOW = 600

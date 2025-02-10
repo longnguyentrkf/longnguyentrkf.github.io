@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.isSmallScreen
+import com.kingfuspace.core.Variables.isSmallScreen
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.weatherai
 import org.jetbrains.compose.resources.painterResource
@@ -45,12 +45,9 @@ fun Weatherai(
 
 
     if (isSmallScreen) {
-        Column(modifier = modifier.padding(vertical = 16.dp)) {
+        Column(modifier = modifier) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 250.dp)
-                    .padding(horizontal = 16.dp),
+                modifier = Modifier.heightIn(max = 250.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -63,12 +60,7 @@ fun Weatherai(
 
             Spacer(modifier = Modifier.height(height = 16.dp))
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(all = 16.dp),
-                verticalArrangement = Arrangement.Center,
-            ) {
+            Column {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineLarge,
@@ -109,7 +101,7 @@ fun Weatherai(
         }
     } else {
         Row(
-            modifier = modifier.padding(horizontal = 16.dp),
+            modifier = modifier,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(

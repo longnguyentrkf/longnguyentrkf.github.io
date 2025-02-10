@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core.theme
+package com.kingfuspace.core.theme
 
 enum class ThemeType(val label: String){
     DARK(label = "Dark"),

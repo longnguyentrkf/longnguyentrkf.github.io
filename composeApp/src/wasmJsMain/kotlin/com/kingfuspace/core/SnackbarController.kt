@@ -1,4 +1,4 @@
-package com.kingfuspace.main.core
+package com.kingfuspace.core
 
 import androidx.compose.material3.SnackbarDuration
 import kotlinx.coroutines.channels.Channel

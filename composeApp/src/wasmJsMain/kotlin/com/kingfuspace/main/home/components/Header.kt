@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.main.core.Variables.isSmallScreen
-import com.kingfuspace.main.core.Variables.windowInnerHeight
+import com.kingfuspace.core.Variables.isSmallScreen
+import com.kingfuspace.core.Variables.windowInnerHeight
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.kingfuspace_logo_no_background
 import org.jetbrains.compose.resources.painterResource
@@ -109,6 +109,4 @@ fun Header(
             }
         }
     }
-
-
 }

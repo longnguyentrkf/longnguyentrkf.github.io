@@ -4,8 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.kingfuspace.main.core.theme.ThemeType
-import com.kingfuspace.main.core.Variables.theme
+import com.kingfuspace.core.theme.ThemeType
+import com.kingfuspace.core.Variables.theme
 
 
 private val darkColorScheme = darkColorScheme(
