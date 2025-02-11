@@ -1,21 +1,17 @@
 package com.kingfuspace.main.home.components
 
+import KingfuspaceCanvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,8 +20,11 @@ import androidx.compose.ui.unit.dp
 import com.kingfuspace.core.BODY
 import com.kingfuspace.core.MAIL_TO
 import com.kingfuspace.core.SUBJECT
+import com.kingfuspace.main.ui.components.MyTextField
+import com.kingfuspace.main.ui.theme.typography
 
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Footer(
     modifier: Modifier = Modifier,
@@ -48,48 +47,43 @@ fun Footer(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(space = 24.dp)
     ) {
+
         Text(
             text = title,
-            style = MaterialTheme.typography.headlineLarge
+            style = typography.headlineLarge
         )
 
         Text(
             text = body,
-            style = MaterialTheme.typography.bodyLarge
+            style = typography.bodyLarge
         )
+
+
 
         Row(modifier = Modifier.fillMaxWidth()) {
 
-            OutlinedTextField(
+            MyTextField(
                 modifier = Modifier.weight(weight = 0.5f),
-                shape = CircleShape,
-
                 value = firstName,
                 onValueChange = { setFirstName(it) },
-                label = { Text(text = "First name") },
-                singleLine = true
+                label = "First name",
             )
 
             Spacer(modifier = Modifier.width(width = 16.dp))
 
-            OutlinedTextField(
+            MyTextField(
                 modifier = Modifier.weight(weight = 0.5f),
-                shape = CircleShape,
                 value = lastName,
                 onValueChange = { setLastName(it) },
-                label = { Text(text = "Last name") },
-                singleLine = true
+                label = "Last name",
             )
         }
 
-        OutlinedTextField(
-
+        MyTextField(
             modifier = Modifier.fillMaxWidth(),
-            shape = CircleShape,
             value = message,
             onValueChange = { setMessage(it) },
-            label = { Text(text = "Message") },
-            singleLine = true
+            label = "Message"
         )
 
         Row(

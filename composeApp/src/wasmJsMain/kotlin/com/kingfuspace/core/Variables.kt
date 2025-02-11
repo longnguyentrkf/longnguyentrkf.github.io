@@ -17,7 +17,7 @@ object Variables {
     var windowInnerHeight by mutableStateOf(value = window.innerHeight)
     val windowWidth = window.screen.width
     val windowHeight = window.screen.height
-    var theme by mutableStateOf(value = ThemeType.DARK)
+    var theme by mutableStateOf(value = ThemeType.LIGHT)
     var fontSizeMultiplier by mutableStateOf(
         value = (windowInnerWidth.dp / windowWidth.dp).coerceIn(
             minimumValue = 0.75f,

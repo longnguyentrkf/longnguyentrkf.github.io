@@ -1,6 +1,7 @@
 package com.kingfuspace.main.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,129 +32,96 @@ import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
-fun Portfolio(
-    modifier: Modifier = Modifier
-) {
+fun Portfolio(modifier: Modifier = Modifier) {
     val title = "Portfolio"
     val subTitle = "Web Page"
     val body = "A minimalistic designed web page detailing achievements, experiences, and services."
     val uriHandler = LocalUriHandler.current
     val url = "https://kingfuspace.com/longnguyen/"
 
-
     if (isSmallScreen) {
-        Column(modifier = modifier) {
-            Box(modifier = Modifier.heightIn(max = 250.dp)) {
-                Image(
-                    modifier = Modifier.clip(shape = MaterialTheme.shapes.small).fillMaxWidth(),
-                    painter = painterResource(Res.drawable.longnguyen),
-                    contentDescription = null
-                )
-            }
-
-            Spacer(modifier = Modifier.height(height = 16.dp))
-
-
-            Column {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = subTitle,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.outline,
-                    fontStyle = FontStyle.Italic
-                )
-
-                Spacer(modifier = Modifier.height(height = 16.dp))
-
-                Text(
-                    text = body,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-
-                Spacer(modifier = Modifier.height(height = 16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    ElevatedButton(
-                        shape = CircleShape,
-                        onClick = { uriHandler.openUri(uri = url) }
-                    ) {
-                        Text(
-                            text = "View",
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
-                }
-            }
+        Column(
+            modifier = modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            PortfolioImage()
+            Spacer(modifier = Modifier.height(16.dp))
+            PortfolioContent(title, subTitle, body, url, uriHandler)
         }
     } else {
         Row(
-            modifier = modifier,
+            modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier.weight(weight = 1f),
-                contentAlignment = Alignment.Center
+            PortfolioImage(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(16.dp))
+            PortfolioContent(title, subTitle, body, url, uriHandler, Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+private fun PortfolioImage(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .heightIn(max = 300.dp)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            modifier = Modifier
+                .clip(MaterialTheme.shapes.small)
+                .fillMaxWidth(),
+            painter = painterResource(resource = Res.drawable.longnguyen),
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun PortfolioContent(
+    title: String,
+    subTitle: String,
+    body: String,
+    url: String,
+    uriHandler: UriHandler,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = subTitle,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.outline,
+            fontStyle = FontStyle.Italic
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = body,
+            style = MaterialTheme.typography.bodyLarge,
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            ElevatedButton(
+                shape = CircleShape,
+                onClick = { uriHandler.openUri(uri = url) }
             ) {
-                Image(
-                    modifier = Modifier
-                        .heightIn(max = 300.dp)
-                        .clip(shape = MaterialTheme.shapes.small),
-                    painter = painterResource(resource = Res.drawable.longnguyen),
-                    contentDescription = null
-                )
-            }
-
-            Spacer(modifier = Modifier.width(width = 16.dp))
-
-
-            Column(
-                modifier = Modifier.weight(weight = 1f),
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = subTitle,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.outline,
-                    fontStyle = FontStyle.Italic
-                )
-
-                Spacer(modifier = Modifier.height(height = 16.dp))
-
-                Text(
-                    text = body,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-
-                Spacer(modifier = Modifier.height(height = 16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    ElevatedButton(
-                        shape = CircleShape,
-                        onClick = { uriHandler.openUri(uri = url) }
-                    ) {
-                        Text(
-                            text = "View",
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
-                }
+                Text(text = "View", style = MaterialTheme.typography.bodyLarge)
             }
         }
     }
