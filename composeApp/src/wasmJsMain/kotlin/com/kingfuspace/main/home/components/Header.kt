@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,11 +35,17 @@ fun Header(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Image(painter = painter)
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth(fraction = 0.6f)
+                    .weight(weight = 1f),
+                painter = painter
+            )
 
-            Spacer(modifier = Modifier.height(height = 16.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
 
             Text(
+                modifier = Modifier.weight(weight = 1f),
                 title = title,
                 subtitle = subtitle
             )
@@ -48,9 +56,13 @@ fun Header(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                modifier = Modifier.weight(weight = 1f),
+                modifier = Modifier
+                    .fillMaxHeight(fraction = 0.6f)
+                    .weight(weight = 1f),
                 painter = painter
             )
+
+            Spacer(modifier = Modifier.width(width = 24.dp))
 
             Text(
                 modifier = Modifier.weight(weight = 1f),
@@ -67,7 +79,10 @@ private fun Text(
     subtitle: String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center
+    ) {
         Text(
             text = title,
             style = typography.headlineMedium

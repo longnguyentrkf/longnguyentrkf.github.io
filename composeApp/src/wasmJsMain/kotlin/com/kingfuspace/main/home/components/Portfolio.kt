@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.shapes
@@ -44,11 +43,11 @@ fun Portfolio(modifier: Modifier = Modifier) {
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape = shapes.extraSmall)
+                    .clip(shape = shapes.extraLarge)
                     .heightIn(max = 300.dp)
             )
 
-            Spacer(modifier = Modifier.height(height = 16.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
 
             Text(
                 title = title,
@@ -66,11 +65,11 @@ fun Portfolio(modifier: Modifier = Modifier) {
             Image(
                 modifier = Modifier
                     .weight(weight = 1f)
-                    .clip(shape = shapes.extraSmall)
+                    .clip(shape = shapes.extraLarge)
                     .heightIn(max = 300.dp)
             )
 
-            Spacer(modifier = Modifier.width(width = 16.dp))
+            Spacer(modifier = Modifier.width(width = 24.dp))
 
             Text(
                 modifier = Modifier.weight(weight = 1f),

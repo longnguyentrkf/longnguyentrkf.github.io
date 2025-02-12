@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -46,10 +47,10 @@ fun Clok(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(max = 300.dp)
-                    .clip(shape = shapes.extraSmall)
+                    .clip(shape = shapes.extraLarge)
             )
 
-            Spacer(modifier = Modifier.height(height = 16.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
 
             Text(
                 title = title,
@@ -73,13 +74,14 @@ fun Clok(modifier: Modifier = Modifier) {
                 uriHandler = uriHandler,
             )
 
-            Spacer(modifier = Modifier.width(width = 16.dp))
+            Spacer(modifier = Modifier.width(width = 24.dp))
 
             Image(
                 modifier = Modifier
+//                    .padding(all = 16.dp)
                     .weight(weight = 1f)
                     .heightIn(max = 300.dp)
-                    .clip(shape = shapes.extraSmall)
+                    .clip(shape = shapes.extraLarge)
             )
         }
     }

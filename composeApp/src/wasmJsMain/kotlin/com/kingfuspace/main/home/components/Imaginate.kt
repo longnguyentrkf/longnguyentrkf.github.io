@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ElevatedButton
@@ -23,6 +24,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation.weight
+import androidx.compose.ui.text.font.FontVariation.width
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kingfuspace.core.Variables.isSmallScreen
@@ -47,10 +50,10 @@ fun Imaginate(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(max = 300.dp)
-                    .clip(shape = shapes.extraSmall)
+                    .clip(shape = shapes.extraLarge)
             )
 
-            Spacer(modifier = Modifier.height(height = 16.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
 
             Text(
                 title = title,
@@ -74,13 +77,13 @@ fun Imaginate(modifier: Modifier = Modifier) {
                 uriHandler = uriHandler
             )
 
-            Spacer(modifier = Modifier.width(width = 16.dp))
+            Spacer(modifier = Modifier.width(width = 24.dp))
 
             Image(
                 modifier = Modifier
                     .weight(weight = 1f)
                     .heightIn(max = 300.dp)
-                    .clip(shape = shapes.extraSmall),
+                    .clip(shape = shapes.extraLarge),
             )
         }
     }
