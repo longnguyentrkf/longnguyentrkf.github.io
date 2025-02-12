@@ -60,17 +60,17 @@ fun Footer(
 
         Row {
             MyTextField(
-                modifier = Modifier.padding(all = 12.dp).weight(weight = 0.5f),
+                modifier = Modifier.weight(weight = 0.5f),
                 value = firstName,
                 onValueChange = { setFirstName(it) },
                 label = "First name",
                 isSingleLine = true
             )
 
-//            Spacer(modifier = Modifier.width(width = .dp))
+            Spacer(modifier = Modifier.width(width = 24.dp))
 
             MyTextField(
-                modifier = Modifier.padding(all = 12.dp).weight(weight = 0.5f),
+                modifier = Modifier.weight(weight = 0.5f),
                 value = lastName,
                 onValueChange = { setLastName(it) },
                 label = "Last name",
@@ -79,7 +79,7 @@ fun Footer(
         }
 
         MyTextField(
-            modifier = Modifier.padding(all = 12.dp).fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             value = message,
             onValueChange = { setMessage(it) },
             label = "Message",
