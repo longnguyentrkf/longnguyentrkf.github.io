@@ -196,11 +196,7 @@ fun KingfuspaceCanvas(modifier: Modifier = Modifier) {
     val color = MaterialTheme.colorScheme.inverseSurface
 
     // Use an adaptive Canvas that fills the width and maintains a 1:1 aspect ratio.
-    Canvas(
-        modifier = modifier
-//            .fillMaxWidth()
-//            .aspectRatio(ratio = 1f)
-    ) {
+    Canvas(modifier = modifier) {
         // Compute the cube size as 80% of the minimum canvas dimension.
         val cubeSize = min(size.width, size.height) * 0.8f
         val half = cubeSize / 2f

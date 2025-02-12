@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -40,12 +40,11 @@ fun DialogEditText(
         content = {
             Column(
                 modifier = modifier
-                    .clip(shape = Shapes().medium)
+                    .clip(shape = shapes.medium)
                     .verticalScroll(state = rememberScrollState())
                     .background(color = MaterialTheme.colorScheme.surface)
                     .padding(all = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
-
             ) {
                 Text(
                     text = title,

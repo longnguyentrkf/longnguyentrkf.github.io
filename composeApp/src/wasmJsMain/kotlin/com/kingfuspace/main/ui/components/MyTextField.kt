@@ -15,6 +15,7 @@ fun MyTextField(
     value: String,
     onValueChange: (String) -> Unit,
     maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     isSingleLine: Boolean = false,
     isEnabled: Boolean = true,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -33,17 +34,26 @@ fun MyTextField(
             disabledIndicatorColor = Transparent
         ),
         textStyle = MaterialTheme.typography.bodyLarge,
-        label = if (label != null) { { Text(text = label, maxLines = labelMaxLines) } } else null,
+        label = if (label != null) {
+            { Text(text = label, maxLines = labelMaxLines) }
+        } else null,
         value = value,
         onValueChange = onValueChange,
         maxLines = maxLines,
         singleLine = isSingleLine,
         enabled = isEnabled,
-        leadingIcon = if (leadingIcon != null) { { leadingIcon() } } else null,
-        trailingIcon = if (trailingIcon != null) { { trailingIcon() } } else null,
-        supportingText = if (supportingText != null) { { supportingText() } } else null,
+        leadingIcon = if (leadingIcon != null) {
+            { leadingIcon() }
+        } else null,
+        trailingIcon = if (trailingIcon != null) {
+            { trailingIcon() }
+        } else null,
+        supportingText = if (supportingText != null) {
+            { supportingText() }
+        } else null,
         readOnly = readOnly,
-        placeholder = placeholder
+        placeholder = placeholder,
+        minLines = minLines
     )
 
 

@@ -1,9 +1,7 @@
 package com.kingfuspace.main.home
 
-import KingfuspaceCanvas
 import WeatherAI
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -20,11 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kingfuspace.core.Variables.windowInnerWidth
+import com.kingfuspace.core.Variables.windowInnerHeight
 import com.kingfuspace.main.home.components.Clok
 import com.kingfuspace.main.home.components.Footer
 import com.kingfuspace.main.home.components.Header
@@ -52,17 +48,21 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 16.dp)
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = 64.dp)
     ) {
 
-        Header(paddingValues = paddingValues)
+        Header(
+            modifier = Modifier
+                .height(height = (windowInnerHeight.dp - paddingValues.calculateTopPadding())
+                        .coerceAtLeast(minimumValue = 0.dp)
+                )
+        )
 
         Column(
-            modifier = Modifier
-                .widthIn(max = 1200.dp)
-                .padding(horizontal = 16.dp),
+            modifier = Modifier.widthIn(max = 1200.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp)
         ) {
             Text(
@@ -82,9 +82,7 @@ fun HomeScreen(
         }
 
         Footer(
-            modifier = Modifier
-                .widthIn(max = 1200.dp)
-                .padding(horizontal = 16.dp),
+            modifier = Modifier.widthIn(max = 1200.dp),
             firstName = firstName,
             setFirstName = setFirstName,
             lastName = lastName,

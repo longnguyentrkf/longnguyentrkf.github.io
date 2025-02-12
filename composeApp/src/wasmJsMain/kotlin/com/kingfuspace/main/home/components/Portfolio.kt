@@ -1,9 +1,7 @@
 package com.kingfuspace.main.home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,13 +11,14 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.shapes
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.font.FontStyle
@@ -33,95 +32,111 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Portfolio(modifier: Modifier = Modifier) {
+
     val title = "Portfolio"
-    val subTitle = "Web Page"
+    val subtitle = "Web Page"
     val body = "A minimalistic designed web page detailing achievements, experiences, and services."
     val uriHandler = LocalUriHandler.current
     val url = "https://kingfuspace.com/longnguyen/"
 
     if (isSmallScreen) {
-        Column(
-            modifier = modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center
-        ) {
-            PortfolioImage()
-            Spacer(modifier = Modifier.height(16.dp))
-            PortfolioContent(title, subTitle, body, url, uriHandler)
+        Column(modifier = modifier) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(shape = shapes.extraSmall)
+                    .heightIn(max = 300.dp)
+            )
+
+            Spacer(modifier = Modifier.height(height = 16.dp))
+
+            Text(
+                title = title,
+                subTitle = subtitle,
+                body = body,
+                url = url,
+                uriHandler = uriHandler
+            )
         }
     } else {
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            PortfolioImage(modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.width(16.dp))
-            PortfolioContent(title, subTitle, body, url, uriHandler, Modifier.weight(1f))
+            Image(
+                modifier = Modifier
+                    .weight(weight = 1f)
+                    .clip(shape = shapes.extraSmall)
+                    .heightIn(max = 300.dp)
+            )
+
+            Spacer(modifier = Modifier.width(width = 16.dp))
+
+            Text(
+                modifier = Modifier.weight(weight = 1f),
+                title = title,
+                subTitle = subtitle,
+                body = body,
+                url = url,
+                uriHandler = uriHandler
+            )
         }
     }
 }
 
 @Composable
-private fun PortfolioImage(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .heightIn(max = 300.dp)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            modifier = Modifier
-                .clip(MaterialTheme.shapes.small)
-                .fillMaxWidth(),
-            painter = painterResource(resource = Res.drawable.longnguyen),
-            contentDescription = null
-        )
-    }
+private fun Image(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier,
+        painter = painterResource(resource = Res.drawable.longnguyen),
+        contentDescription = null
+    )
 }
 
 @Composable
-private fun PortfolioContent(
+private fun Text(
+    modifier: Modifier = Modifier,
     title: String,
     subTitle: String,
     body: String,
     url: String,
-    uriHandler: UriHandler,
-    modifier: Modifier = Modifier
+    uriHandler: UriHandler
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.spacedBy(space = 16.dp)
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold
-        )
+        Column {
+            Text(
+                text = title,
+                style = typography.headlineLarge,
+                fontWeight = FontWeight.Bold
+            )
 
-        Text(
-            text = subTitle,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.outline,
-            fontStyle = FontStyle.Italic
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = subTitle,
+                style = typography.bodyLarge,
+                color = colorScheme.outline,
+                fontStyle = FontStyle.Italic
+            )
+        }
 
         Text(
             text = body,
-            style = MaterialTheme.typography.bodyLarge,
+            style = typography.bodyLarge,
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
             ElevatedButton(
-                shape = CircleShape,
                 onClick = { uriHandler.openUri(uri = url) }
             ) {
-                Text(text = "View", style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "View",
+                    style = typography.bodyLarge
+                )
             }
         }
     }

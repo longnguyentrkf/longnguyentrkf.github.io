@@ -77,7 +77,6 @@ fun EditorScreen(
             items(count = banners.size, key = { banners[it].id }) { index ->
                 val isSelected = bannerIndex == index
                 val banner = banners[index]
-//                val bannerHeight = if (isSmallScreen(addedWidth = sidePanelWidth.value.toInt())) banner.height * 3 else banner.height
                 val bannerHeight = if ( windowInnerWidth < SMALL_WINDOW + sidePanelWidth.value.toInt()) banner.height * 3 else banner.height
 
                 Box(
@@ -193,10 +192,7 @@ fun EditorScreen(
                                 }
                             },
                             right = {
-                                Column(
-                                    modifier = Modifier.verticalScroll(state = rememberScrollState())
-                                ) {
-//
+                                Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
                                     banner.texts.forEachIndexed { index, text ->
                                         Text(
                                             modifier = Modifier
@@ -210,9 +206,7 @@ fun EditorScreen(
                                         )
                                     }
                                 }
-                            },
-//                            isSmallScreen = isSmallScreen(addedWidth = sidePanelWidth.value.toInt())
-//                            isSmallScreen = windowInnerWidth < SMALL_WINDOW + sidePanelWidth.value.toInt()
+                            }
                         )
                     }
                 }

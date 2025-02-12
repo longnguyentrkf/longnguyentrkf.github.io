@@ -3,15 +3,14 @@ package com.kingfuspace.main.home.components
 import KingfuspaceCanvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,7 +23,6 @@ import com.kingfuspace.main.ui.components.MyTextField
 import com.kingfuspace.main.ui.theme.typography
 
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Footer(
     modifier: Modifier = Modifier,
@@ -58,15 +56,13 @@ fun Footer(
             style = typography.bodyLarge
         )
 
-
-
-        Row(modifier = Modifier.fillMaxWidth()) {
-
+        Row {
             MyTextField(
                 modifier = Modifier.weight(weight = 0.5f),
                 value = firstName,
                 onValueChange = { setFirstName(it) },
                 label = "First name",
+                isSingleLine = true
             )
 
             Spacer(modifier = Modifier.width(width = 16.dp))
@@ -76,6 +72,7 @@ fun Footer(
                 value = lastName,
                 onValueChange = { setLastName(it) },
                 label = "Last name",
+                isSingleLine = true
             )
         }
 
@@ -83,7 +80,8 @@ fun Footer(
             modifier = Modifier.fillMaxWidth(),
             value = message,
             onValueChange = { setMessage(it) },
-            label = "Message"
+            label = "Message",
+            isSingleLine = true
         )
 
         Row(
@@ -91,14 +89,13 @@ fun Footer(
             horizontalArrangement = Arrangement.End
         ) {
             ElevatedButton(
-                shape = CircleShape,
                 onClick = {
                     val subject = "Subject"
                     val mailBody = "$firstName $lastName%0A%0A$message"
                     val emailUri = buildString {
-                        append(MAIL_TO + toEmail)
-                        append(SUBJECT + subject)
-                        append(BODY + mailBody)
+                        append(value = MAIL_TO + toEmail)
+                        append(value = SUBJECT + subject)
+                        append(value = BODY + mailBody)
                     }
 
                     uriHandler.openUri(uri = emailUri)
