@@ -29,6 +29,7 @@ import com.kingfuspace.main.ui.theme.typography
 import kingfuspace.composeapp.generated.resources.Res
 import kingfuspace.composeapp.generated.resources.clok
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
@@ -145,3 +146,4 @@ private fun Text(
         }
     }
 }
+

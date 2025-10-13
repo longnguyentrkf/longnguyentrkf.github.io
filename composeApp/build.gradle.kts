@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 
@@ -6,10 +7,15 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+
+//    id("org.jetbrains.compose.hot-reload") version "1.0.0-alpha09"
+    alias(libs.plugins.composeHotReload)
 }
 
 
 kotlin {
+
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -17,10 +23,15 @@ kotlin {
     }
 
 
+    composeCompiler {
+        featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+    }
+
 
     sourceSets {
 
         commonMain.dependencies {
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.ui)

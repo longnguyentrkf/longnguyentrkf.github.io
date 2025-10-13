@@ -20,7 +20,7 @@ import com.kingfuspace.main.navigation.navGraphBuilder.shopGraph
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    paddingValues: PaddingValues,
+    paddingValues: PaddingValues
 ) {
     val editorViewModel = viewModel { EditorViewModel() }
     val homeViewModel = viewModel { HomeViewModel() }

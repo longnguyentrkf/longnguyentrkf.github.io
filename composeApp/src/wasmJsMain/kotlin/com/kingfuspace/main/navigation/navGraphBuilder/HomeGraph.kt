@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeGraph(
             message = vm.state.message,
             setMessage = vm::setMessage,
             paddingValues = paddingValues,
-            scrollState = scrollState
+            scrollState = scrollState,
         )
     }
 }

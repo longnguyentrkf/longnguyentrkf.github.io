@@ -1,14 +1,19 @@
 [versions]
 androidx-lifecycle = "2.8.0"
-compose = "1.7.3"
+#compose = "1.7.3"
+#compose = "1.8.1"
+compose = "1.8.2"
+#material3 = "1.9.0-beta06"
 
 junit = "4.13.2"
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 navigation = "2.8.0-alpha10"
 
 kotlinx-serialization = "1.7.1"
 annotation-jvm = "1.9.0"
 annotations = "15.0"
+compose-hot-reload = "1.0.0-alpha09"
+
 
 
 
@@ -32,6 +37,7 @@ annotations = { group = "org.jetbrains", name = "annotations", version.ref = "an
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-jetbrains-kotlin-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "compose-hot-reload" }
 
 

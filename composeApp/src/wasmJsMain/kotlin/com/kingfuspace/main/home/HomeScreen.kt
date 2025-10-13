@@ -35,6 +35,7 @@ import com.kingfuspace.main.home.components.Footer
 import com.kingfuspace.main.home.components.Header
 import com.kingfuspace.main.home.components.Imaginate
 import com.kingfuspace.main.home.components.Portfolio
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
@@ -74,7 +75,9 @@ fun HomeScreen(
                         )
                 )
 
-                Column(modifier = Modifier.widthIn(max = 1200.dp)) {
+                Column(
+                    modifier = Modifier.widthIn(max = 1200.dp)
+                ) {
                     Text(
                         modifier = Modifier.padding(all = 24.dp).fillMaxWidth(),
                         text = "Latest Work",
@@ -124,6 +127,8 @@ fun HomeScreen(
         )
     }
 }
+
+
 
 
 

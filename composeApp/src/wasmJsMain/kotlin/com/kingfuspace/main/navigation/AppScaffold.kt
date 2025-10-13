@@ -3,6 +3,8 @@ package com.kingfuspace.main.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -22,6 +24,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -62,6 +65,7 @@ fun AppScaffold(
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
+
     ObserveAsEvents(
         flow = SnackbarController.events,
         key1 = snackbarHostState
@@ -92,8 +96,9 @@ fun AppScaffold(
                 } == true) {
 
                 CenterAlignedTopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Transparent
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = Transparent,
+                        scrolledContainerColor = Transparent,
                     ),
                     navigationIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {

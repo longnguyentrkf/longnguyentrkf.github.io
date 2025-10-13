@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.painterResource
 fun Portfolio(modifier: Modifier = Modifier) {
 
     val title = "Portfolio"
-    val subtitle = "Web Page"
+    val subtitle = "Webpage"
     val body = "A minimalistic designed web page detailing achievements, experiences, and services."
     val uriHandler = LocalUriHandler.current
     val url = "https://kingfuspace.com/longnguyen/"
